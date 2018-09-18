@@ -1,20 +1,21 @@
 import matplotlib.pyplot as plt
 
 import utils
-from bordas import Prewitt
+import filters
+import bordas
 
 
-def main():
-    ImgOriginal = utils.LerImagem('../imagens/Image_(1).jpg')
-    fig, [ax1,ax2] = plt.subplots(1,2)
+def main(imagem,tipo,filtro,m,n):
+    ImgOriginal = utils.LerImagem('../imagens/{}.jpg'.format(imagem))
+    fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
     ax1.imshow(ImgOriginal,cmap='gray')
-    ImgFiltrada = Prewitt(ImgOriginal)
+    ImgFiltrada = bordas.Derivative(ImgOriginal,tipo, filtro,m,n)
+    # ImgFiltrada = filters.Adapted(ImgOriginal)
     # BinaryImg = utils.Threshold(ImgFiltrada)
     ax2.imshow(ImgFiltrada,cmap='gray')
-    
-    # plt.savefig('./resultados/prewitt'+  + '.png')
+    plt.savefig('../resultados/{}_{}_{}_{}x{}.png'.format(tipo,imagem,filtro,m,n),dpi=150,bbox_inches='tight')
     plt.show()
-
+    
 
 if __name__ == '__main__':
-    main()
+    main('Image_(1a)','Prewitt','Adapted',17,17)

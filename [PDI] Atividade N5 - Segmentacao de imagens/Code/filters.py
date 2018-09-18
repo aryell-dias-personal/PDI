@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 
-def Average(imagem,m,n):
+def Average(imagem,m=3,n=3):
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
@@ -26,7 +26,7 @@ def Average(imagem,m,n):
 
     return filterImg
 
-def Median(imagem,m,n):
+def Median(imagem,m=5,n=5):
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
@@ -52,11 +52,11 @@ def Median(imagem,m,n):
             else:
                 filterImg[x][y] = (kernel[int(np.floor(m*n/2))]+kernel[int(np.ceil(m*n/2))])/2
 
-    # filterImg = imagem - filterImg
+    filterImg = imagem - filterImg
 
     return filterImg
 
-def Adaptative(imagem, M_max):
+def Adaptative(imagem, M_max=7):
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
@@ -108,9 +108,11 @@ def Adaptative(imagem, M_max):
                         a = 0
                         kernel = np.zeros(m*m)
 
+    filterImg = imagem - filterImg
+
     return filterImg
                     
-def Adapted(imagem,m,n):
+def Adapted(imagem,m=5,n=5):
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
@@ -139,5 +141,7 @@ def Adapted(imagem,m,n):
                     filterImg[x][y] = (kernel[int(np.floor(m*n/2))]+kernel[int(np.ceil(m*n/2))])/2
             else:
                 filterImg[x][y] = imagem[x][y]
+
+    filterImg = imagem - filterImg
 
     return filterImg
