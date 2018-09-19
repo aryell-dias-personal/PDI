@@ -34,12 +34,11 @@ def Histograma(imagem):
     count = np.zeros(256)
     mem = 0
 
-    for pixel in range(256):
-        for x in range(aux[0]):
-            for y in range(aux[1]):
-                mem = imagem[x][y]
-                if  mem == pixel:
-                    count[pixel] = count[pixel] + 1
+    for x in range(aux[0]):
+        print(x)
+        for y in range(aux[1]):
+            mem = imagem[x][y]
+            count[mem] = count[mem] + 1
     return count
 
 def Threshold(imagem):
