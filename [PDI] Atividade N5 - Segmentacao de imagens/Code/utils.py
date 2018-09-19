@@ -6,6 +6,12 @@ def LerImagem(nome):
     imagem = mpimg.imread(nome)
     return imagem
 
+def increment(value, initial, limit):
+    if(value + initial > limit or value + initial < 0):
+        return initial
+    else:
+        return value + initial
+
 # normalização da imagem
 def Normalizar(imagem):
     mini = np.min(imagem)
