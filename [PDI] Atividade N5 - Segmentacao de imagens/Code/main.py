@@ -17,4 +17,4 @@ def main(imagem,tipo = 'Prewitt', filtro = 'Median', m = 9 ,n = 9):
     plt.show()
     
 if __name__ == '__main__':
-    main('Image_(4)')
+    main('Image_(3a)')

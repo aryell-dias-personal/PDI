@@ -1,6 +1,15 @@
 import matplotlib.image as mpimg
 import numpy as np
 
+def P(regiao):
+    size = 0;
+    retorno = 0;
+    for pixelReg in regiao:
+        size+=1;
+        if(np.abs(pixelReg-np.mean(regiao))<=2*np.var(regiao)):
+            retorno+=1
+    return retorno/size >= 0.8
+
 # leitura da imagem
 def LerImagem(nome):
     imagem = mpimg.imread(nome)
