@@ -2,13 +2,9 @@ import matplotlib.image as mpimg
 import numpy as np
 
 def P(regiao):
-    size = 0;
-    retorno = 0;
-    for pixelReg in regiao:
-        size+=1;
-        if(np.abs(pixelReg-np.mean(regiao))<=2*np.var(regiao)):
-            retorno+=1
-    return retorno/size >= 0.8
+    (x,y) = np.shape(regiao)
+    retornoAux = np.abs(regiao-np.mean(regiao))<=2*np.std(regiao)
+    return  (np.sum(retornoAux)/(x*y)>=0.8)
 
 # leitura da imagem
 def LerImagem(nome):
@@ -32,6 +28,20 @@ def Normalizar(imagem):
     imagem = imagem*255/(maxi-mini)
     return imagem
 
+
+def Histograma(imagem):
+    aux = np.shape(imagem)
+    count = np.zeros(256)
+    mem = 0
+
+    for pixel in range(256):
+        for x in range(aux[0]):
+            for y in range(aux[1]):
+                mem = imagem[x][y]
+                if  mem == pixel:
+                    count[pixel] = count[pixel] + 1
+    return count
+
 def Threshold(imagem):
     aux = np.shape(imagem)
 
@@ -54,3 +64,25 @@ def Threshold(imagem):
                 BinImg[x][y] = 0
 
     return BinImg
+    
+# aparentemente não surti efeito com as imagens que precisam ser divididas em regiões
+# (a águia e a melancia), nenhuma das duas passa pela função P como True com facilidade,
+# não dividindo a imagem original e regiões menores
+def dividiRegiao(regiao):
+    aux = np.shape(regiao)
+
+    if np.size(aux) > 2:
+        regiao = regiao[:,:,0]
+        aux = np.shape(regiao) 
+
+    regioes = [regiao]
+    # percorrendo a imagem original
+    if((not utils.P(regiao)) and aux[0]/2>1 and aux[1]/2>1):
+        regioes = dividiRegiao(regiao[0:int(aux[0]/2), 0:int(aux[1]/2)]) +\
+            dividiRegiao(regiao[int(aux[0]/2):, 0:int(aux[1]/2)])+\
+            dividiRegiao(regiao[0:int(aux[0]/2), int(aux[1]/2):])+\
+            dividiRegiao(regiao[int(aux[0]/2):, int(aux[1]/2):])
+    return regioes
+
+# def unirRegioes(regioes):
+#   TODO

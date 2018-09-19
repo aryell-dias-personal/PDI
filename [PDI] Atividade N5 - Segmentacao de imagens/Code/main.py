@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np;
 import utils
 import filters
 import bordas
@@ -8,13 +9,15 @@ def main(imagem,tipo = 'Prewitt', filtro = 'Median', m = 9 ,n = 9):
     fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
     # imagens
     ImgOriginal = utils.LerImagem('../images/{}.jpg'.format(imagem))
-    imagemSegmentada = segmentacao.limirizacaoLocal(ImgOriginal)
+    # regioes = utils.dividiRegiao(ImgOriginal)
+    # print(regioes[0])
+    # imagemSegmentada = segmentacao.limirizacaoLocal(ImgOriginal)
     # subplots
     ax1.imshow(ImgOriginal,cmap='gray')
-    ax2.imshow(imagemSegmentada,cmap='gray')
+    ax2.hist(segmentacao.otsu(ImgOriginal,10), range(0,256))
     # plots
     # plt.savefig('../resultados/{}_{}_{}_{}x{}.png'.format(tipo,imagem,filtro,m,n),dpi=150,bbox_inches='tight')
     plt.show()
     
 if __name__ == '__main__':
-    main('Image_(3a)')
+    main('Image_(5)')
