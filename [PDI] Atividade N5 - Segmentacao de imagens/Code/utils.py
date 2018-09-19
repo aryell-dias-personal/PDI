@@ -31,8 +31,8 @@ def Threshold(imagem):
 
     for x in range(aux[0]):
         for y in range(aux[1]):
-            if imagem[x][y] > np.mean(imagem):
-                # se maior que a media da imagem é 1
+            if imagem[x][y] > 0.33*np.max(imagem):
+                # se maior o máximo da imagem é 1
                 BinImg[x][y] = 1
             else:
                 # se não é 0
