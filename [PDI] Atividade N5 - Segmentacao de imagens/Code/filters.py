@@ -10,19 +10,21 @@ def Average(imagem,m=3,n=3):
         aux = np.shape(imagem)
         
     filterImg = np.zeros(aux)
-    kernel = np.zeros(m*n)
 
     media = 0
 
     for x in range(aux[0]):
         for y in range(aux[1]):
-            for u in range(m*n):    
+            for u in range(m*n):
                 if (x+u%m-1 >= 0) and (x+u%m-1 < aux[0]) and (y+u%n-1 >= 0) and (y+u%n-1 < aux[1]):
                     media += imagem[x+u%m-1][y+u%n-1]
             filterImg[x][y] = media/(m*n)
             media = 0
 
-    # filterImg = imagem - filterImg
+    filterImg = imagem - filterImg
+
+    # plt.imshow(filterImg,cmap='gray')
+    # plt.show()
 
     return filterImg
 
@@ -53,6 +55,9 @@ def Median(imagem,m=5,n=5):
                 filterImg[x][y] = (kernel[int(np.floor(m*n/2))]+kernel[int(np.ceil(m*n/2))])/2
 
     # filterImg = imagem - filterImg
+
+    plt.imshow(filterImg,cmap='gray')
+    plt.show()
 
     return filterImg
 
@@ -110,6 +115,9 @@ def Adaptative(imagem, M_max=7, n=0):
 
     # filterImg = imagem - filterImg
 
+    plt.imshow(filterImg,cmap='gray')
+    plt.show()
+
     return filterImg
                     
 def Adapted(imagem,m=5,n=5):
@@ -144,4 +152,51 @@ def Adapted(imagem,m=5,n=5):
 
     # filterImg = imagem - filterImg
 
+    plt.imshow(filterImg,cmap='gray')
+    plt.show()
+
     return filterImg
+
+def Gaussian(imagem):
+    aux = np.shape(imagem)
+
+    if np.size(aux) > 2:
+        imagem = imagem[:][:][1]
+        aux = np.shape(imagem)
+    
+    std = np.rint(np.std(imagem))
+
+    N = np.rint(6*std)
+    if N%2 == 0:
+        N += 1
+    
+    x,y = np.meshgrid(range(N),range(N))
+
+    gaussian = np.exp(-((x-N//2)**2+(y-N//2)**2)/(2*std**2))
+    kernel = np.zeros(N*N)
+    filterImg = np.zeros(aux)
+    soma = 0
+    i = 0
+
+    for t in range(N):
+        for e in range(N):
+            kernel[i] = gaussian[t][e]
+            i += 1
+
+    for x in range(aux[0]):
+        for y in range(aux[1]):
+            for u in range(N*N):
+                    if (x+u%N-1 >= 0) and (x+u%N-1 < aux[0]) and (y+u%N-1 >= 0) and (y+u%N-1 < aux[1]):
+                        soma += imagem[x+u%N-1][y+u%N-1]*kernel[u]
+            filterImg[x][y] = soma
+            soma = 0
+
+    plt.imshow(filterImg,cmap='gray')
+    plt.show()
+
+    return filterImg
+    
+    
+
+
+
