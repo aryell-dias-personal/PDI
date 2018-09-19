@@ -1,23 +1,25 @@
 import matplotlib.pyplot as plt
-import numpy as np;
+
 import utils
 import filters
 import bordas
-import segmentacao
 
-def main(imagem,tipo = 'Prewitt', filtro = 'Median', m = 9 ,n = 9):
+
+def main(imagem,tipo,filtro,m,n):
+    ImgOriginal = utils.LerImagem('../imagens/{}.jpg'.format(imagem))    
+    
+    ImgFiltrada = bordas.Derivative(ImgOriginal,tipo, filtro,m,n)
+    
+    BinaryImg = utils.Threshold(ImgFiltrada)    
+
     fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
-    # imagens
-    ImgOriginal = utils.LerImagem('../images/{}.jpg'.format(imagem))
-    # regioes = utils.dividiRegiao(ImgOriginal)
-    # print(regioes[0])
-    # imagemSegmentada = segmentacao.limirizacaoLocal(ImgOriginal)
-    # subplots
     ax1.imshow(ImgOriginal,cmap='gray')
-    ax2.imshow(segmentacao.otsu(ImgOriginal),cmap='gray')
-    # plots
-    # plt.savefig('../resultados/{}_{}_{}_{}x{}.png'.format(tipo,imagem,filtro,m,n),dpi=150,bbox_inches='tight')
+    ax2.imshow(BinaryImg,cmap='gray')
+    
+    plt.savefig('../resultados/teste_{}_{}_{}_{}x{}.png'.format(tipo,imagem,filtro,m,n),dpi=150,bbox_inches='tight')
+    
     plt.show()
     
+
 if __name__ == '__main__':
-    main('Image_(3a)')
+    main('Image_(1)','Sobel','Average',5,5)
