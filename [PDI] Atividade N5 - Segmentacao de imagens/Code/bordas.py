@@ -42,7 +42,9 @@ def Derivative(imagem, tipo, filtro, m=5, n=5):
                     if (x+u >= 0) and (x+u < aux[0]) and (y+v >= 0) and (y+v < aux[1]):
                         edgeImg[x][y] += np.abs(imagemfil[x+u][y+v]*kernelx[u+2][v+2]) + np.abs(imagemfil[x+u][y+v]*kernely[u+2][v+2])
     
-    # edgeImg = imagemfil - edgeImg
+    edgeImg = imagemfil - edgeImg
+
+    # edgeImg = np.abs(edgeImg - np.max(edgeImg)) 
 
     edgeImg = Normalizar(edgeImg)
 

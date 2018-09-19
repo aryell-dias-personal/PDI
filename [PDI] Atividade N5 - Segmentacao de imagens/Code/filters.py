@@ -22,7 +22,7 @@ def Average(imagem,m=3,n=3):
             filterImg[x][y] = media/(m*n)
             media = 0
 
-    filterImg = imagem - filterImg
+    # filterImg = imagem - filterImg
 
     return filterImg
 
@@ -52,11 +52,11 @@ def Median(imagem,m=5,n=5):
             else:
                 filterImg[x][y] = (kernel[int(np.floor(m*n/2))]+kernel[int(np.ceil(m*n/2))])/2
 
-    filterImg = imagem - filterImg
+    # filterImg = imagem - filterImg
 
     return filterImg
 
-def Adaptative(imagem, M_max=7):
+def Adaptative(imagem, M_max=7, n=0):
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
@@ -108,7 +108,7 @@ def Adaptative(imagem, M_max=7):
                         a = 0
                         kernel = np.zeros(m*m)
 
-    filterImg = imagem - filterImg
+    # filterImg = imagem - filterImg
 
     return filterImg
                     
@@ -142,6 +142,6 @@ def Adapted(imagem,m=5,n=5):
             else:
                 filterImg[x][y] = imagem[x][y]
 
-    filterImg = imagem - filterImg
+    # filterImg = imagem - filterImg
 
     return filterImg

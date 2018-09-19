@@ -7,15 +7,17 @@ import bordas
 
 def main(imagem,tipo,filtro,m,n):
     ImgOriginal = utils.LerImagem('../imagens/{}.jpg'.format(imagem))
-    fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
+    fig, [ax1,ax2, ax3] = plt.subplots(1,3,figsize=(20,30))
     ax1.imshow(ImgOriginal,cmap='gray')
+    imgTest = filters.Average(ImgOriginal,7)
     ImgFiltrada = bordas.Derivative(ImgOriginal,tipo, filtro,m,n)
     # ImgFiltrada = filters.Adapted(ImgOriginal)
-    # BinaryImg = utils.Threshold(ImgFiltrada)
-    ax2.imshow(ImgFiltrada,cmap='gray')
-    plt.savefig('../resultados/{}_{}_{}_{}x{}.png'.format(tipo,imagem,filtro,m,n),dpi=150,bbox_inches='tight')
+    BinaryImg = utils.Threshold(ImgFiltrada)
+    ax2.imshow(BinaryImg,cmap='gray')
+    ax3.imshow(imgTest,cmap='gray')
+    plt.savefig('../resultados/teste_{}_{}_{}_{}x{}.png'.format(tipo,imagem,filtro,m,n),dpi=150,bbox_inches='tight')
     plt.show()
     
 
 if __name__ == '__main__':
-    main('Image_(1a)','Prewitt','Adapted',17,17)
+    main('Image_(1a)','Prewitt','Median',9,9)
