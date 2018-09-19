@@ -16,7 +16,7 @@ def Average(imagem,m=3,n=3):
 
     for x in range(aux[0]):
         for y in range(aux[1]):
-            for u in range(m*n):
+            for u in range(m*n):    
                 if (x+u%m-1 >= 0) and (x+u%m-1 < aux[0]) and (y+u%n-1 >= 0) and (y+u%n-1 < aux[1]):
                     media += imagem[x+u%m-1][y+u%n-1]
             filterImg[x][y] = media/(m*n)
