@@ -37,7 +37,6 @@ def otsu(imagem):
                 imagemRetorno[x][y] = 1
             else: 
                 imagemRetorno[x][y] = 0
-    print(np.sum(imagemRetorno))
     return imagemRetorno
             
 def limirizacaoLocal(imagem, tipoMedia = 'local', n = 20, a = 0, b = 1 ): 

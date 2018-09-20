@@ -35,7 +35,6 @@ def Histograma(imagem):
     mem = 0
 
     for x in range(aux[0]):
-        print(x)
         for y in range(aux[1]):
             mem = imagem[x][y]
             count[mem] = count[mem] + 1

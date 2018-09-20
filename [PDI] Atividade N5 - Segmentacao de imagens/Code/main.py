@@ -20,4 +20,4 @@ def main(imagem,tipo,filtro,m,n):
     
 
 if __name__ == '__main__':
-    main('Image_(5)','Sobel','Average',5,5)
+    main('Image_(3b)','Sobel','Average',5,5)
