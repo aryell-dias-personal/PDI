@@ -164,12 +164,13 @@ def Gaussian(imagem):
         imagem = imagem[:][:][1]
         aux = np.shape(imagem)
     
-    std = np.rint(np.std(imagem))
+    # std = np.rint(np.std(imagem))
+    std = 1.5
 
-    N = np.rint(6*std)
+    N = int(np.rint(6*std))
     if N%2 == 0:
         N += 1
-    
+    print(N)
     x,y = np.meshgrid(range(N),range(N))
 
     gaussian = np.exp(-((x-N//2)**2+(y-N//2)**2)/(2*std**2))
@@ -191,8 +192,8 @@ def Gaussian(imagem):
             filterImg[x][y] = soma
             soma = 0
 
-    plt.imshow(filterImg,cmap='gray')
-    plt.show()
+    # plt.imshow(filterImg,cmap='gray')
+    # plt.show()
 
     return filterImg
     
