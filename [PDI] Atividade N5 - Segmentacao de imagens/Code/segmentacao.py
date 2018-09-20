@@ -1,5 +1,6 @@
 import numpy as np
 import utils
+import filters
 
 # otsu para duas classes
 def otsu(imagem):

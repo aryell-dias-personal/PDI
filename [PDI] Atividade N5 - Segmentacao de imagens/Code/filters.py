@@ -56,8 +56,8 @@ def Median(imagem,m=5,n=5):
 
     # filterImg = imagem - filterImg
 
-    plt.imshow(filterImg,cmap='gray')
-    plt.show()
+    # plt.imshow(filterImg,cmap='gray')
+    # plt.show()
 
     return filterImg
 

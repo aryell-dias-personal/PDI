@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
-
+import numpy as np
 import utils
 import filters
 import bordas
 import segmentacao
 
 def main(imagem,tipo,filtro,m,n):
-    ImgOriginal = utils.LerImagem('../images/{}.jpg'.format(imagem))    
+    ImgOriginal = np.array(segmentacao.limirizacaoLocal(utils.LerImagem('../images/{}.jpg'.format(imagem)), 'sobel',),dtype='uint8')    
         
     BinaryImg = segmentacao.otsu(ImgOriginal)    
 
@@ -18,6 +18,5 @@ def main(imagem,tipo,filtro,m,n):
     
     plt.show()
     
-
 if __name__ == '__main__':
     main('Image_(3b)','Sobel','Average',5,5)
