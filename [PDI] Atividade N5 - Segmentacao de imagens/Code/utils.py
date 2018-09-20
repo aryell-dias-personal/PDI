@@ -1,5 +1,6 @@
 import matplotlib.image as mpimg
 import numpy as np
+import utils
 
 def P(regiao):
     (x,y) = np.shape(regiao)
@@ -41,7 +42,7 @@ def Histograma(imagem):
             count[mem] = count[mem] + 1
     return count
 
-def Threshold(imagem):
+def Threshold(imagem, T):
     aux = np.shape(imagem)
 
     # caso a imagem possua mais de dois shapes (duas dimensões)
@@ -55,7 +56,7 @@ def Threshold(imagem):
 
     for x in range(aux[0]):
         for y in range(aux[1]):
-            if imagem[x][y] > 0.33*np.max(imagem):
+            if imagem[x][y] > T:
                 # se maior o máximo da imagem é 1
                 BinImg[x][y] = 1
             else:
