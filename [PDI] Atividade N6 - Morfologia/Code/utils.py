@@ -40,8 +40,13 @@ def translacao(conjunto, Zx = 0, Zy = 0):
         for i in range(x)
     ]
 
-# def reflexao(conjunto):
-# TODO será util para implementação da dilatação
-
+def reflexao(conjunto):
+    aux = np.shape(conjunto) 
+    conjuntoRetorno = np.zeros(aux)
+    for i in range(aux[0]):
+        for j in range(aux[1]):
+            conjuntoRetorno[i][j] = conjunto[aux[0] - i-1][aux[1] - j-1]
+    return conjuntoRetorno
+    
 # def intersercao(A,B):
 # TODO será util para implementação da dilatação

@@ -5,7 +5,7 @@ import Operacoes
 def mainPreenche(imagem):
     ImgOriginal = Utils.LerImagem('../Imagens/Originais/{}.jpg'.format(imagem))
 
-    ImgResultado = Utils.translacao(ImgOriginal,-10,-10)
+    ImgResultado = Utils.translacao(Utils.reflexao(ImgOriginal))
 
     fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
     ax1.imshow(ImgOriginal,cmap='gray')
