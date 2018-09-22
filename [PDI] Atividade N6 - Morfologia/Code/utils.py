@@ -8,7 +8,7 @@ def LerImagem(nome):
 
 # as operações foram interpretadas como sendo as classicas
 # utilizando dos pixels nas correspondentes de uma imagem 
-# para outr
+# para outra
 
 def operation(img1,img2, operation):
     img1 = np.array(img1[:,:,0], dtype=bool)
@@ -23,4 +23,15 @@ def operation(img1,img2, operation):
     # seria um xnor?
     elif(operation == 'xand'):
         return [[((not img1[i][j]) and (not img2[i][j])) or ((img1[i][j]) and (img2[i][j])) for j in range(y)]for i in range(x)]
-        
+
+translacao(conjunto):
+# TODO será util para implementação da dilatação
+
+reflexao(conjunto):
+# TODO será util para implementação da dilatação
+
+complemento(subConjunto, conjunto):
+# TODO será util para implementação da dilatação
+
+intersercao(A,B):
+# TODO será util para implementação da dilatação
