@@ -24,14 +24,24 @@ def operation(img1,img2, operation):
     elif(operation == 'xand'):
         return [[((not img1[i][j]) and (not img2[i][j])) or ((img1[i][j]) and (img2[i][j])) for j in range(y)]for i in range(x)]
 
-translacao(conjunto):
+
+# quando for utilizado deve definir quanto deverá ser transladado
+# por padrão os espaços desconhecidos (fora do escopo da imagem o-
+# riginal) são preenchidos com 0
+def translacao(conjunto, Zx = 0, Zy = 0):
+    x,y = np.shape(conjunto) 
+    return [
+        [
+            conjunto[Zx+i][Zy+j]
+            if Zx+i>0 and Zy+j>0 and Zx+i<x and Zy+j<y
+            else 0 
+            for j in range(y)
+        ]
+        for i in range(x)
+    ]
+
+# def reflexao(conjunto):
 # TODO será util para implementação da dilatação
 
-reflexao(conjunto):
-# TODO será util para implementação da dilatação
-
-complemento(subConjunto, conjunto):
-# TODO será util para implementação da dilatação
-
-intersercao(A,B):
+# def intersercao(A,B):
 # TODO será util para implementação da dilatação

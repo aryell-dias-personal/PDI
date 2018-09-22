@@ -3,12 +3,12 @@ import Utils
 import Operacoes
 
 def mainPreenche(imagem):
-    ImgOriginal = Utils.LerImagem('../Imagens/Originais/{}.png'.format(imagem1))
+    ImgOriginal = Utils.LerImagem('../Imagens/Originais/{}.jpg'.format(imagem))
 
-    ImgResultado = Operacoes.dilata(ImgOriginal)
+    ImgResultado = Utils.translacao(ImgOriginal,-10,-10)
 
     fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
-    ax1.imshow(ImgOriginal1,cmap='gray')
+    ax1.imshow(ImgOriginal,cmap='gray')
     ax2.imshow(ImgResultado,cmap='gray')
     plt.show()
     
