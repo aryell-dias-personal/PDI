@@ -28,7 +28,7 @@ def operation(img1,img2, operation):
 # quando for utilizado deve definir quanto deverá ser transladado
 # por padrão os espaços desconhecidos (fora do escopo da imagem o-
 # riginal) são preenchidos com 0
-def translacao(conjunto, Zx = 0, Zy = 0):
+def translacao(conjunto, shape, Zx = 0, Zy = 0):
     x,y = np.shape(conjunto) 
     return [
         [
@@ -49,6 +49,14 @@ def reflexao(conjunto):
         ]
         for i in range(x)
     ]
-    
-# def intersercao(A,B):
-# TODO será util para implementação da dilatação
+
+def intersecao(B,A):
+    # depende de como é interpretado, a questão é que pode ser
+    # que a posição x e y componha juntamente com o valor do pixel o valor
+    # do ponto, permitindo fazer uma comparação ponto a ponto
+    # neste caso supomos que a interseção apenas retorne 1 quando 
+    # a mesma posicao em ambos os conjuntos for 1, caso esta interpretação
+    # esteja correta, a interseção será equivalente a um and
+    return operation(B,A,'and')
+    # não faz sentido a posição x e y não interferir no processo, pois é obvio que a imagem
+    # binária tem 0s e 1s.
