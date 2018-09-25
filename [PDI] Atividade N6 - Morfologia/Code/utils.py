@@ -11,8 +11,8 @@ def LerImagem(nome):
 # para outra
 
 def operation(img1,img2, operation):
-    img1 = np.array(img1[:,:,0], dtype=bool)
-    img2 = np.array(img2[:,:,0], dtype=bool)
+    # img1 = np.array(img1[:,:,0], dtype=bool)
+    # img2 = np.array(img2[:,:,0], dtype=bool)
     x,y = np.shape(img1)
     if(operation == 'and'):
         return [[img1[i][j] and img2[i][j] for j in range(y)]for i in range(x)]
@@ -60,3 +60,21 @@ def intersecao(B,A):
     return operation(B,A,'and')
     # não faz sentido a posição x e y não interferir no processo, pois é obvio que a imagem
     # binária tem 0s e 1s.
+
+def Binarizar(imagem):
+    aux = np.shape(imagem)
+
+    if np.size(aux) > 2:
+        imagem = imagem[:][:][0]
+        aux = np.shape(imagem)
+
+    ImgBin = np.zeros(aux)
+
+    for x in range(aux[0]):
+        for y in range(aux[1]):
+            if imagem[x][y] >= 128:
+                ImgBin[x][y] = 1
+            else:
+                ImgBin[x][y] = 0
+
+    return ImgBin
