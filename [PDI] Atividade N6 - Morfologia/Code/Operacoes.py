@@ -1,8 +1,15 @@
-import Utils
+import utils
 import numpy as np
 
-def dilata(A,B):
-    # B é o elemento estruturante simétrico responsável 
+def Dilation(imagem, SE):
+    # SE é o elemento estruturante simétrico responsável 
     # pelo preenchimento dos buracos
-    return Utils.intersecao(Utils.translacao(Utils.reflexao(B)), A) 
+    return utils.intersecao(utils.translacao(utils.reflexao(B)), A) 
 
+def Erosion(imagem, SE):
+    
+
+def Opening():
+
+
+def Closing():

@@ -21,8 +21,8 @@ def operation(img1,img2, operation):
     elif(operation == 'xor'):
         return [[((not img1[i][j]) and (img2[i][j])) or ((img1[i][j]) and (not img2[i][j])) for j in range(y)]for i in range(x)]
     # seria um xnor?
-    elif(operation == 'xand'):
-        return [[((not img1[i][j]) and (not img2[i][j])) or ((img1[i][j]) and (img2[i][j])) for j in range(y)]for i in range(x)]
+    elif(operation == 'nand'):
+        return [[(not img1[i][j]) and (not img2[i][j]) for j in range(y)]for i in range(x)]
 
 
 # quando for utilizado deve definir quanto deverá ser transladado
