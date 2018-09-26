@@ -27,9 +27,12 @@ def operation(img1,img2, operation):
 
 def Binarizar(imagem):
     aux = np.shape(imagem)
-    if np.size(aux) > 2:
+
+    if np.size(aux) > 2: # seleciona apenas uma matriz de cor caso a leitura seja rgb
         imagem = imagem[:,:,0]
         aux = np.shape(imagem)
+
+    # imagem binária, 0 se for menor do que 128 e 1 maior do que 128
 
     ImgBin = np.zeros(aux)
     
