@@ -6,7 +6,7 @@ def Dilation(imagem, SE, centrox, centroy):
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
-        imagem = imagem[:][:][0]
+        imagem = imagem[:,:,0]
         aux = np.shape(imagem)
     
     for x in range(aux[0]):
@@ -19,13 +19,18 @@ def Dilation(imagem, SE, centrox, centroy):
         for y in range(aux[1]):
             ImgDilat[x][y] = np.abs(ImgDilat[x][y] - 1)
 
+    ImgDilat[:][-1] = ImgDilat[:][-2]
+    ImgDilat[:][0] = ImgDilat[:][1]
+    ImgDilat[0][:] = ImgDilat[1][:]
+    ImgDilat[-1][:] = ImgDilat[-2][:] 
+
     return ImgDilat
 
 def Erosion(imagem, SE, centrox, centroy):
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
-        imagem = imagem[:][:][0]
+        imagem = imagem[:,:,0]
         aux = np.shape(imagem)
 
     ImgErod = []
@@ -71,7 +76,7 @@ def Preencher_furos(imagem,SE,centrox,centroy):
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
-        imagem = imagem[:][:][0]
+        imagem = imagem[:,:,0]
         aux = np.shape(imagem)
 
     CompImg = np.zeros(aux)
@@ -101,21 +106,21 @@ def Geo_Dil(markerimagem,maskimagem,SE,centrox,centroy):
     aux1 = np.shape(markerimagem)
 
     if np.size(aux1) > 2:
-        markerimagem = markerimagem[:][:][0]
+        markerimagem = markerimagem[:,:,0]
         aux1 = np.shape(markerimagem)
 
     if np.size(np.shape(maskimagem)) > 2:
-        maskimagem = maskimagem[:][:][0]    
+        maskimagem = maskimagem[:,:,0]    
 
     stop = 0
-    x = 0
+    # x = 0
     lastImg = np.zeros(aux1)
     ones = np.ones(aux1)
 
     while stop == 0:
         ImgDilat = Dilation(markerimagem,SE,centrox,centroy)
         ImgGeoDilat = utils.operation(ImgDilat,maskimagem,'and')
-        
+
         # if x == 49:
         #     for t in range(5):
         #         for y in range(5):

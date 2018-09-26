@@ -22,7 +22,7 @@ def operation(img1,img2, operation):
         return [[((not img1[i][j]) and (img2[i][j])) or ((img1[i][j]) and (not img2[i][j])) for j in range(y)]for i in range(x)]
     # seria um xnor?
     elif(operation == 'nand'):
-        return [[(not img1[i][j]) and (not img2[i][j]) for j in range(y)]for i in range(x)]
+        return [[not((img1[i][j]) and (img2[i][j])) for j in range(y)]for i in range(x)]
 
 
 # quando for utilizado deve definir quanto deverá ser transladado
@@ -63,13 +63,12 @@ def intersecao(B,A):
 
 def Binarizar(imagem):
     aux = np.shape(imagem)
-
     if np.size(aux) > 2:
-        imagem = imagem[:][:][0]
+        imagem = imagem[:,:,0]
         aux = np.shape(imagem)
 
     ImgBin = np.zeros(aux)
-
+    
     for x in range(aux[0]):
         for y in range(aux[1]):
             if imagem[x][y] >= 128:
@@ -78,3 +77,4 @@ def Binarizar(imagem):
                 ImgBin[x][y] = 0
 
     return ImgBin
+ 
