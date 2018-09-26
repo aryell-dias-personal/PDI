@@ -11,7 +11,7 @@ def Dilation(imagem, SE, centrox, centroy):
     
     for x in range(aux[0]):
         for y in range(aux[1]):
-            imagem[x][y] = np.abs(imagem[x][y] - 1)
+            imagem[x][y] = 1 - imagem[x][y]
 
     ImgDilat = Erosion(imagem, SE, centrox, centroy)
 
@@ -55,9 +55,7 @@ def Erosion(imagem, SE, centrox, centroy):
                 ImgLinha.append(0)
         ImgErod.append(ImgLinha)
         ImgLinha = []
-            
-    a = np.shape(ImgErod)
-        
+
     return ImgErod
 
 def Opening(imagem,SE,centrox,centroy):
@@ -68,15 +66,13 @@ def Closing(imagem,SE,centrox,centroy):
     ImgClose = Erosion(Dilation(imagem,SE,centrox,centroy),SE,centrox,centroy)
     return ImgClose
 
-def Preencher_furos(imagem):
+def Preencher_furos(imagem,SE,centrox,centroy):
 
     aux = np.shape(imagem)
 
     if np.size(aux) > 2:
         imagem = imagem[:][:][0]
         aux = np.shape(imagem)
-
-    # ImgOriginal = utils.Binarizar(imagem)
 
     CompImg = np.zeros(aux)
 
@@ -94,9 +90,9 @@ def Preencher_furos(imagem):
         MarkerImg[x][0] = 1 - imagem[x][0]
         MarkerImg[x][aux[1]-1] = 1 - imagem[x][aux[1]-1]
 
-    SE = [[1,1,1],[1,1,1],[1,1,1]]
+    # SE = [[1,1,1],[1,1,1],[1,1,1]]
 
-    ImgSemFuros = Geo_Dil(MarkerImg,CompImg,SE,1,1)
+    ImgSemFuros = Geo_Dil(MarkerImg,CompImg,SE,centrox,centroy)
 
     return ImgSemFuros
     
@@ -119,24 +115,31 @@ def Geo_Dil(markerimagem,maskimagem,SE,centrox,centroy):
     while stop == 0:
         ImgDilat = Dilation(markerimagem,SE,centrox,centroy)
         ImgGeoDilat = utils.operation(ImgDilat,maskimagem,'and')
-        # ImgGeoDilat = ones - ImgGeoDilat
-        if x == 49:
-            fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
-            ax1.imshow(lastImg,cmap='gray')
-            ax2.imshow(ImgGeoDilat,cmap='gray')
-            plt.show()
-        if np.allclose(lastImg,ImgGeoDilat):
+        
+        # if x == 49:
+        #     for t in range(5):
+        #         for y in range(5):
+        #             print(ImgGeoDilat[t][y])
+        #     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        #     for t in range(5):
+        #         for y in range(5):
+        #             print(lastImg[t][y])
+
+        if np.allclose(ones - lastImg,ImgGeoDilat):
             stop = 1
             print('funfou')
         else:
             lastImg = ImgGeoDilat
             markerimagem = ImgGeoDilat
-            x += 1
-            if x == 50:
-                print('andou')
-                x = 0
+            # x += 1
+            # if x == 50:
+            #     fig, [ax1,ax2] = plt.subplots(1,2)
+            #     ax1.imshow(lastImg,cmap='gray')
+            #     ax2.imshow(ImgGeoDilat,cmap='gray')
+            #     plt.show()
+            #     x = 0
 
-
+    ImgGeoDilat = ones - ImgGeoDilat
 
     return ImgGeoDilat
     

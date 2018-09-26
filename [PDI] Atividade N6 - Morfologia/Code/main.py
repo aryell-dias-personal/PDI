@@ -55,7 +55,7 @@ if __name__ == '__main__':
     ImgOriginal = utils.Binarizar(ImgOriginal)
     imagem = Operacoes.Opening(ImgOriginal,kernel,cx,cy)
     imagem = Operacoes.Closing(imagem,kernel,cx,cy)
-    imagem = Operacoes.Preencher_furos(imagem)
+    imagem = Operacoes.Preencher_furos(imagem,kernel,cx,cy)
     ax2.imshow(imagem,cmap='gray')
     plt.show()
 
