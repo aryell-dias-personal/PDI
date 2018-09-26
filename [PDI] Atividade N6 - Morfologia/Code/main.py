@@ -3,17 +3,6 @@ import utils
 import Operacoes
 import numpy as np
 
-def mainPreenche(imagem):
-    ImgOriginal = utils.LerImagem('../imagens/{}.jpg'.format(imagem))
-
-    ImgResultado = utils.translacao(utils.reflexao(ImgOriginal))
-
-    fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
-    ax1.imshow(ImgOriginal,cmap='gray')
-    ax2.imshow(ImgResultado,cmap='gray')
-    plt.show()
-    
-
 def mainOpera(imagem1,imagem2,operacao):
     # formato das imagens 1a e 1b são diferentes do esperado 
     ImgOriginal1 = utils.LerImagem('../imagens/{}.png'.format(imagem1))
@@ -72,14 +61,14 @@ def Quarta_Questao(imagem,SE,centrox,centroy):
 
 
 if __name__ == '__main__':
-    kernel = [[0,1,0],[1,1,1],[0,1,0]]
-    kernel2 = [[1,1,1],[1,1,1],[1,1,1]]
+    # kernel = [[0,1,0],[1,1,1],[0,1,0]]
+    # kernel2 = [[1,1,1],[1,1,1],[1,1,1]]
 
-    # mainOpera('Image_(1a)','Image_(1b)','nand')
+    mainOpera('Image_(1a)','Image_(1b)','nand')
 
     # filtro_de_ruido('Image_(2a)',kernel,cx,cy)
 
-    Preenche_furos('Image_(3a)',kernel,1,1)
+    # Preenche_furos('Image_(3a)',kernel,1,1)
 
     # Quarta_Questao('Image_(4a)',kernel,1,1)
     
