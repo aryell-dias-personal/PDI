@@ -45,9 +45,15 @@ def Preenche_furos(imagem,SE,centrox,centroy):
     fig, [ax1,ax2] = plt.subplots(1,2)
     ax1.imshow(ImgOriginal,cmap='gray')
     ImgOriginal = utils.Binarizar(ImgOriginal)
-    imagem = Operacoes.Opening(ImgOriginal,kernel,centrox,centroy)
-    imagem = Operacoes.Closing(imagem,kernel,centrox,centroy)
+
+    imagem = Operacoes.Dilation(ImgOriginal,kernel,centrox,centroy)
+    imagem = Operacoes.Dilation(imagem,kernel,centrox,centroy)
+
     imagem = Operacoes.Preencher_furos(imagem,kernel,centrox,centroy)
+    
+    imagem = Operacoes.Erosion(imagem,kernel,centrox,centroy)
+    # imagem = Operacoes.Erosion(imagem,kernel,centrox,centroy)
+    
     ax2.imshow(imagem,cmap='gray')
     plt.show()
     
