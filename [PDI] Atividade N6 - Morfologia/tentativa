@@ -1,0 +1,7 @@
+imagem = Operacoes.Erosion(img,kernel2,1,1)
+
+    subImg = img - imagem
+
+    Separada = img - subImg
+
+    Separada = Operacoes.Dilation(Separada,kernel,1,2)

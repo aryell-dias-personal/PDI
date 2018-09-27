@@ -65,18 +65,50 @@ def Quarta_Questao(imagem,SE,centrox,centroy):
     ax2.imshow(imagem,cmap='gray')
     plt.show()
 
+def Quarta_Questao_separar(imagem,SE,centrox,centroy):
+    ImgOriginal = utils.LerImagem("../imagens/{}.jpg".format(imagem))
+    ImgOriginal = utils.Binarizar(ImgOriginal)
+    fig, [ax1,ax2] = plt.subplots(1,2)
+    ax1.imshow(ImgOriginal,cmap='gray')
+
+    imagemD = Operacoes.Dilation(ImgOriginal,SE,1,1)
+    imagemD = Operacoes.Dilation(imagemD,SE,1,1)
+    imagemD = Operacoes.Dilation(imagemD,SE,1,1)   
+
+    imagem = Operacoes.Preencher_furos(imagemD,SE,1,1)
+
+    imagem = Operacoes.Erosion(imagem,SE,1,1)
+    imagem = Operacoes.Erosion(imagem,SE,1,1)
+    imagem = Operacoes.Erosion(imagem,SE,1,1)
+
+    erodi = Operacoes.Erosion(ImgOriginal,SE,1,1)
+    # erodi = Operacoes.Erosion(erodi,SE,1,1)
+    # erodi = Operacoes.Erosion(erodi,SE,1,1)
+    # erodi = Operacoes.Erosion(erodi,SE,1,1)
+
+    subImg = np.array(imagem) - np.array(erodi)
+    # subImg = ImgOriginal - subImg
+
+    separa = utils.operation(subImg,ImgOriginal,'xor')
+
+    ax2.imshow(separa,cmap='gray')
+    plt.show()
+
 
 if __name__ == '__main__':
-    # kernel = [[0,1,0],[1,1,1],[0,1,0]]
-    # kernel2 = [[1,1,1],[1,1,1],[1,1,1]]
+    kernel = [[0,1,0],[1,1,1],[0,1,0]]
+    kernel1 = [[0,1,0],[1,1,1],[0,0,0]]
+    kernel2 = [[1,1,1],[1,1,1],[1,1,1]]
 
-    mainOpera('Image_(1a)','Image_(1b)','nand')
+    # mainOpera('Image_(1a)','Image_(1b)','nand')
 
     # filtro_de_ruido('Image_(2a)',kernel,cx,cy)
 
     # Preenche_furos('Image_(3a)',kernel,1,1)
 
     # Quarta_Questao('Image_(4a)',kernel,1,1)
+
+    Quarta_Questao_separar('Image_(4a)',kernel,1,1)
     
     # mainPreenche('Image_(3a)')
 
