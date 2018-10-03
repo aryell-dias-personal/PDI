@@ -8,6 +8,8 @@ def LerImagem(nome):
     if np.size(np.shape(imagem)) > 2:
         imagem = imagem[:,:,0]
     
+    # imagem = Binarizar(imagem)
+
     return imagem
 
 def Binarizar(imagem):
@@ -20,9 +22,9 @@ def Binarizar(imagem):
     for x in range(aux[0]):
         for y in range(aux[1]):
             if imagem[x][y] >= 128:
-                ImgBin[x][y] = 1
+                ImgBin[x][y] = int(1)
             else:
-                ImgBin[x][y] = 0
+                ImgBin[x][y] = int(0)
 
     return ImgBin
 
