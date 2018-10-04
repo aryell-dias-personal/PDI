@@ -5,7 +5,6 @@ import utils
 
 def SeguidorBorda(imagem):
     aux = np.shape(imagem)
-
     zeros = np.zeros(aux[1])
     x = 0
     y = 0
@@ -32,48 +31,58 @@ def SeguidorBorda(imagem):
         flag = 0
 
         for t in range(mem,8):
-            if imagem[pos[t][0]][pos[t][1]] == 1 and flag == 0:
-                B1 = pos[t]
-                if t-1 >= 0:
-                    C = pos[t-1]
-                else:
-                    C = pos[7]
-                flag = 1
-        
-        if flag == 0:
-            for f in range(0,mem):
-                if imagem[pos[f][0]][pos[f][1]] == 1 and flag == 0:
-                    B1 = pos[f]
-                    if f-1>=0:
-                        C = pos[f-1]
+            if pos[t][0] >= 0 and pos[t][0] < aux[0] and pos[t][1] >= 0 and pos[t][1] < aux[1]:
+                if imagem[pos[t][0]][pos[t][1]] == 1 and flag == 0:
+                    B1 = pos[t]
+                    if t-1 >= 0:
+                        C = pos[t-1]
                     else:
                         C = pos[7]
                     flag = 1
+        
+        if flag == 0:
+            for f in range(0,mem):
+                if pos[f][0] >= 0 and pos[f][0] < aux[0] and pos[f][1] >= 0 and pos[f][1] < aux[1]:
+                    if imagem[pos[f][0]][pos[f][1]] == 1 and flag == 0:
+                        B1 = pos[f]
+                        if f-1>=0:
+                            C = pos[f-1]
+                        else:
+                            C = pos[7]
+                        flag = 1
 
         borda.append(B1)
         pos = [[B1[0],B1[1]-1],[B1[0]-1,B1[1]-1],[B1[0]-1,B1[1]],[B1[0]-1,B1[1]+1],[B1[0],B1[1]+1],[B1[0]+1,B1[1]+1],[B1[0]+1,B1[1]],[B1[0]+1,B1[1]-1]]
 
     return borda
 
-def ChainCode(imagem, vizinhanca):
+def ChainCode(imagem, vizinhanca,g,l):
     aux = np.shape(imagem)
 
     padImg = np.zeros(aux)
     size = aux
 
-    while size[0]%10 != 0:
+    while size[0]%g != 0:
         padImg = np.zeros([size[0]+1,size[1]])
         size = np.shape(padImg)
-    while size[1]%10 != 0:
+    while size[1]%l != 0:
         padImg = np.zeros([size[0],size[1]+1])
         size = np.shape(padImg)
 
-    for i in range(aux[0]):
-        for j in range(aux[1]):
-            padImg[i][j] = imagem[i][j]
+    if (aux[0]-size[0])%2 > 0:
+        complemento = 1 
+    else:
+        complemento = 0
 
-    grid = np.zeros([10,10])
-    chain = []
+    if (aux[1]-size[1])%2 > 0:
+        comp = 1 
+    else:
+        comp = 0
+    
+    for i in range(int(np.floor((size[0]-aux[0])/2)),int(size[0]-np.floor((size[0]-aux[0])/2)-complemento)):
+        for j in range(int(np.floor((size[1]-aux[1])/2)),int(size[1]-np.floor((size[1]-aux[1])/2)-comp)):
+            padImg[i][j] = imagem[i-int(np.floor((size[0]-aux[0])/2))][j-int(np.floor((size[1]-aux[1])/2))]
+
     zeros = np.zeros(aux[1])
     x = 0
     y = 0
@@ -83,142 +92,91 @@ def ChainCode(imagem, vizinhanca):
     
     while imagem[x][y] == 0:
         y += 1
+    
+    dim = np.shape(padImg)
+    grid = np.zeros([g,l])
 
-    borda = SeguidorBorda(padImg)
+    if dim[0]%2 > 0:
+        xcomp = 1 
+    else:
+        xcomp = 0
 
-    pontos, dc = np.shape(borda)
-    newborda = []
-    img = np.zeros([911,881])
+    if dim[1]%2 > 0:
+        ycomp = 1 
+    else:
+        ycomp = 0
 
-    for r in range(pontos):
-        if borda[r][0] >= 0 and borda[r][0] < size[0]/20:
-            x1 = 0
-        elif borda[r][0] >= size[0]/20 and borda[r][0] < 3*size[0]/20:
-            x1 =1
-        elif borda[r][0] >= 3*size[0]/20 and borda[r][0] < 5*size[0]/20:
-            x1 =2
-        elif borda[r][0] >= 5*size[0]/20 and borda[r][0] < 7*size[0]/20:
-            x1 =3
-        elif borda[r][0] >= 7*size[0]/20 and borda[r][0] < 9*size[0]/20:
-            x1 =4
-        elif borda[r][0] >= 9*size[0]/20 and borda[r][0] < 11*size[0]/20:
-            x1 =5
-        elif borda[r][0] >= 11*size[0]/20 and borda[r][0] < 13*size[0]/20:
-            x1 =6
-        elif borda[r][0] >= 13*size[0]/20 and borda[r][0] < 15*size[0]/20:
-            x1 =7
-        elif borda[r][0] >= 15*size[0]/20 and borda[r][0] < 17*size[0]/20:
-            x1 =8
-        elif borda[r][0] >= 17*size[0]/20 and borda[r][0] < 19*size[0]/20:
-            x1 =9
-        elif borda[r][0] >= 19*size[0]/20:
-            x1 =10
-        
-        if borda[r][1] >= 0 and borda[r][1] < size[1]/20:
-            y1 = 0
-        elif borda[r][1] >= size[1]/20 and borda[r][1] < 3*size[1]/20:
-            y1 =1
-        elif borda[r][1] >= 3*size[1]/20 and borda[r][1] < 5*size[1]/20:
-            y1 =2
-        elif borda[r][1] >= 5*size[1]/20 and borda[r][1] < 7*size[1]/20:
-            y1 =3
-        elif borda[r][1] >= 7*size[1]/20 and borda[r][1] < 9*size[1]/20:
-            y1 =4
-        elif borda[r][1] >= 9*size[1]/20 and borda[r][1] < 11*size[1]/20:
-            y1 =5
-        elif borda[r][1] >= 11*size[1]/20 and borda[r][1] < 13*size[1]/20:
-            y1 =6
-        elif borda[r][1] >= 13*size[1]/20 and borda[r][1] < 15*size[1]/20:
-            y1 =7
-        elif borda[r][1] >= 15*size[1]/20 and borda[r][1] < 17*size[1]/20:
-            y1 =8
-        elif borda[r][1] >= 17*size[1]/20 and borda[r][1] < 19*size[1]/20:
-            y1 =9
-        elif borda[r][1] >= 19*size[1]/20:
-            y1 =10
-        
-        t = [x1,y1]
-        img[t[0]*91][t[1]*88] = 1
-        ig = 0
-
-        for h in range(np.shape(newborda)[0]):
-            if t == newborda[h]:
-                ig = 1
-        if ig == 0:
-            newborda.append(t)
-
-    plt.imshow(img,cmap='gray')
+    for u in range(g):
+        for v in range(l):
+            for t in range(u*g-int(np.floor(dim[0]/(2*g))),u*g+int(np.floor(dim[0]/(2*g)))-xcomp):
+                for k in range(v*l-int(np.floor(dim[1]/(2*l))),v*l+int(np.floor(dim[1]/(2*l)))-ycomp):
+                    if t+u-xcomp >= 0 and t+u-xcomp < dim[0] and k+v-ycomp >= 0 and k+v-ycomp < dim[1]:
+                        if padImg[t+u-xcomp][k+v-ycomp] == 1:
+                            grid[u][v] = 1
+    
+    plt.imshow(grid,cmap='gray')
     plt.show()
+
+    newborda = SeguidorBorda(grid)
+    chain = []
+    cope = []
 
     if vizinhanca == 8:
         for q in range(np.shape(newborda)[0]):
             pos = [[newborda[q][0],newborda[q][1]+1], [newborda[q][0]-1,newborda[q][1]+1], [newborda[q][0]-1,newborda[q][1]], [newborda[q][0]-1,newborda[q][1]-1], [newborda[q][0],newborda[q][1]-1], [newborda[q][0]+1,newborda[q][1]-1], [newborda[q][0]+1,newborda[q][1]], [newborda[q][0]+1,newborda[q][1]+1]]
             
             for h in range(0,8):
-                if q < 7:
+                if q < (np.shape(newborda)[0]-1):
                     if pos[h] == newborda[q+1]:
-                        mem = h                
+                        if q == 0:
+                            for m in range(8):
+                                if pos[m] == newborda[-1]:
+                                    if m == 0:
+                                        chain.append(8 - h)
+                                    else:
+                                        if h - m >= 0:
+                                            chain.append(h-m)
+                                        else:
+                                            chain.append(h-m+8)        
+                        else:
+                            if h == 0:
+                                chain.append(8 - mem)
+                            else:
+                                if h - mem >= 0:
+                                    chain.append(h-mem)
+                                else:
+                                    chain.append(h-mem+8)
+                        mem = h
                 else:
                     if pos[h] == newborda[0]:
-                        mem = h                
-            chain.append(mem)
+                        if h == 0:
+                            chain.append(8 - mem)
+                        else:
+                            if h - mem >= 0:
+                                chain.append(h-mem)
+                            else:
+                                chain.append(h-mem+8)
+                        mem = h 
+            cope.append(mem)
 
-    # chain = 
-
+    print(cope)
     return chain
-        
 
 def Esqueleto(imagem):
     aux = np.shape(imagem)
-    # zeros = np.zeros(aux[1])
-    # x = 0
-    # y = 0
-
-    # while np.allclose(imagem[x][:],zeros):
-    #     x += 1
-    
-    # while imagem[x][y] == 0:
-    #     y += 1
-
-    # B0 = [x,y]
+    copia = np.copy(imagem)
     para = 0
+    count = 0
 
     while para == 0:
         deletar = []
-        borda = SeguidorBorda(imagem)
+        borda = SeguidorBorda(copia)
+        count += 1
 
-        plt.imshow(borda)
-        plt.show()
-
-        for s in range(np.shape(borda)[0]):
-            N = 0
-            T = 0
-            B0 = [borda[s][0],borda[s][1]]
-            pos = [[B0[0],B0[1]-1],[B0[0]-1,B0[1]-1],[B0[0]-1,B0[1]],[B0[0]-1,B0[1]+1],[B0[0],B0[1]+1],[B0[0]+1,B0[1]+1],[B0[0]+1,B0[1]],[B0[0]+1,B0[1]-1]]
-            
-            for i in range(-1,2):
-                for j in range(-1,2):
-                    if B0[0]+i >= 0 and B0[0]+i<aux[0] and B0[1]+j>=0 and B0[1]+j<aux[1]:
-                        if imagem[B0[0]+i][B0[1]+j] == 1:
-                            N += 1
-            
-            for a in range(8):
-                if a > 0:
-                    if pos[a][0] - pos[a-1][0] == 1 or pos[a][1] - pos[a-1][1] == 1:
-                        T += 1
-                else:
-                    if pos[0][0] - pos[7][0] == 1 or pos[0][1] - pos[7][1] == 1:
-                        T += 1
-            
-            if (N <= 6 or N >= 2) and T == 1 and imagem[pos[2][0]][pos[2][1]]*imagem[pos[4][0]][pos[4][1]]*imagem[pos[6][0]][pos[6][1]] == 0 and imagem[pos[0][0]][pos[0][1]]*imagem[pos[4][0]][pos[4][1]]*imagem[pos[6][0]][pos[6][1]] == 0:
-                deletar.append(B0)
-
-        for g in range(np.shape(deletar)[0]):
-            x = deletar[g][0]
-            y = deletar[g][1]
-            imagem[x][y] = 0
-
-        borda = SeguidorBorda(imagem)
+        if count == 20:
+            plt.imshow(copia,cmap='gray')
+            plt.show()
+            count = 0
 
         for s in range(np.shape(borda)[0]):
             N = 0
@@ -229,28 +187,60 @@ def Esqueleto(imagem):
             for i in range(-1,2):
                 for j in range(-1,2):
                     if B0[0]+i >= 0 and B0[0]+i<aux[0] and B0[1]+j>=0 and B0[1]+j<aux[1]:
-                        if imagem[B0[0]+i][B0[1]+j] == 1:
+                        if copia[B0[0]+i][B0[1]+j] == 1 and (i != 0 and j!= 0):
                             N += 1
             
             for a in range(8):
                 if a > 0:
-                    if pos[a][0] - pos[a-1][0] == 1 or pos[a][1] - pos[a-1][1] == 1:
+                    if copia[pos[a][0]][pos[a][1]] - copia[pos[a-1][0]][pos[a-1][1]] == 1:
                         T += 1
                 else:
-                    if pos[0][0] - pos[7][0] == 1 or pos[0][1] - pos[7][1] == 1:
+                    if copia[pos[0][0]][pos[0][1]] - copia[pos[7][0]][pos[7][1]] == 1:
                         T += 1
             
-            if (N <= 6 or N >= 2) and T == 1 and imagem[pos[2][0]][pos[2][1]]*imagem[pos[4][0]][pos[4][1]]*imagem[pos[0][0]][pos[0][1]] == 0 and imagem[pos[0][0]][pos[0][1]]*imagem[pos[2][0]][pos[2][1]]*imagem[pos[6][0]][pos[6][1]] == 0:
+            if (N <= 6 and N >= 2) and T == 1 and copia[pos[2][0]][pos[2][1]]*copia[pos[4][0]][pos[4][1]]*copia[pos[6][0]][pos[6][1]] == 0 and copia[pos[4][0]][pos[4][1]]*copia[pos[6][0]][pos[6][1]]*copia[pos[0][0]][pos[0][1]] == 0:
+                deletar.append(B0)
+        
+        for g in range(np.shape(deletar)[0]):
+            x = deletar[g][0]
+            y = deletar[g][1]
+            copia[x][y] = 0
+
+        borda = SeguidorBorda(copia)
+
+        for s in range(np.shape(borda)[0]):
+            N = 0
+            T = 0
+            B0 = [borda[s][0],borda[s][1]]
+            pos = [[B0[0],B0[1]-1],[B0[0]-1,B0[1]-1],[B0[0]-1,B0[1]],[B0[0]-1,B0[1]+1],[B0[0],B0[1]+1],[B0[0]+1,B0[1]+1],[B0[0]+1,B0[1]],[B0[0]+1,B0[1]-1]]
+            
+            for i in range(-1,2):
+                for j in range(-1,2):
+                    if B0[0]+i >= 0 and B0[0]+i<aux[0] and B0[1]+j>=0 and B0[1]+j<aux[1]:
+                        if copia[B0[0]+i][B0[1]+j] == 1 and (i != 0 and j!= 0):
+                            N += 1
+            
+            for a in range(8):
+                if a > 0:
+                    if copia[pos[a][0]][pos[a][1]] - copia[pos[a-1][0]][pos[a-1][1]] == 1:
+                        T += 1
+                else:
+                    if copia[pos[0][0]][pos[0][1]] - copia[pos[7][0]][pos[7][1]] == 1:
+                        T += 1
+            
+            if (N <= 6 and N >= 2) and T == 1 and copia[pos[2][0]][pos[2][1]]*copia[pos[4][0]][pos[4][1]]*copia[pos[0][0]][pos[0][1]] == 0 and copia[pos[2][0]][pos[2][1]]*copia[pos[6][0]][pos[6][1]]*copia[pos[0][0]][pos[0][1]] == 0:
                 deletar.append(B0)
 
         for g in range(np.shape(deletar)[0]):
             x = deletar[g][0]
             y = deletar[g][1]
-            imagem[x][y] = 0
+            copia[x][y] = 0
 
-        print(deletar)
+        # print(deletar)
 
         if np.size(deletar) == 0:
             para = 1
 
-    return imagem
+    return copia
+
+# def MPP(imagem):

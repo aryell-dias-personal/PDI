@@ -22,9 +22,13 @@ def Binarizar(imagem):
     for x in range(aux[0]):
         for y in range(aux[1]):
             if imagem[x][y] >= 128:
-                ImgBin[x][y] = int(1)
+                ImgBin[x][y] = np.uint8(1)
             else:
-                ImgBin[x][y] = int(0)
+                ImgBin[x][y] = np.uint8(0)
+
+    # for i in range(np.shape(ImgBin)[0]):
+    #     for j in range(np.shape(ImgBin)[1]):
+    #         print(ImgBin[i][j])
 
     return ImgBin
 
