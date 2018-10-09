@@ -35,6 +35,6 @@ def Chain(imagem):
     print(teste)
 
 if __name__ == '__main__':
-    Chain('Image_(1)')
-    # esqueletizacao('Image_(3)')
+    # Chain('Image_(1)')
+    esqueletizacao('Image_(3)')
     
