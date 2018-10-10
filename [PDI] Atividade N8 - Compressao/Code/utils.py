@@ -41,3 +41,32 @@ def Normalizar(imagem):
     img = 255*(imagem - mini)/(maxi-mini)
 
     return img
+
+
+def Pad(imagem,g,l):
+    size = np.shape(imagem)
+    aux = size
+    padImg = np.zeros(size)
+
+    while size[0]%g != 0:
+        padImg = np.zeros([size[0]+1,size[1]])
+        size = np.shape(padImg)
+    while size[1]%l != 0:
+        padImg = np.zeros([size[0],size[1]+1])
+        size = np.shape(padImg)
+
+    if (aux[0]-size[0])%2 > 0:
+        complemento = 1 
+    else:
+        complemento = 0
+
+    if (aux[1]-size[1])%2 > 0:
+        comp = 1 
+    else:
+        comp = 0
+    
+    for i in range(int(np.floor((size[0]-aux[0])/2)),int(size[0]-np.floor((size[0]-aux[0])/2)-complemento)):
+        for j in range(int(np.floor((size[1]-aux[1])/2)),int(size[1]-np.floor((size[1]-aux[1])/2)-comp)):
+            padImg[i][j] = imagem[i-int(np.floor((size[0]-aux[0])/2))][j-int(np.floor((size[1]-aux[1])/2))]
+
+    return padImg
