@@ -71,79 +71,82 @@ def Block(imagem):
     y = size[1]/8
 
 
-def LZW(imagem,tamanho):
-    dictionary = np.zeros(tamanho,dtype=object)
-    memoria = np.zeros(tamanho)
-    for s in range(tamanho): # cria o dicionário inicial
-        if s < 256:
-            dictionary[s] = s
-        else:
-            dictionary[s] = -1
+# def LZW(imagem,tamanho):
+#     dictionary = np.zeros(tamanho,dtype=object)
+#     memoria = np.zeros(tamanho)
+#     for s in range(tamanho): # cria o dicionário inicial
+#         if s < 256:
+#             dictionary[s] = s
+#         else:
+#             dictionary[s] = -1
         
-    aux = np.shape(imagem)    
+#     aux = np.shape(imagem)    
 
-    vetor = imagem[0][0]
-    mem = 256
+#     vetor = imagem[0][0]
+#     mem = 256
 
-    for x in range(aux[0]): # loop pra cobrir td imagem
-        for y in range(aux[1]):
-            check = 0
-            if dictionary[-1] != -1: # comecei a fazer isso aqui pra resetar as entradas do dicionário menos usadas, mas não terminei ainda
-                temporario = np.min(memoria)
-            for t in range(tamanho): # loop pra olhar td o dicionário
-                # print(dictionary[t], vetor)
-                if np.array_equal(vetor,dictionary[t]): # verifica se a estrutura tá no dicionário
-                    if y+1 < aux[1]: # verifica qual pixel tá sendo analisado
-                        memoria[t] += 1 # isso é pra fazer o reset do dicionário, deixa pra lá
-                        copia = np.zeros(np.size(vetor)+1) # cria a nova estrutura para analise
-                        if np.size(vetor) > 1:
-                            for k in range(np.size(vetor)):
-                                copia[k] = vetor[k]
-                        else:
-                            copia[0] = vetor
-                        copia[-1] = imagem[x][y+1]
-                        vetor = copia
-                        check = 1
-                        break
-                    elif x+1 < aux[0]: # a mesma coisa, só pra evitar q passe dos limites da imagem
-                        memoria[t] += 1
-                        copia = np.zeros(np.size(vetor)+1)
-                        if np.size(vetor) > 1:
-                            for k in range(np.size(vetor)):
-                                copia[k] = vetor[k]
-                        else:
-                            copia[0] = vetor
-                        copia[-1] = imagem[x+1][0]
-                        vetor = copia
-                        check = 1
-                        break
-            
-            if check == 0: # caso não se tenha a estrutura no dicionário, ela é adicionada
-                # print(dictionary[mem-1], vetor, mem)
-                dictionary[mem] = vetor
-                mem += 1
-                if y+1 < aux[1]:
-                    # print('aaaa')
-                    vetor = [imagem[x][y],imagem[x][y+1]]
-                elif x+1 < aux[0]:
-                    # print('bbbb')
-                    vetor = [imagem[x][y],imagem[x+1][0]]
-
-    return dictionary
-
-
-# def LZW(imagem):
-#     #cores de 0 a 255 são mapeadas diretamente, 
-#     #sem necessidade de codificação   
-#     dictionary = {x:x for x in range(256)}  
-#     aux = np.shape(imagem)  
-#     # loop pra cobrir td imagem  
-#     memoria = []
-#     for x in range(aux[0]): 
+#     for x in range(aux[0]): # loop pra cobrir td imagem
 #         for y in range(aux[1]):
-#             valores = list(dictionary.values())
-#             pixel = imagem[x][y]
-#             if(memoria!=[]):
-#                 memoria.append(pixel)
-#                 if(not valores.__contains__(memoria)):
+#             check = 0
+#             if dictionary[-1] != -1: # comecei a fazer isso aqui pra resetar as entradas do dicionário menos usadas, mas não terminei ainda
+#                 temporario = np.min(memoria)
+#             for t in range(tamanho): # loop pra olhar td o dicionário
+#                 # print(dictionary[t], vetor)
+#                 if np.array_equal(vetor,dictionary[t]): # verifica se a estrutura tá no dicionário
+#                     if y+1 < aux[1]: # verifica qual pixel tá sendo analisado
+#                         memoria[t] += 1 # isso é pra fazer o reset do dicionário, deixa pra lá
+#                         copia = np.zeros(np.size(vetor)+1) # cria a nova estrutura para analise
+#                         if np.size(vetor) > 1:
+#                             for k in range(np.size(vetor)):
+#                                 copia[k] = vetor[k]
+#                         else:
+#                             copia[0] = vetor
+#                         copia[-1] = imagem[x][y+1]
+#                         vetor = copia
+#                         check = 1
+#                         break
+#                     elif x+1 < aux[0]: # a mesma coisa, só pra evitar q passe dos limites da imagem
+#                         memoria[t] += 1
+#                         copia = np.zeros(np.size(vetor)+1)
+#                         if np.size(vetor) > 1:
+#                             for k in range(np.size(vetor)):
+#                                 copia[k] = vetor[k]
+#                         else:
+#                             copia[0] = vetor
+#                         copia[-1] = imagem[x+1][0]
+#                         vetor = copia
+#                         check = 1
+#                         break
+            
+#             if check == 0: # caso não se tenha a estrutura no dicionário, ela é adicionada
+#                 # print(dictionary[mem-1], vetor, mem)
+#                 dictionary[mem] = vetor
+#                 mem += 1
+#                 if y+1 < aux[1]:
+#                     # print('aaaa')
+#                     vetor = [imagem[x][y],imagem[x][y+1]]
+#                 elif x+1 < aux[0]:
+#                     # print('bbbb')
+#                     vetor = [imagem[x][y],imagem[x+1][0]]
+
 #     return dictionary
+
+
+def LZW(imagem):
+    #cores de 0 a 255 são mapeadas diretamente, 
+    #sem necessidade de codificação   
+    dictionary = {x:x for x in range(256)}  
+    aux = np.shape(imagem)  
+    # loop pra cobrir td imagem  
+    memoria = []
+    for x in range(aux[0]): 
+        for y in range(aux[1]):
+            valores = list(dictionary.values())
+            lastKey = list(dictionary.keys())[-1]
+            pixel = imagem[x][y]
+            if(memoria!=[]):
+                memoria.append(pixel)
+                if(not valores.__contains__(memoria)):
+                    dictionary[lastKey+1] = memoria
+                    memoria = []
+    return dictionary
