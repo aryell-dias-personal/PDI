@@ -18,12 +18,14 @@ def mainQuant(imagem,bit):
 
 if __name__ == '__main__':
     # mainQuant('Image_(3)',8)
-    # ImgOriginal = utils.LerImage('Image_(1)')
-    ImgOriginal = [[39,39,126,126],[39,39,126,126],[39,39,126,126],[39,39,126,126]]
+    ImgOriginal = utils.LerImage('Image_(2)')
+    # ImgOriginal = [[39,39,126,126],[39,39,126,126],[39,39,126,126],[39,39,126,126]]
+
+    q = np.shape(ImgOriginal)
 
     # q = compressao.Huffman('Image_(1)')
     # q = utils.Pad(ImgOriginal,8,8)
-    q = compressao.LZW(ImgOriginal,8192)
+    # q = compressao.LZW(ImgOriginal)
     # q = compressao.LZW(ImgOriginal)    
     print(q)
 
