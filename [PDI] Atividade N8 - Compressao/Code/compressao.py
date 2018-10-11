@@ -71,10 +71,10 @@ def Block(imagem):
     y = size[1]/8
 
 
-def LZW(imagem):
-    dictionary = np.zeros(2048,dtype=object)
-    memoria = np.zeros(2048)
-    for s in range(2048): # cria o dicionário inicial
+def LZW(imagem,tamanho):
+    dictionary = np.zeros(tamanho,dtype=object)
+    memoria = np.zeros(tamanho)
+    for s in range(tamanho): # cria o dicionário inicial
         if s < 256:
             dictionary[s] = s
         else:
@@ -90,8 +90,8 @@ def LZW(imagem):
             check = 0
             if dictionary[-1] != -1: # comecei a fazer isso aqui pra resetar as entradas do dicionário menos usadas, mas não terminei ainda
                 temporario = np.min(memoria)
-            for t in range(2048): # loop pra olhar td o dicionário
-                print(dictionary[t], vetor)
+            for t in range(tamanho): # loop pra olhar td o dicionário
+                # print(dictionary[t], vetor)
                 if np.array_equal(vetor,dictionary[t]): # verifica se a estrutura tá no dicionário
                     if y+1 < aux[1]: # verifica qual pixel tá sendo analisado
                         memoria[t] += 1 # isso é pra fazer o reset do dicionário, deixa pra lá
@@ -119,12 +119,15 @@ def LZW(imagem):
                         break
             
             if check == 0: # caso não se tenha a estrutura no dicionário, ela é adicionada
+                # print(dictionary[mem-1], vetor, mem)
                 dictionary[mem] = vetor
                 mem += 1
                 if y+1 < aux[1]:
+                    # print('aaaa')
                     vetor = [imagem[x][y],imagem[x][y+1]]
                 elif x+1 < aux[0]:
-                    vetor = [imagem[x][y],imagem[x+1][y]]
+                    # print('bbbb')
+                    vetor = [imagem[x][y],imagem[x+1][0]]
 
     return dictionary
 
