@@ -134,6 +134,19 @@ def Block(imagem):
 #                 count = 0
 #     return dictionary
 
+def LZWcompress(dictionary):
+    retorno = []
+    for x in range(256, dictionary.__len__()):
+        pos = dictionary[x][:-1]
+        if(pos.__len__() == 1):
+            retorno += pos
+        else:
+            for key in dictionary.keys():
+                if(dictionary[key] == pos):
+                    retorno += [key]
+                    break
+    return retorno
+
 def LZW(imagem):
     #cores de 0 a 255 são mapeadas diretamente, 
     #sem necessidade de codificação   
