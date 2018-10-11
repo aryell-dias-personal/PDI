@@ -5,16 +5,17 @@ import matplotlib.pyplot as plt
 def LZWdescompress(dictionary, comp, originalShape):
     x, y = originalShape
     imagemDesformatada = []
-    for x in comp:
-        if(isinstance(dictionary[x],int)):
-            imagemDesformatada += [dictionary[x]]
+    for i in comp:
+        if(isinstance(dictionary[i],int)):
+            imagemDesformatada += [dictionary[i]]
         else:
-            imagemDesformatada += dictionary[x]
-    print(imagemDesformatada)    
-    imagemRetorno = []
+            imagemDesformatada += dictionary[i]
+    imagemDesformatada += [dictionary[i][-1]]
+    imagemRetorno = [[i*j for i in range(x)]for j in range(y)]
     counter = 0
     for i in range(x):
         for j in range(y):
-            counter += j
+            # print(imagemDesformatada[counter])
             imagemRetorno[i][j] = imagemDesformatada[counter]
+            counter += 1
     return imagemRetorno

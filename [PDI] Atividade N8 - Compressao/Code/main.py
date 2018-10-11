@@ -27,6 +27,7 @@ if __name__ == '__main__':
     dictionary = compressao.LZW(ImgOriginal)
     compress = compressao.LZWcompress(dictionary)
     decompress = descompressao.LZWdescompress(dictionary,compress,(4,4))
+    print(decompress)
 
     # q = compressao.LZW(ImgOriginal,8192)    
     # fig,[ax1, ax2] = plt.subplots(1,2)
