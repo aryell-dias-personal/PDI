@@ -72,29 +72,38 @@ def Block(imagem):
 
 
 def LZW(imagem,tamanho):
-    dictionary = np.zeros(tamanho,dtype=object)
-    memoria = np.zeros(tamanho)
-    for s in range(tamanho): # cria o dicionário inicial
-        if s < 256:
-            dictionary[s] = s
-        else:
-            dictionary[s] = -1
+    # dictionary = np.zeros(256,dtype=object)
+    dictionary = []
+    # memoria = np.zeros(tamanho)
+
+    for s in range(256): # cria o dicionário inicial
+        dictionary.append(s)
+        # if s < 256:
+        #     dictionary[s] = s
+        # else:
+        #     dictionary[s] = -1
         
     aux = np.shape(imagem)    
 
     vetor = imagem[0][0]
-    mem = 256
+    # mem = 256
+
+    count = 0
 
     for x in range(aux[0]): # loop pra cobrir td imagem
         for y in range(aux[1]):
             check = 0
-            if dictionary[-1] != -1: # comecei a fazer isso aqui pra resetar as entradas do dicionário menos usadas, mas não terminei ainda
-                temporario = np.min(memoria)
-            for t in range(tamanho): # loop pra olhar td o dicionário
+
+            # if dictionary[-1] != -1: # comecei a fazer isso aqui pra resetar as entradas do dicionário menos usadas, mas não terminei ainda
+                # temporario = np.min(memoria)
+
+            for t in range(len(dictionary)): # loop pra olhar td o dicionário
                 # print(dictionary[t], vetor)
                 if np.array_equal(vetor,dictionary[t]): # verifica se a estrutura tá no dicionário
                     if y+1 < aux[1]: # verifica qual pixel tá sendo analisado
-                        memoria[t] += 1 # isso é pra fazer o reset do dicionário, deixa pra lá
+                        
+                        # memoria[t] += 1 # isso é pra fazer o reset do dicionário, deixa pra lá
+                        
                         copia = np.zeros(np.size(vetor)+1) # cria a nova estrutura para analise
                         if np.size(vetor) > 1:
                             for k in range(np.size(vetor)):
@@ -106,7 +115,9 @@ def LZW(imagem,tamanho):
                         check = 1
                         break
                     elif x+1 < aux[0]: # a mesma coisa, só pra evitar q passe dos limites da imagem
-                        memoria[t] += 1
+                        
+                        # memoria[t] += 1
+                        
                         copia = np.zeros(np.size(vetor)+1)
                         if np.size(vetor) > 1:
                             for k in range(np.size(vetor)):
@@ -120,13 +131,20 @@ def LZW(imagem,tamanho):
             
             if check == 0: # caso não se tenha a estrutura no dicionário, ela é adicionada
                 # print(dictionary[mem-1], vetor, mem)
-                dictionary[mem] = vetor
-                mem += 1
+                # dictionary[mem] = vetor
+                # mem += 1
+                dictionary.append(vetor)
                 if y+1 < aux[1]:
                     # print('aaaa')
                     vetor = [imagem[x][y],imagem[x][y+1]]
                 elif x+1 < aux[0]:
                     # print('bbbb')
                     vetor = [imagem[x][y],imagem[x+1][0]]
+
+            count += 1
+            if count == 1000:
+                print(len(dictionary), dictionary[-1], imagem[x][y], x, y)
+                count = 0
+
 
     return dictionary
