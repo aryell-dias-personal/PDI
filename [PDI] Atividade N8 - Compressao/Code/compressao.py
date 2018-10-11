@@ -127,3 +127,20 @@ def LZW(imagem):
                     vetor = [imagem[x][y],imagem[x+1][y]]
 
     return dictionary
+
+
+# def LZW(imagem):
+#     #cores de 0 a 255 são mapeadas diretamente, 
+#     #sem necessidade de codificação   
+#     dictionary = {x:x for x in range(256)}  
+#     aux = np.shape(imagem)  
+#     # loop pra cobrir td imagem  
+#     memoria = []
+#     for x in range(aux[0]): 
+#         for y in range(aux[1]):
+#             valores = list(dictionary.values())
+#             pixel = imagem[x][y]
+#             if(memoria!=[]):
+#                 memoria.append(pixel)
+#                 if(not valores.__contains__(memoria)):
+#     return dictionary

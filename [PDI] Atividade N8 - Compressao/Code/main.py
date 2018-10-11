@@ -24,15 +24,15 @@ if __name__ == '__main__':
     # q = compressao.Huffman('Image_(1)')
     # q = utils.Pad(ImgOriginal,8,8)
     q = compressao.LZW(ImgOriginal)
-    # for x in range(2048):
-    #     if not np.array_equal(-1,q[x]):
-    #         print(q[x])
-    #     else:
-    #         break
+    for x in range(2048):
+        if not np.array_equal(-1,q[x]):
+            print(q[x])
+        else:
+            break
 
-    fig,[ax1, ax2] = plt.subplots(1,2)
-    ax1.imshow(ImgOriginal, cmap='gray')
-    # ax2.imshow(q,cmap='gray')
-    plt.show()
+    # fig,[ax1, ax2] = plt.subplots(1,2)
+    # ax1.imshow(ImgOriginal, cmap='gray')
+    # # ax2.imshow(q,cmap='gray')
+    # plt.show()
 
     
