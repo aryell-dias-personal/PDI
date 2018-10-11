@@ -154,6 +154,7 @@ def LZW(imagem):
     aux = np.shape(imagem)  
     # loop pra cobrir td imagem  
     memoria = []
+    count = 0
     for x in range(aux[0]): 
         for y in range(aux[1]):
             valores = list(dictionary.values())
@@ -164,4 +165,8 @@ def LZW(imagem):
                 if(not valores.__contains__(memoria)):
                     dictionary[lastKey+1] = memoria
                     memoria = [memoria[-1]]
+            count += 1
+            if count == 1000:
+                print(len(dictionary),x,y)
+                count = 0
     return dictionary
