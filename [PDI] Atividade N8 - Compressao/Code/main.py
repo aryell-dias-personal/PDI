@@ -3,6 +3,7 @@ import numpy as np
 
 import utils
 import compressao
+import descompressao
 
 def mainQuant(imagem,bit):
     ImgOriginal = utils.LerImage(imagem)
@@ -23,10 +24,11 @@ if __name__ == '__main__':
 
     # q = compressao.Huffman('Image_(1)')
     # q = utils.Pad(ImgOriginal,8,8)
-    q = compressao.LZW(ImgOriginal,8192)
-    # q = compressao.LZW(ImgOriginal)    
-    print(q)
+    dictionary = compressao.LZW(ImgOriginal)
+    compress = compressao.LZWcompress(dictionary)
+    decompress = descompressao.LZWdescompress(dictionary,compress,(4,4))
 
+    # q = compressao.LZW(ImgOriginal,8192)    
     # fig,[ax1, ax2] = plt.subplots(1,2)
     # ax1.imshow(ImgOriginal, cmap='gray')
     # ax2.imshow(q,cmap='gray')
