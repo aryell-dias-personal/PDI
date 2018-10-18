@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt 
 import numpy as np
-
+import iluminacao
 import utils
 import ruido
 
@@ -32,10 +32,11 @@ def filterHSI(imagem,m=3,n=3):
     plt.show()
 
 if __name__ == '__main__':
+    ImgOriginal = utils.LerImage('Image_(1a)')
+    iluminacao.clarear()
+
     # filterRGB('Image_(2b)')
-
-    filterHSI('Image_(2a)',5,5)
-
+    # filterHSI('Image_(2a)',5,5)
     # fig,[[ax1,ax2],[ax3,ax4]] = plt.subplots(2,2)
     # ax1.imshow(ImgOriginal)
     # ax2.imshow(imagem[:,:,0],cmap='gray')
