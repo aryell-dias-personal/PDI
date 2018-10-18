@@ -3,6 +3,7 @@ import numpy as np
 
 import utils
 import ruido
+import colori
 
 def filterRGB(imagem,m=3,n=3):
     ImgOriginal = utils.LerImage(imagem)
@@ -34,10 +35,17 @@ def filterHSI(imagem,m=3,n=3):
 if __name__ == '__main__':
     # filterRGB('Image_(2b)')
 
-    filterHSI('Image_(2a)',5,5)
+    # filterHSI('Image_(2a)',5,5)
 
-    # fig,[[ax1,ax2],[ax3,ax4]] = plt.subplots(2,2)
-    # ax1.imshow(ImgOriginal)
-    # ax2.imshow(imagem[:,:,0],cmap='gray')
-    # ax3.imshow(imagem[:,:,1],cmap='gray')
-    # ax4.imshow(imagem[:,:,2],cmap='gray')
+    ImgOriginal = utils.LerImage('Image_(3a)')
+
+    # print(np.shape(ImgOriginal),ImgOriginal[219][281])
+
+    img = colori.color(ImgOriginal)
+
+    fig,[ax1,ax2] = plt.subplots(1,2)
+    ax1.imshow(ImgOriginal,cmap='gray')
+    # ax2.plot(range(256),img)
+    ax2.imshow(img)
+
+    plt.show()
