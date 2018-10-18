@@ -32,13 +32,14 @@ def filterHSI(imagem,m=3,n=3):
     plt.show()
 
 if __name__ == '__main__':
-    ImgOriginal = utils.LerImage('Image_(1a)')
-    iluminacao.clarear()
+    ImgOriginal = utils.LerImage('Image_(1b)')
+    fig,[ax1,ax2] = plt.subplots(1,2)
+    ax1.imshow(ImgOriginal)
+    ax2.imshow(iluminacao.escurecer(ImgOriginal,0.02))
+    plt.show()
 
     # filterRGB('Image_(2b)')
     # filterHSI('Image_(2a)',5,5)
-    # fig,[[ax1,ax2],[ax3,ax4]] = plt.subplots(2,2)
-    # ax1.imshow(ImgOriginal)
     # ax2.imshow(imagem[:,:,0],cmap='gray')
     # ax3.imshow(imagem[:,:,1],cmap='gray')
     # ax4.imshow(imagem[:,:,2],cmap='gray')
