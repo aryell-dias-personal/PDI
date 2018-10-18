@@ -3,8 +3,7 @@ import matplotlib.image as mpimg
 import matplotlib.pyplot as plt 
 
 def LerImage(imagem):
-    img = mpimg.imread("../imagens/{}.jpg".format(imagem))
-
+    img = mpimg.imread('../imagens/{}.jpg'.format(imagem))
     return img
 
 def rgb2hsi(imagem):
