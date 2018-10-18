@@ -26,15 +26,15 @@ def color(imagem):
                 r[x][y] = 255 # amarelo
                 g[x][y] = 217
                 b[x][y] = 15
-            elif imagem[x][y] >= 190 and imagem[x][y] < 245:
+            elif imagem[x][y] >= 210 and imagem[x][y] < 245: #210 a 245
                 r[x][y] = 241 # vermelho
                 g[x][y] = 78
                 b[x][y] = 40
-            elif imagem[x][y] >= 110 and imagem[x][y] < 200:
+            elif imagem[x][y] >= 100 and imagem[x][y] < 210: #100 a 210
                 r[x][y] = 0  # azul
                 g[x][y] = 157
                 b[x][y] = 220
-            elif imagem[x][y] < 110:
+            elif imagem[x][y] < 100:
                 r[x][y] = 0
                 g[x][y] = 0
                 b[x][y] = 0

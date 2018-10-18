@@ -49,11 +49,11 @@ if __name__ == '__main__':
     ax2.imshow(img)
 
     plt.show()
-    ImgOriginal = utils.LerImage('Image_(1b)')
-    fig,[ax1,ax2] = plt.subplots(1,2)
-    ax1.imshow(ImgOriginal)
-    ax2.imshow(iluminacao.escurecer(ImgOriginal,0.02))
-    plt.show()
+    # ImgOriginal = utils.LerImage('Image_(1b)')
+    # fig,[ax1,ax2] = plt.subplots(1,2)
+    # ax1.imshow(ImgOriginal)
+    # ax2.imshow(iluminacao.escurecer(ImgOriginal,0.02))
+    # plt.show()
 
     # filterRGB('Image_(2b)')
     # filterHSI('Image_(2a)',5,5)
