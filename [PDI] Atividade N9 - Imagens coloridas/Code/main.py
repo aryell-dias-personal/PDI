@@ -8,8 +8,13 @@ import colori
 def filterRGB(imagem,m=3,n=3):
     ImgOriginal = utils.LerImage(imagem)
 
+    # imagem = np.uint8(ruido.average(ImgOriginal,m,n))
+    # imagem = np.uint8(ruido.Median(imagem,m,n))
     imagem = np.uint8(ruido.Median(ImgOriginal,m,n))
-    imagem = np.uint8(ruido.Median(imagem,m,n))
+
+    # imagem = np.uint8(ruido.min_max(imagem,m,n))
+
+    imagem = np.uint8(ruido.midpoint(imagem,m,n))
 
     fig,[ax1,ax2] = plt.subplots(1,2)
     ax1.imshow(ImgOriginal)
@@ -21,9 +26,12 @@ def filterHSI(imagem,m=3,n=3):
     ImgOriginal = utils.LerImage(imagem)
     
     img = utils.rgb2hsi(ImgOriginal)
-    img = ruido.Median(img,m,n)
-    img = ruido.Median(img,m,n)
-    img = ruido.Median(img,m,n)
+    
+    # img = ruido.average(img,m,n)
+    # img = ruido.Median(img,m,n)
+    # img = ruido.Median(img,m,n)
+    img = ruido.midpoint(img,m,n)
+    
     img = utils.hsi2rgb(img)
 
     fig,[ax1,ax2] = plt.subplots(1,2)
@@ -32,31 +40,39 @@ def filterHSI(imagem,m=3,n=3):
 
     plt.show()
 
-if __name__ == '__main__':
-    # filterRGB('Image_(2b)')
-
-    # filterHSI('Image_(2a)',5,5)
-
+def cor(imagem):
     ImgOriginal = utils.LerImage('Image_(3a)')
-
-    # print(np.shape(ImgOriginal),ImgOriginal[219][281])
 
     img = colori.color(ImgOriginal)
 
     fig,[ax1,ax2] = plt.subplots(1,2)
     ax1.imshow(ImgOriginal,cmap='gray')
-    # ax2.plot(range(256),img)
     ax2.imshow(img)
 
     plt.show()
-    # ImgOriginal = utils.LerImage('Image_(1b)')
-    # fig,[ax1,ax2] = plt.subplots(1,2)
-    # ax1.imshow(ImgOriginal)
-    # ax2.imshow(iluminacao.escurecer(ImgOriginal,0.02))
-    # plt.show()
+    
 
-    # filterRGB('Image_(2b)')
-    # filterHSI('Image_(2a)',5,5)
-    # ax2.imshow(imagem[:,:,0],cmap='gray')
-    # ax3.imshow(imagem[:,:,1],cmap='gray')
-    # ax4.imshow(imagem[:,:,2],cmap='gray')
+def escurecer(imagem,m):
+    ImgOriginal = utils.LerImage('Image_(1b)')
+    fig,[ax1,ax2] = plt.subplots(1,2)
+    ax1.imshow(ImgOriginal)
+    ax2.imshow(iluminacao.escurecer(ImgOriginal,m))
+    plt.show()
+
+def clarear(imagem,m):
+    ImgOriginal = utils.LerImage(imagem)
+    fig,[ax1,ax2] = plt.subplots(1,2)
+    ax1.imshow(ImgOriginal)
+    ax2.imshow(iluminacao.clarear(ImgOriginal,m))
+    plt.show()
+
+if __name__ == '__main__':
+    # filterRGB('Image_(2b)',5,5)
+
+    filterHSI('Image_(2a)')
+
+    # cor('Image_(3a)')   
+
+    # escurecer('Image_(1b)', 0.008)
+
+    # clarear('Image_(1a)', 0.2)

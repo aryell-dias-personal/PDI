@@ -22,8 +22,10 @@ def average(imagem,m=3,n=3):
             for u in range(m*n):
                 if (x+u%m-1 >= 0) and (x+u%m-1 < aux[0]) and (y+u%n-1 >= 0) and (y+u%n-1 < aux[1]):
                     media_r += r[x+u%m-1][y+u%n-1]
+                    # print(media_r, r[x+u%m-1][y+u%n-1],x+u%m-1,y+u%n-1)
                     media_b += b[x+u%m-1][y+u%n-1]
                     media_g += g[x+u%m-1][y+u%n-1]
+            # print(rfil[x][y],media_r,m*n)
             rfil[x][y] = int(np.rint(media_r/(m*n)))
             gfil[x][y] = int(np.rint(media_g/(m*n)))
             bfil[x][y] = int(np.rint(media_b/(m*n)))
@@ -112,4 +114,83 @@ def Median(imagem,m=3,n=3):
 
     return filterImg
 
-# def 
+def min_max(imagem,m=3,n=3):
+    r = imagem[:,:,0]
+    g = imagem[:,:,1]
+    b = imagem[:,:,2]
+
+    aux = np.shape(r)
+
+    rfil = np.zeros(aux)
+    gfil = np.zeros(aux)
+    bfil = np.zeros(aux)
+    
+    ker_r = np.zeros(m*n)
+    ker_g = np.zeros(m*n)
+    ker_b = np.zeros(m*n)
+
+    for x in range(aux[0]):
+        for y in range(aux[1]):
+            for u in range(m*n):
+                if (x+u%m-1 >= 0) and (x+u%m-1 < aux[0]) and (y+u%n-1 >= 0) and (y+u%n-1 < aux[1]):
+                    ker_r[u] = r[x+u%m-1][y+u%n-1]
+                    ker_g[u] = g[x+u%m-1][y+u%n-1]
+                    ker_b[u] = b[x+u%m-1][y+u%n-1]
+            if r[x][y] == max(ker_r) or r[x][y] == min(ker_r):
+                rfil[x][y] = np.mean(ker_r)
+            else:
+                rfil[x][y] = r[x][y]
+            if g[x][y] == max(ker_g) or g[x][y] == min(ker_g):
+                gfil[x][y] = np.mean(ker_g)
+            else:
+                gfil[x][y] = g[x][y]
+            if b[x][y] == max(ker_b) or b[x][y] == min(ker_b):
+                bfil[x][y] = np.mean(ker_b)
+            else:
+                bfil[x][y] = b[x][y]
+
+    filterImg = []
+
+    filterImg.append(rfil)
+    filterImg.append(gfil)
+    filterImg.append(bfil)
+
+    filterImg = np.einsum('abc->bca',filterImg)
+
+    return filterImg
+
+def midpoint(imagem,m,n):
+    r = imagem[:,:,0]
+    g = imagem[:,:,1]
+    b = imagem[:,:,2]
+
+    aux = np.shape(r)
+
+    rfil = np.zeros(aux)
+    gfil = np.zeros(aux)
+    bfil = np.zeros(aux)
+    
+    ker_r = np.zeros(m*n)
+    ker_g = np.zeros(m*n)
+    ker_b = np.zeros(m*n)
+
+    for x in range(aux[0]):
+        for y in range(aux[1]):
+            for u in range(m*n):
+                if (x+u%m-1 >= 0) and (x+u%m-1 < aux[0]) and (y+u%n-1 >= 0) and (y+u%n-1 < aux[1]):
+                    ker_r[u] = r[x+u%m-1][y+u%n-1]
+                    ker_g[u] = g[x+u%m-1][y+u%n-1]
+                    ker_b[u] = b[x+u%m-1][y+u%n-1]
+            rfil[x][y] = np.uint8((min(ker_r)+max(ker_r))/2)
+            gfil[x][y] = np.uint8((min(ker_g)+max(ker_g))/2)
+            bfil[x][y] = np.uint8((min(ker_b)+max(ker_b))/2)
+
+    filterImg = []
+
+    filterImg.append(rfil)
+    filterImg.append(gfil)
+    filterImg.append(bfil)
+
+    filterImg = np.einsum('abc->bca',filterImg)
+
+    return filterImg

@@ -22,9 +22,12 @@ def rgb2hsi(imagem):
 
     for x in range(aux[0]):
         for y in range(aux[1]):
+            # if r[x][y] == g[x][y] and r[x][y] == b[x][y]:
+            #     teta = np.pi/2
+            # elif g[x][y] == b[x][y]:
+            #     teta = 0
+            # else:
             teta = np.arccos(((r[x][y]-g[x][y]+r[x][y]-b[x][y])/2)/((r[x][y]-g[x][y])**2+(r[x][y]-b[x][y])*(g[x][y]-b[x][y]))**(1/2))
-
-            # print(r[x][y],g[x][y],b[x][y])
 
             if b[x][y] <= g[x][y]:
                 H[x][y] = teta
@@ -34,6 +37,7 @@ def rgb2hsi(imagem):
             S[x][y] = 1 - (3*min(r[x][y],g[x][y],b[x][y]))/(r[x][y]+g[x][y]+b[x][y])
 
             I[x][y] = (r[x][y]+g[x][y]+b[x][y])/3
+            # print(H[x][y],S[x][y],I[x][y])
 
     imagemHSI = []
     imagemHSI.append(H)
