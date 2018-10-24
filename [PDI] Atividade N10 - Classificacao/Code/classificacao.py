@@ -2,6 +2,9 @@ import numpy as np
 # import create_data
 import utils
 import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+import sklearn
+import cv2
 
 def caracteristicas(imagem):
 
@@ -56,20 +59,56 @@ def caracteristicas(imagem):
 
     return Hu
 
-def MLP():
+def features(imagem):
+    sift = cv2.xfeatures2d.SIFT_create()
+    surf = cv2.xfeatures2d.SURF_create()
+
+    orb = cv2.ORB_create(nfeatures=1500)
+
+    keypoints, descriptors = surf.detectAndCompute(imagem, None)
+
+    print(descriptors)
+
+    return descriptors
+
+
+def rede():
     train_x_orig, train_y, test_x_orig, test_y, classes = utils.load_dataset()
 
     carac = []
+    # train_y = sklearn.utils.validation.column_or_1d(np.transpose(train_y),warn=True)
+    train_y = np.transpose(train_y)
 
     for t in range(train_x_orig.shape[0]):
-        carac.append(caracteristicas(train_x_orig[t,:,:,:]))
+        carac.append(features(train_x_orig[t,:,:,:]))
 
-    interna = np.zeros(5)
-    peso1 = np.random.uniform(-1,1,[7,5])
+    svclassifier = SVC(kernel='rbf')    
+    svclassifier.fit(carac,train_y.ravel())
+
+    carac_test = []
 
     for t in range(train_x_orig.shape[0]):
-        for d in range(7):
-            for q in range(5):
-                interna[q] += peso1[q]*carac[t][d]
-        for u in range(5):
-            if interna[u] >= 
+        carac_test.append(caracteristicas(train_x_orig[t,:,:,:]))
+
+    y_pred = svclassifier.predict(carac_test)
+
+    print(y_pred)
+
+# def MLP():
+#     train_x_orig, train_y, test_x_orig, test_y, classes = utils.load_dataset()
+
+#     carac = []
+
+#     for t in range(train_x_orig.shape[0]):
+#         carac.append(caracteristicas(train_x_orig[t,:,:,:]))
+
+#     interna = np.zeros(5)
+#     peso1 = np.random.uniform(-1,1,[7,5])
+
+#     for t in range(train_x_orig.shape[0]):
+#         for d in range(7):
+#             for q in range(5):
+#                 interna[q] += peso1[q]*carac[t][d]
+#         for u in range(5):
+#             ativa = 1/(1+np.exp(-(interna[u]+1)/2))
+#             if ativa >= 
