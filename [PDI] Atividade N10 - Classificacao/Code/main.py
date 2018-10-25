@@ -4,5 +4,5 @@ import classificacao
 # import create_data
 
 if __name__ == '__main__':
-    classificacao.rede()
-    # create_data
+    classificacao.SVM()
+    
