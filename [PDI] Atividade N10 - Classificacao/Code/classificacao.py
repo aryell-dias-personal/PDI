@@ -1,10 +1,11 @@
 import numpy as np
+import cv2
+import sklearn
+from sklearn.svm import SVC
+import matplotlib.pyplot as plt
+
 # import create_data
 import utils
-import matplotlib.pyplot as plt
-from sklearn.svm import SVC
-import sklearn
-import cv2
 
 def caracteristicas(imagem):
 
@@ -60,16 +61,27 @@ def caracteristicas(imagem):
     return Hu
 
 def features(imagem):
-    sift = cv2.xfeatures2d.SIFT_create()
-    surf = cv2.xfeatures2d.SURF_create()
+    # sift = cv2.xfeatures2d.SIFT_create()
+    # surf = cv2.xfeatures2d.SURF_create()
 
-    orb = cv2.ORB_create(nfeatures=1500)
+    # keypoints, descriptors = sift.detectAndCompute(imagem, None)
 
-    keypoints, descriptors = surf.detectAndCompute(imagem, None)
+    winSize = (64,64)
+    blockSize = (16,16)
+    blockStride = (8,8)
+    cellSize = (8,8)
+    nbins = 9
+    derivAperture = 1
+    winSigma = 4.
+    histogramNormType = 0
+    L2HysThreshold = 2.0000000000000001e-01
+    gammaCorrection = 0
+    nlevels = 64
 
-    print(descriptors)
+    hog = cv2.HOGDescriptor(winSize,blockSize,blockStride,cellSize,nbins,derivAperture,winSigma,histogramNormType,L2HysThreshold,gammaCorrection,nlevels)
+    h = hog.compute(imagem)
 
-    return descriptors
+    return h
 
 
 def rede():
@@ -77,22 +89,26 @@ def rede():
 
     carac = []
     # train_y = sklearn.utils.validation.column_or_1d(np.transpose(train_y),warn=True)
-    train_y = np.transpose(train_y)
+    # train_y = np.transpose(train_y)
 
     for t in range(train_x_orig.shape[0]):
-        carac.append(features(train_x_orig[t,:,:,:]))
+        carac.append(np.ravel(features(train_x_orig[t,:,:,:])))
 
-    svclassifier = SVC(kernel='rbf')    
+    svclassifier = SVC(kernel='sigmoid')  
     svclassifier.fit(carac,train_y.ravel())
 
     carac_test = []
 
-    for t in range(train_x_orig.shape[0]):
-        carac_test.append(caracteristicas(train_x_orig[t,:,:,:]))
+    for t in range(test_x_orig.shape[0]):
+        carac_test.append(np.ravel(features(test_x_orig[t,:,:,:])))
 
     y_pred = svclassifier.predict(carac_test)
 
-    print(y_pred)
+    print(sklearn.metrics.confusion_matrix(test_y.ravel(),y_pred))
+    print(sklearn.metrics.classification_report(test_y.ravel(),y_pred))
+
+
+
 
 # def MLP():
 #     train_x_orig, train_y, test_x_orig, test_y, classes = utils.load_dataset()
