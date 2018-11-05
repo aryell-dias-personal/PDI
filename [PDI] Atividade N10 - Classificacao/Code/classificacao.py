@@ -95,7 +95,7 @@ def SVM():
     carac = []
     data = []
     
-    # train_y = np.transpose(train_y)
+    # train_y = np.transpose(train_y)send_message
 
     fout = open('train.csv', 'w')
 
@@ -128,7 +128,7 @@ def SVM():
 
     fout.close()
 
-    svclassifier = SVC(C=1.0, tol=1e-10, cache_size=600, kernel='rbf', class_weight='balanced')  
+    svclassifier = SVC(C=20.0, tol=1e-10, cache_size=600, kernel='rbf', class_weight='balanced')  
     svclassifier.fit(X_train,y_train)
 
     carac_test = []
@@ -163,6 +163,8 @@ def SVM():
     fin.close()
 
     X_test, X_tr, y_test, y_tr = sklearn.model_selection.train_test_split(Xt, yt, test_size = 0)
+
+    print(X_tr)
 
     y_pred = svclassifier.predict(X_test)
 
