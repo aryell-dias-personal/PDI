@@ -21,7 +21,7 @@ def Average(imagem,m=3,n=3):
             filterImg[x][y] = media/(m*n)
             media = 0
 
-    filterImg = imagem - filterImg
+    # filterImg = imagem - filterImg
 
     # plt.imshow(filterImg,cmap='gray')
     # plt.show()
@@ -165,7 +165,7 @@ def Gaussian(imagem):
         aux = np.shape(imagem)
     
     # std = np.rint(np.std(imagem))
-    std = 1.5
+    std = 2.5
 
     N = int(np.rint(6*std))
     if N%2 == 0:

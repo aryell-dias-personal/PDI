@@ -60,7 +60,7 @@ def Canny(imagem, T_min, T_max):
         imagem = imagem[:][:][1]
         aux = np.shape(imagem)
 
-    imagem = filters.Median(imagem)
+    # imagem = filters.Median(imagem,7,7)
     ImgFiltrada = filters.Gaussian(imagem)
     
     plt.imshow(ImgFiltrada,cmap='gray')
@@ -85,28 +85,36 @@ def Canny(imagem, T_min, T_max):
                             phaseImg[x][y] += np.arctan(ImgFiltrada[x+u][y+v]*kernely[u+2][v+2]/0.00000001*kernelx[u+2][v+2])
     
     print('mag e fase')
-    magImg = Normalizar(magImg)
+    # magImg = Normalizar(magImg)
 
     for x in range(aux[0]):
         for y in range(aux[1]):
             if (x-1 >= 0) and (x+1 < aux[0]) and (y-1 >=0) and (y+1 < aux[1]):
                 if phaseImg[x][y] >= -23 and phaseImg[x][y] < 23: 
-                    if magImg[x][y] < magImg[x][y-1] or magImg[x][y] < magImg[x][y+1]:
+                    if (magImg[x][y] < magImg[x][y-1] or magImg[x][y] > magImg[x][y+1]): 
+                    
+                    # (magImg[x][y] < magImg[x][y-1] and magImg[x][y] > magImg[x][y+1]) or (magImg[x][y] > magImg[x][y-1] and magImg[x][y] < magImg[x][y+1]):
                         ImgFiltrada[x][y] = 0
                     else:
                         ImgFiltrada[x][y] = magImg[x][y]
                 elif phaseImg[x][y] >= 23 and phaseImg[x][y] < 67:
-                    if magImg[x][y] < magImg[x-1][y+1] or magImg[x][y] < magImg[x+1][y-1]:
+                    if (magImg[x][y] < magImg[x-1][y+1] or magImg[x][y] > magImg[x+1][y-1]):
+                    
+                    # (magImg[x][y] < magImg[x-1][y+1] and magImg[x][y] > magImg[x+1][y-1]) or (magImg[x][y] > magImg[x-1][y+1] and magImg[x][y] < magImg[x+1][y-1]):
                         ImgFiltrada[x][y] = 0
                     else:
                         ImgFiltrada[x][y] = magImg[x][y] 
                 elif (phaseImg[x][y] >= 67 and phaseImg[x][y] <= 90) or (phaseImg[x][y] >= -89 and phaseImg[x][y] < -67):
-                    if magImg[x][y] < magImg[x-1][y] or magImg[x][y] < magImg[x+1][y]:
+                    if (magImg[x][y] < magImg[x-1][y] or magImg[x][y] > magImg[x+1][y]):
+                    
+                    # (magImg[x][y] < magImg[x-1][y] and magImg[x][y] > magImg[x+1][y]) or (magImg[x][y] > magImg[x-1][y] and magImg[x][y] < magImg[x+1][y]):
                         ImgFiltrada[x][y] = 0
                     else:
                         ImgFiltrada[x][y] = magImg[x][y]
                 elif phaseImg[x][y] >= -67 and phaseImg[x][y] < -23:
-                    if magImg[x][y] < magImg[x-1][y-1] or magImg[x][y] < magImg[x+1][y+1]:
+                    if (magImg[x][y] < magImg[x-1][y-1] or magImg[x][y] > magImg[x+1][y+1]): 
+                    
+                    # (magImg[x][y] < magImg[x-1][y-1] and magImg[x][y] > magImg[x+1][y+1]) or (magImg[x][y] > magImg[x-1][y-1] and magImg[x][y] < magImg[x+1][y+1]):
                         ImgFiltrada[x][y] = 0
                     else:
                         ImgFiltrada[x][y] = magImg[x][y]
@@ -137,16 +145,21 @@ def Canny(imagem, T_min, T_max):
                 ImgThrHigh[x][y] = 0
 
     fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,30))
+
+    ImgThrLow = ImgThrLow - ImgThrHigh
+
     ax1.imshow(ImgThrHigh,cmap='Greys')
     ax2.imshow(ImgThrLow,cmap='Greys')
     plt.show()
-
+    img = np.zeros(aux)
     for x in range(aux[0]):
         for y in range(aux[1]):
             if ImgThrHigh[x][y] > 0:
                 for u in range(9):
                     if (x+u%9-1 >= 0) and (x+u%9-1 < aux[0]) and (y+u%9-1 >= 0) and (y+u%9-1 < aux[1]):
-                        if ImgThrLow[x+u%9-1][y+u%9-1] > 0 and ImgThrHigh[x+u%9-1][y+u%9-1] == 0:
-                            ImgThrHigh[x+u%9-1][y+u%9-1] = ImgThrLow[x+u%9-1][y+u%9-1]
+                        if ImgThrLow[x+u%9-1][y+u%9-1] > 0:
+                            img[x+u%9-1][y+u%9-1] = ImgThrLow[x+u%9-1][y+u%9-1]
 
-    return ImgThrHigh
+    img = np.abs(img - np.max(img)) 
+
+    return img

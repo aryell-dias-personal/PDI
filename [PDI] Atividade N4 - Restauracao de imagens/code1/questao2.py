@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
 # leitura da imagem
-imagemOrignal = mpimg.imread('../image_(3).jpg')
+imagemOrignal = mpimg.imread('../imagens/image_(4).jpg')
 
 # aplicação da media alfa cortada numa area selecionada
 
@@ -122,12 +122,11 @@ def aplicaMediaHarmonica(imagemOriginal, size=10):
 
 # ploting
 (fig, (ax1, ax2, ax3)) = plt.subplots(1, 3)
-imagemResultado = aplicaMediaAlfaCortada(imagemOrignal)
-xDiference = int((imagemOrignal.shape[0] - imagemResultado.shape[0])/2)
-yDiference = int((imagemOrignal.shape[1] - imagemResultado.shape[1])/2)
-a = imagemOrignal[xDiference:(imagemResultado.shape[0]+xDiference)][yDiference:(imagemResultado.shape[1]+yDiference)]
-print(a.shape)
+imagemResultado = aplicaMediana(imagemOrignal)
+xDiference = imagemOrignal.shape[0] - imagemResultado.shape[0]
+yDiference = imagemOrignal.shape[1] - imagemResultado.shape[1]
 ax1.imshow(imagemOrignal, cmap='gray')
 ax2.imshow(imagemResultado, cmap='gray')    
-ax3.hist((imagemOrignal[xDiference:(imagemOrignal.shape[0]-xDiference)][yDiference:(imagemOrignal.shape[1]-yDiference)]-imagemResultado).reshape([-1],), range(0,256))
+# ax3.hist((imagemOrignal[(xDiference/2):(imagemOrignal.shape[0]-xDiference/2)][(yDiference/2):(imagemOrignal.shape[1]-yDiference/2)]-imagemResultado).reshape([-1],), range(0,256))
+ax3.hist(imagemResultado.reshape([-1],), range(0,256))
 plt.show()
