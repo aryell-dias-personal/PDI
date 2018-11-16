@@ -14,38 +14,15 @@ def rgb2gray(imagem):
 
     return img
 
-def Median(imagem,m=5,n=5):
-    aux = np.shape(imagem)
-
-    if np.size(aux) > 2:
-        imagem = imagem[:][:][0]
-        aux = np.shape(imagem)
-    
-    filterImg = np.zeros(aux)
-    kernel = np.zeros(m*n)
-
-    for x in range(aux[0]):
-        for y in range(aux[1]):
-            for u in range(m*n):
-                if (x+u%m-1 >= 0) and (x+u%m-1 < aux[0]) and (y+u%n-1 >= 0) and (y+u%n-1 < aux[1]):
-                    kernel[u] = imagem[x+u%m-1][y+u%n-1]
-            for v in range(m*n):
-                for t in range(v,m*n):
-                    if kernel[v] > kernel[t]:
-                        auxi = kernel[t]
-                        kernel[t] = kernel[v]
-                        kernel[v] = auxi
-            if (m*n)%2 > 0:
-                filterImg[x][y] = kernel[int((m*n-1)/2)]
-            else:
-                filterImg[x][y] = (kernel[int(np.floor(m*n/2))]+kernel[int(np.ceil(m*n/2))])/2
-
-    # filterImg = imagem - filterImg
-
-    # plt.imshow(filterImg,cmap='gray')
-    # plt.show()
-
-    return filterImg
+def Normalizar(imagem):
+    mini = np.min(imagem)
+    maxi = np.max(imagem)
+    imagem = imagem - mini
+    # diferença entre a imagem e o mínimo vezes 
+    # 255 dividido pela diferença entre o máximo
+    # e o minimo
+    imagem = imagem*255/(maxi-mini)
+    return imagem
 
 def Binarizar(imagem):
     aux = np.shape(imagem)
@@ -60,7 +37,7 @@ def Binarizar(imagem):
     
     for x in range(aux[0]):
         for y in range(aux[1]):
-            if imagem[x][y] >= 0.4*np.max(imagem):
+            if imagem[x][y] >= 0.1*np.max(imagem):
                 ImgBin[x][y] = 1
             else:
                 ImgBin[x][y] = 0
