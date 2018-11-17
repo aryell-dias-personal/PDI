@@ -14,11 +14,15 @@ if __name__ == '__main__':
 
         # imagem = utils.Binarizar(imagem)  
 
-        borda, imagem = project.projeto(img)
+        # borda, imagem = project.projeto_sobel(img)
 
-        fig, [ax1, ax2, ax3] = plt.subplots(1,3,figsize=(20,10))
+        # borda = project.projeto_canny(img)
+
+        borda,imagem = project.projeto_rodrigo(img)
+
+        fig, [ax1, ax2,ax3] = plt.subplots(1,3,figsize=(20,10))
 
         ax1.imshow(img, cmap='gray')
-        ax2.imshow(imagem,cmap='gray')
-        ax3.imshow(borda,cmap='gray')
+        ax2.imshow(borda,cmap='gray')
+        ax3.imshow(imagem,cmap='gray')
         plt.show()
