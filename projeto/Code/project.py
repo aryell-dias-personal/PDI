@@ -68,3 +68,28 @@ def projeto_rodrigo(imagem):
     res = scp.morphology.grey_closing(res,size=9)
 
     return borda, img, res
+
+def detecta_rejunte(imagem):
+    # gray = cv2.cvtColor
+    # (imagem,cv2.COLOR_BGR2GRAY)
+    # ret, thresh = cv2.threshold(gray,0,255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    # return ret, thresh
+    imgf = scp.gaussian_filter(imagem,1.0)
+    labeled, nr_objects = scp.label(imgf > (np.min(imagem)+np.max(imagem))/2)
+    # labeled = labeled > np.min(labeled)
+    # labeled = morphology.erosion(labeled)
+    print(nr_objects)
+    return labeled
+
+# funciona pra 19
+def projeto_aryell(imagem):
+    aux = np.shape(imagem)
+    retorno = np.zeros(aux)
+    
+    naoRejunte = detecta_rejunte(imagem)
+    bordaDilatada = projeto_canny(imagem)
+    for a in range(aux[0]-1):
+        for b in range(aux[1]-1):
+            retorno[a][b] = bordaDilatada[a][b] and naoRejunte[a][b]
+    retorno = scp.morphology.binary_erosion(retorno)
+    return retorno 
