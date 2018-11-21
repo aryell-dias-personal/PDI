@@ -1,5 +1,7 @@
 import numpy as np
+import scipy
 import scipy.ndimage as scp
+import cv2
 from skimage import feature, filters, morphology
 import utils
 
