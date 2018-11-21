@@ -3,6 +3,36 @@ import matplotlib.pyplot as plt
 import utils
 import project
 
+def rodrigo(imagem):
+    borda,imagem,aaaa = project.projeto_rodrigo(img)
+
+    fig, [[ax1, ax2],[ax3,ax4]] = plt.subplots(2,2,figsize=(20,10))
+
+    ax1.imshow(img, cmap='gray')
+    ax2.imshow(borda,cmap='gray')
+    ax3.imshow(imagem,cmap='gray')
+    ax4.imshow(aaaa,cmap='gray')
+    plt.show()
+
+def sobel(imagem):
+    borda, imagem = project.projeto_sobel(img)
+
+    fig, [ax1, ax2,ax3] = plt.subplots(1,3,figsize=(20,10))
+
+    ax1.imshow(img, cmap='gray')
+    ax2.imshow(imagem,cmap='gray')
+    ax3.imshow(borda,cmap='gray')
+    plt.show()
+
+def canny(imagem):
+    borda, img = project.projeto_canny(imagem)
+
+    fig, [ax1, ax2, ax3] = plt.subplots(1,3,figsize=(20,10))
+
+    ax1.imshow(imagem, cmap='gray')
+    ax2.imshow(img,cmap='gray')
+    ax3.imshow(borda,cmap='gray')
+    plt.show()
 
 if __name__ == '__main__': 
     for i in range(1,68):
@@ -10,19 +40,10 @@ if __name__ == '__main__':
 
         img = utils.rgb2gray(img)
 
-        # imagem = utils.Median(imagem,9,9)
+        sobel(img)
 
-        # imagem = utils.Binarizar(imagem)  
+        # canny(img)
 
-        # borda, imagem = project.projeto_sobel(img)
+        # rodrigo(img)
 
-        # borda = project.projeto_canny(img)
-
-        borda,imagem = project.projeto_rodrigo(img)
-
-        fig, [ax1, ax2,ax3] = plt.subplots(1,3,figsize=(20,10))
-
-        ax1.imshow(img, cmap='gray')
-        ax2.imshow(borda,cmap='gray')
-        ax3.imshow(imagem,cmap='gray')
-        plt.show()
+        
