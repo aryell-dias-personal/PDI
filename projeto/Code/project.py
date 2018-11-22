@@ -6,22 +6,32 @@ from skimage import feature, filters, morphology
 import utils
 
 
-def projeto_sobel(img):
-    imagem = scp.morphology.grey_closing(img,size=9)
-    imagem = scp.morphology.grey_opening(imagem,size=9)
+def projeto_sobel(imagem):
+    
+    imagem = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
 
-    borda = filters.sobel(imagem)
-    bor = filters.sobel(img)
+    img = filters.median(imagem,morphology.square(3))
+    # bor = filters.sobel(imagem)
 
-    borda = bor - borda
+    # imagem = scp.morphology.grey_closing(imagem,size=9)
+    # imagem = scp.morphology.grey_opening(imagem,size=9)
 
-    borda = abs(borda)
+    imagem = abs(imagem - img)
 
-    block_size = 35
-    local_thr = filters.threshold_local(borda,block_size,method='gaussian')
-    borda = borda > local_thr     
+    borda = filters.sobel(imagem)    
 
-    # borda = feature.canny(borda,sigma=2)
+    # borda = bor - borda
+
+    # borda = abs(borda)
+
+    # block_size = 55
+    # local_thr = filters.threshold_local(borda,block_size,method='gaussian')
+    # borda = borda > local_thr     
+
+    # borda = morphology.skeletonize(borda)
+    # borda = scp.morphology.binary_closing(borda)
+
+    # print(np.max(img), np.min(img), np.max(borda), np.min(borda))
 
     return borda,imagem
 
@@ -32,24 +42,33 @@ def projeto_canny(imagem):
 
     imagem = imagem - img
 
-    imagem = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
+    img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
 
-    borda = feature.canny(imagem,sigma=1)
+    borda = feature.canny(img,sigma=1)
 
-    # imagem = scp.morphology.grey_erosion(borda,size=5)
-    imagem = scp.morphology.grey_closing(borda, size=5)
-    return imagem
+    # print(np.max(img) - np.min(img), np.mean(img), np.max(img))
+
+    return borda, imagem
 
 def projeto_rodrigo(imagem):
     borda = feature.canny(imagem,sigma=1)
 
-    block_size = 55
-    img = filters.threshold_adaptive(imagem,block_size)
+    block_size = 45
+    img = filters.threshold_adaptive(imagem,block_size,offset=10)
+    img = 1 - img
     img = morphology.skeletonize(img)
 
-    return borda, img
+    res = borda + img
 
-# detecta rejunte
+    for x in range(np.shape(res)[0]):
+        for y in range(np.shape(res)[1]):
+            if res[x][y] > 0:
+                res[x][y] = 1
+
+    res = scp.morphology.grey_closing(res,size=9)
+
+    return borda, img, res
+
 def detecta_rejunte(imagem):
     # gray = cv2.cvtColor
     # (imagem,cv2.COLOR_BGR2GRAY)
@@ -69,11 +88,8 @@ def projeto_aryell(imagem):
     
     naoRejunte = detecta_rejunte(imagem)
     bordaDilatada = projeto_canny(imagem)
-
     for a in range(aux[0]-1):
         for b in range(aux[1]-1):
             retorno[a][b] = bordaDilatada[a][b] and naoRejunte[a][b]
-
     retorno = scp.morphology.binary_erosion(retorno)
-
-    return retorno
+    return retorno 
