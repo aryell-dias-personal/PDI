@@ -46,6 +46,10 @@ if __name__ == '__main__':
 
         # rodrigo(img)
 
+    # img = utils.LerImage(str(i))
+
+    # img = utils.rgb2gray(img)
+
     # imagem = project.projeto_aryell(img)
 
     # fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10))

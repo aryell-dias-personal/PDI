@@ -10,43 +10,27 @@ def projeto_sobel(imagem):
     
     imagem = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
 
-    img = filters.median(imagem,morphology.square(3))
-    # bor = filters.sobel(imagem)
+    img = filters.rank.minimum(imagem, morphology.square(7)) #filtro de minimo
 
-    # imagem = scp.morphology.grey_closing(imagem,size=9)
-    # imagem = scp.morphology.grey_opening(imagem,size=9)
+    imagem = scp.morphology.grey_opening(img,size=7) # closing e opening para borrar a imagem
+    imagem = scp.morphology.grey_closing(imagem,size=5)
 
-    imagem = abs(imagem - img)
+    borda = feature.canny(imagem,sigma=1) # canny da imagem borrada
 
-    borda = filters.sobel(imagem)    
-
-    # borda = bor - borda
-
-    # borda = abs(borda)
-
-    # block_size = 55
-    # local_thr = filters.threshold_local(borda,block_size,method='gaussian')
-    # borda = borda > local_thr     
-
-    # borda = morphology.skeletonize(borda)
-    # borda = scp.morphology.binary_closing(borda)
-
-    # print(np.max(img), np.min(img), np.max(borda), np.min(borda))
+    borda = scp.morphology.binary_closing(borda) # closing do canny
 
     return borda,imagem
 
 def projeto_canny(imagem):
 
-    img = scp.morphology.grey_closing(imagem,size=17)
+    img = scp.morphology.grey_closing(imagem,size=17) # closing e opening pra borrar a imagem
     img = scp.morphology.grey_opening(img,size=17)
 
-    imagem = imagem - img
+    imagem = imagem - img # subtração pra tentar realçar os detalhes
 
-    img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
+    img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem)) # normaliza
 
-    borda = feature.canny(img,sigma=1)
-
-    # print(np.max(img) - np.min(img), np.mean(img), np.max(img))
+    borda = feature.canny(img,sigma=1) # canny da imagem normalizada
 
     return borda, imagem
 
