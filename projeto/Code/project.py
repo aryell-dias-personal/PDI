@@ -60,9 +60,9 @@ def detecta_rejunte(imagem):
     # return ret, thresh
     imgf = scp.gaussian_filter(imagem,1.0)
     labeled, nr_objects = scp.label(imgf > (np.min(imagem)+np.max(imagem))/2)
-    # labeled = labeled > np.min(labeled)
-    # labeled = morphology.erosion(labeled)
-    print(nr_objects)
+    labeled = labeled > np.min(labeled)
+    labeled = morphology.erosion(scp.morphology.binary_erosion(morphology.erosion(labeled)))
+    # print(nr_objects)
     return labeled
 
 # funciona pra 19
