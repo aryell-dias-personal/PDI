@@ -41,12 +41,32 @@ def canny_por_canal(imagem):
     blue = imagem[:,:,2]
 
     canny_r = feature.canny(red,sigma=1)
+    canny_r = scp.morphology.binary_closing(canny_r,structure=np.ones((3,3)))
+    canny_r = scp.morphology.binary_opening(canny_r, structure=np.ones((3,3)))
+
     canny_g = feature.canny(green,sigma=1)
+    canny_g = scp.morphology.binary_closing(canny_g,structure=np.ones((3,3)))
+    canny_g = scp.morphology.binary_opening(canny_g,structure=np.ones((3,3)))
+
     canny_b = feature.canny(blue,sigma=1)
+    canny_b = scp.morphology.binary_closing(canny_b,structure=np.ones((3,3)))
+    canny_b = scp.morphology.binary_opening(canny_b,structure=np.ones((3,3)))
 
-    
+    a,b,c = np.shape(imagem)
+    result = np.zeros((a,b))
 
-    return canny_r, canny_g, canny_b
+    for x in range(np.shape(imagem)[0]):
+        for y in range(np.shape(imagem)[1]):
+            if canny_r[x][y] and canny_b[x][y]:
+                result[x][y] = 1
+            elif canny_r[x][y] and canny_g[x][y]:
+                result[x][y] = 1
+            elif canny_b[x][y] and canny_g[x][y]:
+                result[x][y] = 1
+            else:
+                result[x][y] = 0
+
+    return result
 
 def projeto_rodrigo(imagem):
     borda = feature.canny(imagem,sigma=1)
@@ -92,23 +112,31 @@ def projeto_aryell(imagem):
     retorno = scp.morphology.binary_erosion(retorno)
     return retorno 
 
-
 def projeto_aryell_2(imagem):
-    esqueleto = 1 - filters.threshold_adaptive(imagem,12345)
-    esqueleto = morphology.skeletonize(esqueleto)
-    return esqueleto
+    aux = np.shape(imagem[:][:][0])
+    retorno = np.zeros(aux)
+    borda = canny_por_canal(imagem)
+    rejunte = utils.extraiRetas(borda,130)
+    # esqueleto = morphology.skeletonize(imagem)
+    # rejunte = utils.extraiRetas(esqueleto,130)
+    # print(rejunte)
+    for a in range(aux[0]-1):
+        for b in range(aux[1]-1):
+            retorno[a][b] = borda[a][b] and (not rejunte[a][b])
+    return retorno, borda, rejunte, imagem
 
 # funciona mais ou menos para alguns
 def projeto_aryell_3(imagem):
     aux = np.shape(imagem)
     retorno = np.zeros(aux)
     # extrai borda
-    borda,_ = projeto_canny(imagem)
+    # borda,_ = projeto_canny(imagem)
+    print('aaaa')
     # extrai retas com threshold maior que 130
-    retas = utils.extraiRetas(borda,130)
+    retas = utils.extraiRetas(imagem,400)
     # cria imagem de retorno apartir do esqueleto e das retas
     for a in range(aux[0]-1):
         for b in range(aux[1]-1):
-            retorno[a][b] = borda[a][b] and (not retas[a][b])
+            retorno[a][b] = imagem[a][b] and (not retas[a][b])
     
-    return retorno, borda, retas, imagem
+    return retorno, imagem, retas, imagem

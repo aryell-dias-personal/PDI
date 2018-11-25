@@ -3,7 +3,8 @@ import matplotlib.image as mpimg
 import cv2
 
 def extraiRetas(imagem, threshold):
-    lines = cv2.HoughLines(np.array(imagem, dtype=np.uint8),1,np.pi/360,threshold)
+    print(imagem)
+    lines = cv2.HoughLines(np.array(imagem[0], dtype=np.uint8),1,np.pi/360,threshold)
     retorno = np.zeros(np.shape(imagem))
     if(not lines is None):
         for things in lines:
