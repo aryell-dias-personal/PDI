@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt 
 import utils
+from skimage import filters
 import project
 
 def rodrigo(imagem):
@@ -21,13 +22,15 @@ def sobel(imagem):
     plt.show()
 
 def aryell(imagem):
-    x,y = np.shape(imagem)
-    retorno, borda, rejunte, imagem = project.projeto_aryell_2(imagem)
-    fig, [(ax1, ax2), (ax3, ax4)] = plt.subplots(2,2,figsize=(20,10))
-    ax1.imshow(imagem,cmap='gray')
-    ax2.imshow(borda, cmap='gray')
-    ax3.imshow(rejunte,cmap='gray')
-    ax4.imshow(retorno,cmap='gray')
+    # retorno, borda, retas, imagem = project.projeto_aryell_2(imagem)
+    esqueleto = project.projeto_aryell_2(imagem)    
+    fig, ax = plt.subplots(1,1)
+    # fig, [(ax1, ax2), (ax3, ax4)] = plt.subplots(2,2,figsize=(20,10))
+    # ax1.imshow(imagem,cmap='gray')
+    # ax2.imshow(retorno, cmap='gray')
+    # ax3.imshow(retas,cmap='gray')
+    # ax4.imshow(borda,cmap='gray')
+    ax.imshow(esqueleto,cmap='gray')
     plt.show()
 
 def canny(imagem):
@@ -51,15 +54,15 @@ def canny_banda(imagem):
 
 if __name__ == '__main__': 
     for i in range(1,68):
-        img = utils.LerImage(str(i))
-
-        # img = utils.rgb2gray(img)
+        img = utils.LerImage(str(19))
+        img = filters.median(img)
+        img = utils.rgb2gray(img)
 
         # sobel(img)
 
         # canny_banda(img)
 
-        # aryell(img)
+        aryell(img)
 
         # canny(img)
         

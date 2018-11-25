@@ -92,13 +92,23 @@ def projeto_aryell(imagem):
     retorno = scp.morphology.binary_erosion(retorno)
     return retorno 
 
+
 def projeto_aryell_2(imagem):
+    esqueleto = 1 - filters.threshold_adaptive(imagem,12345)
+    esqueleto = morphology.skeletonize(esqueleto)
+    return esqueleto
+
+# funciona mais ou menos para alguns
+def projeto_aryell_3(imagem):
     aux = np.shape(imagem)
     retorno = np.zeros(aux)
-    esqueleto = morphology.skeletonize(imagem)
-    rejunte = utils.extraiRetas(esqueleto,130)
-    print(rejunte)
+    # extrai borda
+    borda,_ = projeto_canny(imagem)
+    # extrai retas com threshold maior que 130
+    retas = utils.extraiRetas(borda,130)
+    # cria imagem de retorno apartir do esqueleto e das retas
     for a in range(aux[0]-1):
         for b in range(aux[1]-1):
-            retorno[a][b] = esqueleto[a][b] and (not rejunte[a][b])
-    return retorno, esqueleto, rejunte, imagem
+            retorno[a][b] = borda[a][b] and (not retas[a][b])
+    
+    return retorno, borda, retas, imagem

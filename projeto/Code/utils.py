@@ -47,8 +47,11 @@ def Binarizar(imagem):
     for x in range(aux[0]):
         for y in range(aux[1]):
             # 0.1*np.max(imagem)
-            if imagem[x][y] >= 127:
-                ImgBin[x][y] = 1
-            else:
+            if imagem[x][y] >= ((np.max(imagem)+np.min(imagem))/2):                
+            # if imagem[x][y] >= 127:
                 ImgBin[x][y] = 0
+                # ImgBin[x][y] = 1
+            else:
+                ImgBin[x][y] = 1
+                # ImgBin[x][y] = 0
     return ImgBin
