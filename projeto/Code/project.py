@@ -35,6 +35,17 @@ def projeto_canny(imagem):
 
     return borda, imagem
 
+def canny_por_canal(imagem):
+    red = imagem[:,:,0]
+    green = imagem[:,:,1] 
+    blue = imagem[:,:,2]
+
+    canny_r = feature.canny(red,sigma=1)
+    canny_g = feature.canny(green,sigma=1)
+    canny_b = feature.canny(blue,sigma=1)
+
+    return canny_r, canny_g, canny_b
+
 def projeto_rodrigo(imagem):
     borda = feature.canny(imagem,sigma=1)
 

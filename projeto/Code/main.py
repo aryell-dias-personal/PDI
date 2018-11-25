@@ -38,9 +38,26 @@ def canny(imagem):
     ax3.imshow(borda,cmap='gray')
     plt.show()
 
+def canny_banda(imagem):
+    R,G,B = project.canny_por_canal(imagem)
+
+    fig, [[ax1,ax2],[ax3,ax4]] = plt.subplots(2,2,figsize=(20,10))
+
+    ax1.imshow(imagem)
+    ax2.imshow(R,cmap='gray')
+    ax3.imshow(G,cmap='gray')
+    ax4.imshow(B,cmap='gray')
+    plt.show()    
+
 if __name__ == '__main__': 
     for i in range(1,68):
         img = utils.LerImage(str(i))
+
+        # img = utils.rgb2gray(img)
+
+        # sobel(img)
+
+        canny_banda(img)
         img = utils.rgb2gray(img)
         aryell(img)
         # canny(img)
