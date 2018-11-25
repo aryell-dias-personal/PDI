@@ -24,6 +24,16 @@ def sobel(imagem):
     ax3.imshow(borda,cmap='gray')
     plt.show()
 
+def aryell(imagem):
+    x,y = np.shape(imagem)
+    retorno, borda, rejunte, imagem = project.projeto_aryell_2(imagem)
+    fig, [(ax1, ax2), (ax3, ax4)] = plt.subplots(2,2,figsize=(20,10))
+    ax1.imshow(imagem,cmap='gray')
+    ax2.imshow(borda, cmap='gray')
+    ax3.imshow(rejunte,cmap='gray')
+    ax4.imshow(retorno,cmap='gray')
+    plt.show()
+
 def canny(imagem):
     borda, img = project.projeto_canny(imagem)
 
@@ -37,10 +47,8 @@ def canny(imagem):
 if __name__ == '__main__': 
     for i in range(1,68):
         img = utils.LerImage(str(i))
-
         img = utils.rgb2gray(img)
-
-        sobel(img)
+        aryell(img)
 
         # canny(img)
 
