@@ -63,9 +63,9 @@ if __name__ == '__main__':
 
         # sobel(img)
 
-        canny_banda(img)
-        img = utils.rgb2gray(img)
-        aryell(img)
+        # canny_banda(img)
+
+        # aryell(img)
 
         # canny(img)
 
