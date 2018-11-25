@@ -5,9 +5,7 @@ import project
 
 def rodrigo(imagem):
     borda,imagem,aaaa = project.projeto_rodrigo(img)
-
     fig, [[ax1, ax2],[ax3,ax4]] = plt.subplots(2,2,figsize=(20,10))
-
     ax1.imshow(img, cmap='gray')
     ax2.imshow(borda,cmap='gray')
     ax3.imshow(imagem,cmap='gray')
@@ -16,9 +14,7 @@ def rodrigo(imagem):
 
 def sobel(imagem):
     borda, imagem = project.projeto_sobel(img)
-
     fig, [ax1, ax2,ax3] = plt.subplots(1,3,figsize=(20,10))
-
     ax1.imshow(img, cmap='gray')
     ax2.imshow(imagem,cmap='gray')
     ax3.imshow(borda,cmap='gray')
@@ -36,9 +32,7 @@ def aryell(imagem):
 
 def canny(imagem):
     borda, img = project.projeto_canny(imagem)
-
     fig, [ax1, ax2, ax3] = plt.subplots(1,3,figsize=(20,10))
-
     ax1.imshow(imagem, cmap='gray')
     ax2.imshow(img,cmap='gray')
     ax3.imshow(borda,cmap='gray')
@@ -49,9 +43,7 @@ if __name__ == '__main__':
         img = utils.LerImage(str(i))
         img = utils.rgb2gray(img)
         aryell(img)
-
         # canny(img)
-
         # rodrigo(img)
 
     # img = utils.LerImage(str(i))

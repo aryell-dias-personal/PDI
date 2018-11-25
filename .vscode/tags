@@ -1,0 +1,239 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Adaptative	../[PDI] Atividade N5 - Segmentacao de imagens/Code/filters.py	/^def Adaptative(imagem, M_max=7, n=0):$/;"	kind:function	line:64
+Adapted	../[PDI] Atividade N5 - Segmentacao de imagens/Code/filters.py	/^def Adapted(imagem,m=5,n=5):$/;"	kind:function	line:123
+AlphaTrim	../[PDI] Atividade N4 - Restauracao de imagens/code/filtros.py	/^def AlphaTrim(imagem,d, m, n):$/;"	kind:function	line:71
+AtividadeTresDFFT.py	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresDFFT.py	1;"	kind:file	line:1
+AtividadeTresNP.py	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	1;"	kind:file	line:1
+AtividadeUm.py	../[PDI] Atividade N1 - Realce/Code/AtividadeUm.py	1;"	kind:file	line:1
+Average	../[PDI] Atividade N5 - Segmentacao de imagens/Code/filters.py	/^def Average(imagem,m=3,n=3):$/;"	kind:function	line:5
+Binarizar	../[PDI] Atividade N6 - Morfologia/Code/utils.py	/^def Binarizar(imagem):$/;"	kind:function	line:31
+Binarizar	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/utils.py	/^def Binarizar(imagem):$/;"	kind:function	line:15
+Binarizar	../[PDI] Atividade N9 - Imagens coloridas/Code/utils.py	/^def Binarizar(imagem):$/;"	kind:function	line:149
+Binarizar	../projeto/Code/utils.py	/^def Binarizar(imagem):$/;"	kind:function	line:41
+Block	../[PDI] Atividade N8 - Compressao/Code/compressao.py	/^def Block(imagem):$/;"	kind:function	line:65
+Canny	../[PDI] Atividade N5 - Segmentacao de imagens/Code/bordas.py	/^def Canny(imagem, T_min, T_max):$/;"	kind:function	line:56
+Chain	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/main.py	/^def Chain(imagem):$/;"	kind:function	line:21
+ChainCode	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/extracao.py	/^def ChainCode(imagem, vizinhanca,g,l):$/;"	kind:function	line:59
+Closing	../[PDI] Atividade N6 - Morfologia/Code/Operacoes.py	/^def Closing(imagem,SE,centrox,centroy):$/;"	kind:function	line:73
+Closing	../[PDI] Atividade N9 - Imagens coloridas/Code/Operacoes.py	/^def Closing(imagem,SE,centrox,centroy):$/;"	kind:function	line:73
+ContraHarmonic	../[PDI] Atividade N4 - Restauracao de imagens/code/filtros.py	/^def ContraHarmonic(imagem, Q):$/;"	kind:function	line:35
+Derivative	../[PDI] Atividade N5 - Segmentacao de imagens/Code/bordas.py	/^def Derivative(imagem, tipo, filtro, m=5, n=5):$/;"	kind:function	line:7
+Dilation	../[PDI] Atividade N6 - Morfologia/Code/Operacoes.py	/^def Dilation(imagem, SE, centrox, centroy):$/;"	kind:function	line:43
+Dilation	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/utils.py	/^def Dilation(imagem, SE, centrox, centroy):$/;"	kind:function	line:85
+Dilation	../[PDI] Atividade N9 - Imagens coloridas/Code/Operacoes.py	/^def Dilation(imagem, SE, centrox, centroy):$/;"	kind:function	line:43
+Erosion	../[PDI] Atividade N6 - Morfologia/Code/Operacoes.py	/^def Erosion(imagem, SE, centrox, centroy):$/;"	kind:function	line:5
+Erosion	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/utils.py	/^def Erosion(imagem, SE, centrox, centroy):$/;"	kind:function	line:35
+Erosion	../[PDI] Atividade N9 - Imagens coloridas/Code/Operacoes.py	/^def Erosion(imagem, SE, centrox, centroy):$/;"	kind:function	line:5
+Esqueleto	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/extracao.py	/^def Esqueleto(imagem):$/;"	kind:function	line:165
+FFT	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	/^def FFT(paddedImg):$/;"	kind:function	line:89
+Gaussian	../[PDI] Atividade N5 - Segmentacao de imagens/Code/filters.py	/^def Gaussian(imagem):$/;"	kind:function	line:160
+GaussianNoise	../[PDI] Atividade N4 - Restauracao de imagens/code/ruidos.py	/^def GaussianNoise(imagem):$/;"	kind:function	line:24
+Geo_Dil	../[PDI] Atividade N6 - Morfologia/Code/Operacoes.py	/^def Geo_Dil(markerimagem,maskimagem,SE,centrox,centroy):$/;"	kind:function	line:106
+Geo_Dil	../[PDI] Atividade N9 - Imagens coloridas/Code/Operacoes.py	/^def Geo_Dil(markerimagem,maskimagem,SE,centrox,centroy):$/;"	kind:function	line:106
+Harmonic	../[PDI] Atividade N4 - Restauracao de imagens/code/filtros.py	/^def Harmonic(imagem, m, n):$/;"	kind:function	line:5
+Histograma	../[PDI] Atividade N4 - Restauracao de imagens/code/utils.py	/^def Histograma(imagem):$/;"	kind:function	line:9
+Histograma	../[PDI] Atividade N5 - Segmentacao de imagens/Code/utils.py	/^def Histograma(imagem):$/;"	kind:function	line:33
+Histograma	../[PDI] Atividade N8 - Compressao/Code/utils.py	/^def Histograma(imagem):$/;"	kind:function	line:12
+Histograma	../[PDI] Atividade N9 - Imagens coloridas/Code/utils.py	/^def Histograma(imagem):$/;"	kind:function	line:120
+Huffman	../[PDI] Atividade N8 - Compressao/Code/compressao.py	/^def Huffman(imagem):$/;"	kind:function	line:7
+ImgOriginal	../[PDI] Atividade N8 - Compressao/Code/main.py	/^    ImgOriginal = [[39,39,126,126],[39,39,126,126],[39,39,126,126],[39,39,126,126]]$/;"	kind:variable	line:23
+ImpulseNoise	../[PDI] Atividade N4 - Restauracao de imagens/code/ruidos.py	/^def ImpulseNoise(imagem,Pl,Ph=255):$/;"	kind:function	line:5
+LZW	../[PDI] Atividade N8 - Compressao/Code/compressao.py	/^def LZW(imagem):$/;"	kind:function	line:150
+LZWcompress	../[PDI] Atividade N8 - Compressao/Code/compressao.py	/^def LZWcompress(dictionary):$/;"	kind:function	line:137
+LZWdescompress	../[PDI] Atividade N8 - Compressao/Code/descompressao.py	/^def LZWdescompress(dictionary, comp, originalShape):$/;"	kind:function	line:5
+LerImage	../[PDI] Atividade N8 - Compressao/Code/utils.py	/^def LerImage(imagem):$/;"	kind:function	line:4
+LerImage	../[PDI] Atividade N9 - Imagens coloridas/Code/utils.py	/^def LerImage(imagem):$/;"	kind:function	line:5
+LerImage	../projeto/Code/utils.py	/^def LerImage(imagem):$/;"	kind:function	line:22
+LerImagem	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresDFFT.py	/^def LerImagem(nome):$/;"	kind:function	line:5
+LerImagem	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	/^def LerImagem(nome):$/;"	kind:function	line:10
+LerImagem	../[PDI] Atividade N4 - Restauracao de imagens/code/utils.py	/^def LerImagem(nome):$/;"	kind:function	line:5
+LerImagem	../[PDI] Atividade N5 - Segmentacao de imagens/Code/utils.py	/^def LerImagem(nome):$/;"	kind:function	line:11
+LerImagem	../[PDI] Atividade N6 - Morfologia/Code/utils.py	/^def LerImagem(nome):$/;"	kind:function	line:5
+LerImagem	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/utils.py	/^def LerImagem(nome):$/;"	kind:function	line:5
+LogarithmicTransformation	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	/^def LogarithmicTransformation(image, max_val=255):$/;"	kind:function	line:74
+Median	../[PDI] Atividade N5 - Segmentacao de imagens/Code/filters.py	/^def Median(imagem,m=5,n=5):$/;"	kind:function	line:31
+Median	../[PDI] Atividade N9 - Imagens coloridas/Code/ruido.py	/^def Median(imagem,m=3,n=3):$/;"	kind:function	line:56
+Normalizar	../[PDI] Atividade N5 - Segmentacao de imagens/Code/utils.py	/^def Normalizar(imagem):$/;"	kind:function	line:22
+Normalizar	../[PDI] Atividade N8 - Compressao/Code/utils.py	/^def Normalizar(imagem):$/;"	kind:function	line:37
+Normalizar	../[PDI] Atividade N9 - Imagens coloridas/Code/utils.py	/^def Normalizar(imagem):$/;"	kind:function	line:112
+Normalizar	../projeto/Code/utils.py	/^def Normalizar(imagem):$/;"	kind:function	line:34
+Opening	../[PDI] Atividade N6 - Morfologia/Code/Operacoes.py	/^def Opening(imagem,SE,centrox,centroy):$/;"	kind:function	line:69
+Opening	../[PDI] Atividade N9 - Imagens coloridas/Code/Operacoes.py	/^def Opening(imagem,SE,centrox,centroy):$/;"	kind:function	line:69
+Operacoes.py	../[PDI] Atividade N6 - Morfologia/Code/Operacoes.py	1;"	kind:file	line:1
+Operacoes.py	../[PDI] Atividade N9 - Imagens coloridas/Code/Operacoes.py	1;"	kind:file	line:1
+P	../[PDI] Atividade N5 - Segmentacao de imagens/Code/utils.py	/^def P(regiao):$/;"	kind:function	line:5
+Pad	../[PDI] Atividade N8 - Compressao/Code/utils.py	/^def Pad(imagem,g,l):$/;"	kind:function	line:46
+Preenche_furos	../[PDI] Atividade N6 - Morfologia/Code/main.py	/^def Preenche_furos(imagem,SE,centrox,centroy):$/;"	kind:function	line:32
+Preencher_furos	../[PDI] Atividade N6 - Morfologia/Code/Operacoes.py	/^def Preencher_furos(imagem,SE,centrox,centroy):$/;"	kind:function	line:77
+Preencher_furos	../[PDI] Atividade N9 - Imagens coloridas/Code/Operacoes.py	/^def Preencher_furos(imagem,SE,centrox,centroy):$/;"	kind:function	line:77
+Probabilidade	../[PDI] Atividade N8 - Compressao/Code/utils.py	/^def Probabilidade(hist):$/;"	kind:function	line:24
+Quant	../[PDI] Atividade N8 - Compressao/Code/compressao.py	/^def Quant(imagem, bit):$/;"	kind:function	line:49
+Quarta_Questao	../[PDI] Atividade N6 - Morfologia/Code/main.py	/^def Quarta_Questao(imagem,SE,centrox,centroy):$/;"	kind:function	line:49
+Quarta_Questao_separar	../[PDI] Atividade N6 - Morfologia/Code/main.py	/^def Quarta_Questao_separar(imagem,SE,centrox,centroy):$/;"	kind:function	line:68
+SVM	../[PDI] Atividade N10 - Classificacao/Code/classificacao.py	/^def SVM():$/;"	kind:function	line:92
+SeguidorBorda	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/extracao.py	/^def SeguidorBorda(imagem):$/;"	kind:function	line:6
+Threshold	../[PDI] Atividade N5 - Segmentacao de imagens/Code/utils.py	/^def Threshold(imagem, T):$/;"	kind:function	line:45
+X	../[PDI] Atividade N10 - Classificacao/Code/test.py	/^X = irisdata.drop('Class', axis=1) #x contains all the features$/;"	kind:variable	line:13
+Zoom	../[PDI] Atividade N1 - Realce/Code/AtividadeUm.py	/^def Zoom(nome, imagemOriginal, X, Y, Xdestiny, Ydestiny):$/;"	kind:function	line:16
+agucar_frequencia.py	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	1;"	kind:file	line:1
+aplicaMediaAlfaCortada	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^def aplicaMediaAlfaCortada(imagemOriginal, corte=3, size=10):$/;"	kind:function	line:66
+aplicaMediaHarmonica	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^def aplicaMediaHarmonica(imagemOriginal, size=10):$/;"	kind:function	line:90
+aplicaMediana	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^def aplicaMediana(imagemOriginal, size=5):$/;"	kind:function	line:42
+aryell	../projeto/Code/main.py	/^def aryell(imagem):$/;"	kind:function	line:23
+average	../[PDI] Atividade N9 - Imagens coloridas/Code/ruido.py	/^def average(imagem,m=3,n=3):$/;"	kind:function	line:5
+bordas	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/utils.py	/^def bordas(imagem):$/;"	kind:function	line:100
+bordas.py	../[PDI] Atividade N5 - Segmentacao de imagens/Code/bordas.py	1;"	kind:file	line:1
+butterWorthFilter	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^def butterWorthFilter(ylen, xlen, cut, n):$/;"	kind:function	line:31
+butterworthHPF	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def butterworthHPF(height, width, cutoff, order=1):$/;"	kind:function	line:76
+butterworthLPF	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def butterworthLPF(height, width, cutoff, order=1):$/;"	kind:function	line:63
+canny	../projeto/Code/main.py	/^def canny(imagem):$/;"	kind:function	line:33
+caracteristicas	../[PDI] Atividade N10 - Classificacao/Code/classificacao.py	/^def caracteristicas(imagem):$/;"	kind:function	line:13
+choose	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao1.py	/^def choose(prob1,prob2, option1, option2):$/;"	kind:function	line:55
+clarear	../[PDI] Atividade N1 - Realce/Code/AtividadeUm.py	/^def clarear(nome, imagemOriginal, c):$/;"	kind:function	line:30
+clarear	../[PDI] Atividade N9 - Imagens coloridas/Code/iluminacao.py	/^def clarear(imagemOriginal, c): $/;"	kind:function	line:3
+clarear	../[PDI] Atividade N9 - Imagens coloridas/Code/main.py	/^def clarear(imagem,m):$/;"	kind:function	line:62
+classificacao.py	../[PDI] Atividade N10 - Classificacao/Code/classificacao.py	1;"	kind:file	line:1
+colnames	../[PDI] Atividade N10 - Classificacao/Code/test.py	/^colnames = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'Class']$/;"	kind:variable	line:9
+color	../[PDI] Atividade N9 - Imagens coloridas/Code/colori.py	/^def color(imagem):$/;"	kind:function	line:16
+colori.py	../[PDI] Atividade N9 - Imagens coloridas/Code/colori.py	1;"	kind:file	line:1
+compress	../[PDI] Atividade N8 - Compressao/Code/main.py	/^    compress = compressao.LZWcompress(dictionary)$/;"	kind:variable	line:30
+compressao.py	../[PDI] Atividade N8 - Compressao/Code/compressao.py	1;"	kind:file	line:1
+cor	../[PDI] Atividade N9 - Imagens coloridas/Code/main.py	/^def cor(imagem):$/;"	kind:function	line:43
+create_data.py	../[PDI] Atividade N10 - Classificacao/Code/create_data.py	1;"	kind:file	line:1
+decompress	../[PDI] Atividade N8 - Compressao/Code/main.py	/^    decompress = descompressao.LZWdescompress(dictionary,compress,(4,4))$/;"	kind:variable	line:31
+decompress	../[PDI] Atividade N8 - Compressao/Code/main.py	/^    decompress = np.uint8(decompress)$/;"	kind:variable	line:32
+descompressao.py	../[PDI] Atividade N8 - Compressao/Code/descompressao.py	1;"	kind:file	line:1
+detecta_rejunte	../projeto/Code/project.py	/^def detecta_rejunte(imagem):$/;"	kind:function	line:57
+df_cm	../[PDI] Atividade N10 - Classificacao/Code/test.py	/^df_cm = confusion_matrix(y_test, y_pred)$/;"	kind:variable	line:34
+dft2d	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def dft2d(image):$/;"	kind:function	line:3
+dictionary	../[PDI] Atividade N8 - Compressao/Code/main.py	/^    dictionary = compressao.LZW(ImgOriginal)$/;"	kind:variable	line:29
+dividiRegiao	../[PDI] Atividade N5 - Segmentacao de imagens/Code/utils.py	/^def dividiRegiao(regiao):$/;"	kind:function	line:71
+escurecer	../[PDI] Atividade N1 - Realce/Code/AtividadeUm.py	/^def escurecer(nome, imagemOriginal, c):$/;"	kind:function	line:42
+escurecer	../[PDI] Atividade N9 - Imagens coloridas/Code/iluminacao.py	/^def escurecer(imagemOriginal, c): $/;"	kind:function	line:10
+escurecer	../[PDI] Atividade N9 - Imagens coloridas/Code/main.py	/^def escurecer(imagem,m):$/;"	kind:function	line:55
+esqueletizacao	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/main.py	/^def esqueletizacao(imagem):$/;"	kind:function	line:7
+extracao.py	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/extracao.py	1;"	kind:file	line:1
+extraiRetas	../projeto/Code/utils.py	/^def extraiRetas(imagem, threshold):$/;"	kind:function	line:5
+features	../[PDI] Atividade N10 - Classificacao/Code/classificacao.py	/^def features(imagem):$/;"	kind:function	line:66
+fft	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	/^    fft = FFT(padImg)$/;"	kind:variable	line:181
+fft	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def fft(x):$/;"	kind:function	line:26
+fft2d	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def fft2d(image):$/;"	kind:function	line:44
+filterHSI	../[PDI] Atividade N9 - Imagens coloridas/Code/main.py	/^def filterHSI(imagem,m=3,n=3):$/;"	kind:function	line:25
+filterRGB	../[PDI] Atividade N9 - Imagens coloridas/Code/main.py	/^def filterRGB(imagem,m=3,n=3):$/;"	kind:function	line:8
+filters.py	../[PDI] Atividade N5 - Segmentacao de imagens/Code/filters.py	1;"	kind:file	line:1
+filtroMediaAlfaCortada	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^def filtroMediaAlfaCortada(area, size, corte):$/;"	kind:function	line:11
+filtroMediaHarmonica	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^def filtroMediaHarmonica(area, size):$/;"	kind:function	line:25
+filtro_de_ruido	../[PDI] Atividade N6 - Morfologia/Code/main.py	/^def filtro_de_ruido(imagem,SE,centrox,centroy):$/;"	kind:function	line:19
+filtros.py	../[PDI] Atividade N4 - Restauracao de imagens/code/filtros.py	1;"	kind:file	line:1
+fourier.py	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	1;"	kind:file	line:1
+gaussianAux	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao1.py	/^def gaussianAux(z, media, desvio):$/;"	kind:function	line:59
+gaussianFilter	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^def gaussianFilter(ylen, xlen, cut):$/;"	kind:function	line:21
+gaussianHPF	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def gaussianHPF(height, width, cutoff):$/;"	kind:function	line:79
+gaussianLPF	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def gaussianLPF(height, width, cutoff):$/;"	kind:function	line:68
+gaussianNoise	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao1.py	/^def gaussianNoise(imagemOriginal, media = 10, desvio = 30):$/;"	kind:function	line:32
+getImageFrequence	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^def getImageFrequence(imagemOrignal, moveCenterOriginal):$/;"	kind:function	line:17
+getMoveCenter	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^def getMoveCenter(imagemOrignal):$/;"	kind:function	line:9
+hsi2rgb	../[PDI] Atividade N9 - Imagens coloridas/Code/utils.py	/^def hsi2rgb(imagem):$/;"	kind:function	line:57
+idealFilter	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^def idealFilter(ylen, xlen, cut):$/;"	kind:function	line:26
+idealHPF	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def idealHPF(height, width, cutoff):$/;"	kind:function	line:73
+idealLPF	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def idealLPF(height, width, cutoff):$/;"	kind:function	line:58
+idft2d	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def idft2d(image_transform):$/;"	kind:function	line:16
+ifft2d	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def ifft2d(image_transform):$/;"	kind:function	line:21
+iluminacao.py	../[PDI] Atividade N9 - Imagens coloridas/Code/iluminacao.py	1;"	kind:file	line:1
+imagem	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresDFFT.py	/^    imagem = LerImagem('.\/Images\/Agucar_(1).jpg')$/;"	kind:variable	line:25
+imagem	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	/^    imagem = LerImagem(".\/Images\/Capturar.jpg")$/;"	kind:variable	line:175
+imagemFrequenciaPura	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^imagemFrequenciaPura = getImageFrequence(imagemOrignal, moveCenterOriginal)$/;"	kind:variable	line:38
+imagemFrequenciaResult	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^imagemFrequenciaResult = butterWorthFilter(ylen,xlen,15,35)*imagemFrequenciaPura$/;"	kind:variable	line:40
+imagemOriginal	../[PDI] Atividade N1 - Realce/Code/AtividadeUm.py	/^imagemOriginal = mpimg.imread('.\/Realce\/imagens\/Clarear_(1).jpg')$/;"	kind:variable	line:60
+imagemOrignal	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^    imagemOrignal = imagemOrignal[...,0]$/;"	kind:variable	line:8
+imagemOrignal	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^imagemOrignal = mpimg.imread('.\/Images\/Agucar_(5).jpg')$/;"	kind:variable	line:6
+imagemOrignal	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao1.py	/^imagemOrignal = mpimg.imread('..\/image_(1).jpg') $/;"	kind:variable	line:6
+imagemOrignal	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^imagemOrignal = mpimg.imread('..\/imagens\/image_(4).jpg')$/;"	kind:variable	line:6
+imagemResultado	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^imagemResultado = moveCenterFrequencia*np.fft.ifft2(imagemFrequenciaResult).real+imagemOrignal$/;"	kind:variable	line:42
+imagemResultado	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^imagemResultado = aplicaMediana(imagemOrignal)$/;"	kind:variable	line:125
+increment	../[PDI] Atividade N5 - Segmentacao de imagens/Code/utils.py	/^def increment(value, initial, limit):$/;"	kind:function	line:15
+initImage	../[PDI] Atividade N1 - Realce/Code/AtividadeUm.py	/^def initImage(X, Y):$/;"	kind:function	line:6
+irisdata	../[PDI] Atividade N10 - Classificacao/Code/test.py	/^irisdata = pd.read_csv(url, names=colnames)$/;"	kind:variable	line:10
+is_power2	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	/^def is_power2(num):$/;"	kind:function	line:15
+kernel	../[PDI] Atividade N2 - Filtros Espaciais/Code/kernelMediana.py	/^def kernel(kernel, imagemOriginal):$/;"	kind:function	line:5
+kernel	../[PDI] Atividade N2 - Filtros Espaciais/Code/kernelMediana.py	/^kernel = np.array([$/;"	kind:variable	line:37
+kernel	../[PDI] Atividade N6 - Morfologia/Code/main.py	/^    kernel = [[0,1,0],[1,1,1],[0,1,0]]$/;"	kind:variable	line:99
+kernel1	../[PDI] Atividade N6 - Morfologia/Code/main.py	/^    kernel1 = [[0,1,0],[1,1,1],[0,0,0]]$/;"	kind:variable	line:100
+kernel2	../[PDI] Atividade N6 - Morfologia/Code/main.py	/^    kernel2 = [[1,1,1],[1,1,1],[1,1,1]]$/;"	kind:variable	line:101
+kernelMediana.py	../[PDI] Atividade N2 - Filtros Espaciais/Code/kernelMediana.py	1;"	kind:file	line:1
+laplacian	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def laplacian(height, width):$/;"	kind:function	line:82
+lerImagem	../[PDI] Atividade N2 - Filtros Espaciais/Code/kernelMediana.py	/^def lerImagem(nome):$/;"	kind:function	line:33
+limirizacaoLocal	../[PDI] Atividade N5 - Segmentacao de imagens/Code/segmentacao.py	/^def limirizacaoLocal(imagem, tipoMedia = 'local', n = 20, a = 0, b = 1 ): $/;"	kind:function	line:43
+lista2.py	../[PDI] Atividade N2 - Filtros Espaciais/Code/lista2.py	1;"	kind:file	line:1
+load_dataset	../[PDI] Atividade N10 - Classificacao/Code/create_data.py	/^def load_dataset():$/;"	kind:function	line:5
+load_dataset	../[PDI] Atividade N10 - Classificacao/Code/utils.py	/^def load_dataset():$/;"	kind:function	line:9
+main	../[PDI] Atividade N4 - Restauracao de imagens/code/main.py	/^def main():$/;"	kind:function	line:9
+main	../[PDI] Atividade N5 - Segmentacao de imagens/Code/main.py	/^def main(imagem,tipo,filtro,m,n):$/;"	kind:function	line:9
+main.py	../[PDI] Atividade N10 - Classificacao/Code/main.py	1;"	kind:file	line:1
+main.py	../[PDI] Atividade N4 - Restauracao de imagens/code/main.py	1;"	kind:file	line:1
+main.py	../[PDI] Atividade N5 - Segmentacao de imagens/Code/main.py	1;"	kind:file	line:1
+main.py	../[PDI] Atividade N6 - Morfologia/Code/main.py	1;"	kind:file	line:1
+main.py	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/main.py	1;"	kind:file	line:1
+main.py	../[PDI] Atividade N8 - Compressao/Code/main.py	1;"	kind:file	line:1
+main.py	../[PDI] Atividade N9 - Imagens coloridas/Code/main.py	1;"	kind:file	line:1
+main.py	../projeto/Code/main.py	1;"	kind:file	line:1
+mainOpera	../[PDI] Atividade N6 - Morfologia/Code/main.py	/^def mainOpera(imagem1,imagem2,operacao):$/;"	kind:function	line:6
+mainQuant	../[PDI] Atividade N8 - Compressao/Code/main.py	/^def mainQuant(imagem,bit):$/;"	kind:function	line:8
+mediana	../[PDI] Atividade N2 - Filtros Espaciais/Code/kernelMediana.py	/^def mediana(side, imagemOriginal):$/;"	kind:function	line:21
+midpoint	../[PDI] Atividade N9 - Imagens coloridas/Code/ruido.py	/^def midpoint(imagem,m,n):$/;"	kind:function	line:162
+min_max	../[PDI] Atividade N9 - Imagens coloridas/Code/ruido.py	/^def min_max(imagem,m=3,n=3):$/;"	kind:function	line:117
+moveCenterFrequencia	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^moveCenterFrequencia = getMoveCenter(imagemFrequenciaResult)$/;"	kind:variable	line:41
+moveCenterOriginal	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresNP.py	/^moveCenterOriginal = getMoveCenter(imagemOrignal)$/;"	kind:variable	line:37
+noise	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao1.py	/^def noise(imagemOriginal, prob1=0.10 ,prob2=0.10 , option1=0, option2=255):$/;"	kind:function	line:12
+operation	../[PDI] Atividade N6 - Morfologia/Code/utils.py	/^def operation(img1,img2, operation):$/;"	kind:function	line:13
+operation	../[PDI] Atividade N9 - Imagens coloridas/Code/utils.py	/^def operation(img1,img2, operation):$/;"	kind:function	line:131
+options	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao1.py	/^def options(option1,option2):$/;"	kind:function	line:51
+otsu	../[PDI] Atividade N5 - Segmentacao de imagens/Code/segmentacao.py	/^def otsu(imagem):$/;"	kind:function	line:6
+pad	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresDFFT.py	/^def pad(ImagemOriginal):$/;"	kind:function	line:9
+pad	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	/^def pad(ImagemOriginal):$/;"	kind:function	line:21
+padImage	../[PDI] Atividade N3 - Filtros de frequencia/Code/fourier.py	/^def padImage(image, powOf2=True):$/;"	kind:function	line:48
+padImg	../[PDI] Atividade N3 - Filtros de frequencia/Code/AtividadeTresDFFT.py	/^    padImg = pad(imagem)$/;"	kind:variable	line:27
+padImg	../[PDI] Atividade N3 - Filtros de frequencia/Code/agucar_frequencia.py	/^    padImg = pad(imagem)$/;"	kind:variable	line:179
+prob	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao1.py	/^def prob(prob1,prob2):$/;"	kind:function	line:47
+project.py	../projeto/Code/project.py	1;"	kind:file	line:1
+projeto_aryell	../projeto/Code/project.py	/^def projeto_aryell(imagem):$/;"	kind:function	line:70
+projeto_aryell_2	../projeto/Code/project.py	/^def projeto_aryell_2(imagem):$/;"	kind:function	line:82
+projeto_canny	../projeto/Code/project.py	/^def projeto_canny(imagem):$/;"	kind:function	line:25
+projeto_rodrigo	../projeto/Code/project.py	/^def projeto_rodrigo(imagem):$/;"	kind:function	line:38
+projeto_sobel	../projeto/Code/project.py	/^def projeto_sobel(imagem):$/;"	kind:function	line:10
+questao1.py	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao1.py	1;"	kind:file	line:1
+questao2.py	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	1;"	kind:file	line:1
+rgb2gray	../[PDI] Atividade N10 - Classificacao/Code/utils.py	/^def rgb2gray(imagem):$/;"	kind:function	line:4
+rgb2gray	../projeto/Code/utils.py	/^def rgb2gray(imagem):$/;"	kind:function	line:29
+rgb2hsi	../[PDI] Atividade N9 - Imagens coloridas/Code/utils.py	/^def rgb2hsi(imagem):$/;"	kind:function	line:9
+rodrigo	../projeto/Code/main.py	/^def rodrigo(imagem):$/;"	kind:function	line:6
+ruido.py	../[PDI] Atividade N9 - Imagens coloridas/Code/ruido.py	1;"	kind:file	line:1
+ruidos.py	../[PDI] Atividade N4 - Restauracao de imagens/code/ruidos.py	1;"	kind:file	line:1
+segmentacao.py	../[PDI] Atividade N5 - Segmentacao de imagens/Code/segmentacao.py	1;"	kind:file	line:1
+segmentar	../[PDI] Atividade N9 - Imagens coloridas/Code/colori.py	/^def segmentar(imagem):$/;"	kind:function	line:5
+sobel	../projeto/Code/main.py	/^def sobel(imagem):$/;"	kind:function	line:15
+svclassifier	../[PDI] Atividade N10 - Classificacao/Code/test.py	/^svclassifier = SVC(kernel='rbf')  $/;"	kind:variable	line:26
+tempCodeRunnerFile.py	../[PDI] Atividade N8 - Compressao/Code/tempCodeRunnerFile.py	1;"	kind:file	line:1
+test.py	../[PDI] Atividade N10 - Classificacao/Code/test.py	1;"	kind:file	line:1
+test_x	../[PDI] Atividade N10 - Classificacao/Code/create_data.py	/^test_x = test_x_flatten\/255.$/;"	kind:variable	line:31
+test_x_flatten	../[PDI] Atividade N10 - Classificacao/Code/create_data.py	/^test_x_flatten = test_x_orig.reshape(test_x_orig.shape[0], -1).T$/;"	kind:variable	line:28
+train_x	../[PDI] Atividade N10 - Classificacao/Code/create_data.py	/^train_x = train_x_flatten\/255.$/;"	kind:variable	line:30
+train_x_flatten	../[PDI] Atividade N10 - Classificacao/Code/create_data.py	/^train_x_flatten = train_x_orig.reshape(train_x_orig.shape[0], -1).T   # The "-1" makes reshape flatten the remaining dimensions$/;"	kind:variable	line:27
+url	../[PDI] Atividade N10 - Classificacao/Code/test.py	/^url = "https:\/\/archive.ics.uci.edu\/ml\/machine-learning-databases\/iris\/iris.data"$/;"	kind:variable	line:5
+utils.py	../[PDI] Atividade N10 - Classificacao/Code/utils.py	1;"	kind:file	line:1
+utils.py	../[PDI] Atividade N4 - Restauracao de imagens/code/utils.py	1;"	kind:file	line:1
+utils.py	../[PDI] Atividade N5 - Segmentacao de imagens/Code/utils.py	1;"	kind:file	line:1
+utils.py	../[PDI] Atividade N6 - Morfologia/Code/utils.py	1;"	kind:file	line:1
+utils.py	../[PDI] Atividade N7 - Representacao e extracao de caracteristicas/Code/utils.py	1;"	kind:file	line:1
+utils.py	../[PDI] Atividade N8 - Compressao/Code/utils.py	1;"	kind:file	line:1
+utils.py	../[PDI] Atividade N9 - Imagens coloridas/Code/utils.py	1;"	kind:file	line:1
+utils.py	../projeto/Code/utils.py	1;"	kind:file	line:1
+xDiference	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^xDiference = imagemOrignal.shape[0] - imagemResultado.shape[0]$/;"	kind:variable	line:126
+y	../[PDI] Atividade N10 - Classificacao/Code/test.py	/^y = irisdata['Class'] #contains the categories$/;"	kind:variable	line:14
+yDiference	../[PDI] Atividade N4 - Restauracao de imagens/code1/questao2.py	/^yDiference = imagemOrignal.shape[1] - imagemResultado.shape[1]$/;"	kind:variable	line:127
+y_pred	../[PDI] Atividade N10 - Classificacao/Code/test.py	/^y_pred = svclassifier.predict(X_test)$/;"	kind:variable	line:31
