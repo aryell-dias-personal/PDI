@@ -44,6 +44,8 @@ def canny_por_canal(imagem):
     canny_g = feature.canny(green,sigma=1)
     canny_b = feature.canny(blue,sigma=1)
 
+    
+
     return canny_r, canny_g, canny_b
 
 def projeto_rodrigo(imagem):
