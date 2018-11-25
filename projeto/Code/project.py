@@ -116,9 +116,10 @@ def projeto_aryell_2(imagem):
     retorno = np.zeros(aux)
     borda = canny_por_canal(imagem)
     rejunte = utils.extraiRetas(borda,130)
+    # esqueleto = morphology.skeletonize(imagem)
+    # rejunte = utils.extraiRetas(esqueleto,130)
     print(rejunte)
     for a in range(aux[0]-1):
         for b in range(aux[1]-1):
             retorno[a][b] = borda[a][b] and (not rejunte[a][b])
-    retorno = morphology.binary_closing(retorno)
     return retorno, borda, rejunte, imagem
