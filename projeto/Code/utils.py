@@ -1,5 +1,23 @@
 import numpy as np
 import matplotlib.image as mpimg
+import cv2
+
+def extraiRetas(imagem, threshold):
+    lines = cv2.HoughLines(np.array(imagem, dtype=np.uint8),1,np.pi/360,threshold)
+    retorno = np.zeros(np.shape(imagem))
+    if(not lines is None):
+        for things in lines:
+            for rho,theta in things:
+                a = np.cos(theta)
+                b = np.sin(theta)
+                x0 = a*rho
+                y0 = b*rho
+                x1 = int(x0 + 1000*(-b))
+                y1 = int(y0 + 1000*(a))
+                x2 = int(x0 - 1000*(-b))
+                y2 = int(y0 - 1000*(a))
+                retorno = cv2.line(retorno,(x1,y1),(x2,y2),(255,0,0),2)
+    return retorno
 
 def LerImage(imagem):
     try:

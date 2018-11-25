@@ -11,27 +11,27 @@ def projeto_sobel(imagem):
     
     imagem = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
 
-    img = filters.rank.minimum(imagem, morphology.square(7)) #filtro de minimo
+    img = filters.rank.minimum(imagem, morphology.square(7)) 
 
-    imagem = scp.morphology.grey_opening(img,size=7) # closing e opening para borrar a imagem
+    imagem = scp.morphology.grey_opening(img,size=7) 
     imagem = scp.morphology.grey_closing(imagem,size=5)
 
-    borda = feature.canny(imagem,sigma=1) # canny da imagem borrada
+    borda = feature.canny(imagem,sigma=1) 
 
-    borda = scp.morphology.binary_closing(borda) # closing do canny
+    borda = scp.morphology.binary_closing(borda) 
 
     return borda,imagem
 
 def projeto_canny(imagem):
 
-    img = scp.morphology.grey_closing(imagem,size=17) # closing e opening pra borrar a imagem
+    img = scp.morphology.grey_closing(imagem,size=17) 
     img = scp.morphology.grey_opening(img,size=17)
 
-    imagem = imagem - img # subtração pra tentar realçar os detalhes
+    imagem = imagem - img 
 
-    img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem)) # normaliza
+    img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
 
-    borda = feature.canny(img,sigma=1) # canny da imagem normalizada
+    borda = feature.canny(img,sigma=1) 
 
     return borda, imagem
 
@@ -79,25 +79,6 @@ def detecta_rejunte(imagem):
     # print(nr_objects)
     return labeled
 
-
-def projeto_hough(image):
-    edges, image = projeto_canny(image)
-    lines = cv2.HoughLines(np.array(edges, dtype=np.uint8),1,np.pi/180,150)
-    retorno = np.zeros(np.shape(image))
-    if(not lines is None):
-        for things in lines:
-            for rho,theta in things:
-                a = np.cos(theta)
-                b = np.sin(theta)
-                x0 = a*rho
-                y0 = b*rho
-                x1 = int(x0 + 1000*(-b))
-                y1 = int(y0 + 1000*(a))
-                x2 = int(x0 - 1000*(-b))
-                y2 = int(y0 - 1000*(a))
-                retorno = cv2.line(retorno,(x1,y1),(x2,y2),(255,0,0),2)
-    return retorno
-
 # funciona pra 19
 def projeto_aryell(imagem):
     aux = np.shape(imagem)
@@ -110,14 +91,15 @@ def projeto_aryell(imagem):
             retorno[a][b] = bordaDilatada[a][b] and naoRejunte[a][b]
     retorno = scp.morphology.binary_erosion(retorno)
     return retorno 
-''
+
 def projeto_aryell_2(imagem):
     aux = np.shape(imagem)
     retorno = np.zeros(aux)
     borda = projeto_canny(imagem)[0]
-    rejunte = scp.morphology.binary_dilation(projeto_hough(imagem))
+    rejunte = utils.extraiRetas(borda,130)
     print(rejunte)
     for a in range(aux[0]-1):
         for b in range(aux[1]-1):
-            retorno[a][b] = borda[a][b] and not rejunte[a][b]
+            retorno[a][b] = borda[a][b] and (not rejunte[a][b])
+    retorno = morphology.binary_closing(retorno)
     return retorno, borda, rejunte, imagem
