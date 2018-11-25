@@ -21,7 +21,7 @@ def sobel(imagem):
     plt.show()
 
 def aryell(imagem):
-    x,y = np.shape(imagem)
+    # x,y = np.shape(imagem)
     retorno, borda, rejunte, imagem = project.projeto_aryell_2(imagem)
     fig, [(ax1, ax2), (ax3, ax4)] = plt.subplots(2,2,figsize=(20,10))
     ax1.imshow(imagem,cmap='gray')
@@ -39,14 +39,15 @@ def canny(imagem):
     plt.show()
 
 def canny_banda(imagem):
-    R,G,B = project.canny_por_canal(imagem)
+    R,G,B,res = project.canny_por_canal(imagem)
 
-    fig, [[ax1,ax2],[ax3,ax4]] = plt.subplots(2,2,figsize=(20,10))
+    fig, [[ax1,ax2, ax3],[ax4,ax5,ax6]] = plt.subplots(2,3,figsize=(20,10))
 
     ax1.imshow(imagem)
-    ax2.imshow(R,cmap='gray')
-    ax3.imshow(G,cmap='gray')
-    ax4.imshow(B,cmap='gray')
+    ax2.imshow(res)
+    ax4.imshow(R,cmap='gray')
+    ax5.imshow(G,cmap='gray')
+    ax6.imshow(B,cmap='gray')
     plt.show()    
 
 if __name__ == '__main__': 
@@ -59,10 +60,10 @@ if __name__ == '__main__':
 
         # canny_banda(img)
 
-        # aryell(img)
+        aryell(img)
 
         # canny(img)
-        
+
         # rodrigo(img)
 
     # img = utils.LerImage(str(i))

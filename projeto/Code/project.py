@@ -41,12 +41,31 @@ def canny_por_canal(imagem):
     blue = imagem[:,:,2]
 
     canny_r = feature.canny(red,sigma=1)
+    canny_r = scp.morphology.binary_closing(canny_r,structure=np.ones((3,3)))
+    canny_r = scp.morphology.binary_opening(canny_r, structure=np.ones((3,3)))
+
     canny_g = feature.canny(green,sigma=1)
+    canny_g = scp.morphology.binary_closing(canny_g,structure=np.ones((3,3)))
+    canny_g = scp.morphology.binary_opening(canny_g,structure=np.ones((3,3)))
+
     canny_b = feature.canny(blue,sigma=1)
+    canny_b = scp.morphology.binary_closing(canny_b,structure=np.ones((3,3)))
+    canny_b = scp.morphology.binary_opening(canny_b,structure=np.ones((3,3)))
 
-    
+    result = np.zeros(np.shape(imagem))
 
-    return canny_r, canny_g, canny_b
+    for x in range(np.shape(imagem)[0]):
+        for y in range(np.shape(imagem)[1]):
+            if canny_r[x][y] and canny_b[x][y]:
+                result[x][y] = 1
+            elif canny_r[x][y] and canny_g[x][y]:
+                result[x][y] = 1
+            elif canny_b[x][y] and canny_g[x][y]:
+                result[x][y] = 1
+            else:
+                result[x][y] = 0
+
+    return result
 
 def projeto_rodrigo(imagem):
     borda = feature.canny(imagem,sigma=1)
@@ -93,9 +112,9 @@ def projeto_aryell(imagem):
     return retorno 
 
 def projeto_aryell_2(imagem):
-    aux = np.shape(imagem)
+    aux = np.shape(imagem[:][:][0])
     retorno = np.zeros(aux)
-    borda = projeto_canny(imagem)[0]
+    borda = canny_por_canal(imagem)
     rejunte = utils.extraiRetas(borda,130)
     print(rejunte)
     for a in range(aux[0]-1):
