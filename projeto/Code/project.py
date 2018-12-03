@@ -2,7 +2,7 @@ import numpy as np
 import scipy
 import scipy.ndimage as scp
 import cv2
-from skimage import feature, filters, morphology, color, util
+from skimage import feature, filters, morphology, color, util, exposure
 from skimage.measure import find_contours
 from skimage.transform import hough_line, hough_line_peaks, probabilistic_hough_line
 import utils
@@ -131,8 +131,17 @@ def projeto_aryell_2(imagem):
 
 def teste(imagem):
     # laplace = filters.laplace(frangi)
-    gray = color.rgb2gray(imagem)
+    # selem = morphology.disk(5)
+    # print(imagem)
+    # median = filters.median(color.rgb2gray(imagem),selem=selem)
+    imagem = exposure.equalize_adapthist(filters.gaussian(imagem))
+    laplace = filters.laplace(imagem)
+    gray = color.rgb2gray(laplace)
     frangi = filters.frangi(gray)
-    lines = probabilistic_hough_line(frangi)
+    prewitt = filters.prewitt(frangi)
+
+    # prewitt = np.median(prewitt)/10 < prewitt
+    # retas = utils.extraiRetas(prewitt,130)
+    # lines = probabilistic_hough_line(prewitt,threshold=10,line_length=300,line_gap=1)
     lines = []
     return frangi, lines

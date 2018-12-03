@@ -66,15 +66,15 @@ if __name__ == '__main__':
         # aryell(img)
 
         result, lines = project.teste(img)
-        plt.imshow(result,cmap='gray')
-        histogram = {}
-        for line in lines:
-            plt.plot(*zip(*line), c='r')
-        plt.show()
-        # fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10))
+        # plt.imshow(result,cmap='gray')
+        # histogram = {}
+        # for line in lines:
+        #     plt.plot(*zip(*line), c='r')
+        fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10))
 
-        # ax1.imshow(utils.rgb2gray(img), cmap='gray')
-        # ax2.imshow(result,cmap='gray')
+        ax1.imshow(utils.rgb2gray(img), cmap='gray')
+        ax2.imshow(result,cmap='gray')
+        plt.show()
         
         # canny(img)
         
