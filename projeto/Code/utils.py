@@ -1,10 +1,14 @@
 import numpy as np
 import matplotlib.image as mpimg
+from skimage.transform import hough_line, hough_line_peaks, probabilistic_hough_line
 import cv2
 
+
+def extraiRetas(imagem):
+    h, theta, d  = hough_line(imagem)
+
 def extraiRetas(imagem, threshold):
-    print(imagem)
-    lines = cv2.HoughLines(np.array(imagem[0], dtype=np.uint8),1,np.pi/360,threshold)
+    lines = cv2.HoughLines(np.array(imagem, dtype=np.uint8),1,np.pi/180,threshold)
     retorno = np.zeros(np.shape(imagem))
     if(not lines is None):
         for things in lines:
@@ -39,6 +43,20 @@ def Normalizar(imagem):
     imagem = imagem*255/(maxi-mini)
     return imagem
 
+def BinarizarMedio(imagem, deslocamento = 0):
+    aux = np.shape(imagem)
+    if np.size(aux) > 2:
+        imagem = imagem[:,:,0]
+        aux = np.shape(imagem)
+    ImgBin = np.zeros(aux)
+    for x in range(aux[0]):
+        for y in range(aux[1]):
+            if imagem[x][y] >= (1-deslocamento)*((np.max(imagem)+np.min(imagem))/2):                
+                ImgBin[x][y] = 1
+            else:
+                ImgBin[x][y] = 0
+    return ImgBin
+
 def Binarizar(imagem):
     aux = np.shape(imagem)
     if np.size(aux) > 2:
@@ -47,12 +65,9 @@ def Binarizar(imagem):
     ImgBin = np.zeros(aux)
     for x in range(aux[0]):
         for y in range(aux[1]):
-            # 0.1*np.max(imagem)
-            if imagem[x][y] >= ((np.max(imagem)+np.min(imagem))/2):                
-            # if imagem[x][y] >= 127:
-                ImgBin[x][y] = 0
-                # ImgBin[x][y] = 1
-            else:
+            # 0.1*np.max(imagem)                
+            if imagem[x][y] >= 127:
                 ImgBin[x][y] = 1
-                # ImgBin[x][y] = 0
+            else:
+                ImgBin[x][y] = 0
     return ImgBin

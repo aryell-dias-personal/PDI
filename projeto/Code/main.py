@@ -22,14 +22,14 @@ def sobel(imagem):
     plt.show()
 
 def aryell(imagem):
-    retorno, borda, retas, imagem = project.projeto_aryell_3(imagem)
-    # esqueleto = project.projeto_aryell_2(imagem)    
+    retorno, esqueleto, retas, binarizado = project.projeto_aryell_3(imagem)
+    # esqueleto = project.projeto_aryell_3(imagem)    
     # fig, ax = plt.subplots(1,1)
     fig, [(ax1, ax2), (ax3, ax4)] = plt.subplots(2,2,figsize=(20,10))
-    ax1.imshow(imagem,cmap='gray')
-    ax2.imshow(retorno, cmap='gray')
+    ax1.imshow(binarizado,cmap='gray')
+    ax2.imshow(esqueleto,cmap='gray')
     ax3.imshow(retas,cmap='gray')
-    ax4.imshow(borda,cmap='gray')
+    ax4.imshow(retorno, cmap='gray')
     # ax.imshow(esqueleto,cmap='gray')
     plt.show()
 
@@ -63,8 +63,19 @@ if __name__ == '__main__':
 
         # canny_banda(img)
 
-        aryell(project.canny_por_canal(img))
+        # aryell(img)
 
+        result, lines = project.teste(img)
+        plt.imshow(result,cmap='gray')
+        histogram = {}
+        for line in lines:
+            plt.plot(*zip(*line), c='r')
+        plt.show()
+        # fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10))
+
+        # ax1.imshow(utils.rgb2gray(img), cmap='gray')
+        # ax2.imshow(result,cmap='gray')
+        
         # canny(img)
         
         # rodrigo(img)

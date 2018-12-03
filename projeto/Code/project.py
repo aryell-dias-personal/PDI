@@ -2,7 +2,8 @@ import numpy as np
 import scipy
 import scipy.ndimage as scp
 import cv2
-from skimage import feature, filters, morphology
+from skimage import feature, filters, morphology, color, util
+from skimage.measure import find_contours
 from skimage.transform import hough_line, hough_line_peaks, probabilistic_hough_line
 import utils
 
@@ -31,7 +32,7 @@ def projeto_canny(imagem):
 
     img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
 
-    borda = feature.canny(img,sigma=1) 
+    borda = feature.canny(imagem,sigma=1) 
 
     return borda, imagem
 
@@ -112,31 +113,26 @@ def projeto_aryell(imagem):
     retorno = scp.morphology.binary_erosion(retorno)
     return retorno 
 
-def projeto_aryell_2(imagem):
-    aux = np.shape(imagem[:][:][0])
-    retorno = np.zeros(aux)
-    borda = canny_por_canal(imagem)
-    rejunte = utils.extraiRetas(borda,130)
-    # esqueleto = morphology.skeletonize(imagem)
-    # rejunte = utils.extraiRetas(esqueleto,130)
-    # print(rejunte)
-    for a in range(aux[0]-1):
-        for b in range(aux[1]-1):
-            retorno[a][b] = borda[a][b] and (not rejunte[a][b])
-    return retorno, borda, rejunte, imagem
-
 # funciona mais ou menos para alguns
-def projeto_aryell_3(imagem):
+def projeto_aryell_2(imagem):
     aux = np.shape(imagem)
     retorno = np.zeros(aux)
     # extrai borda
-    # borda,_ = projeto_canny(imagem)
-    print('aaaa')
+    borda,_ = projeto_canny(imagem)
     # extrai retas com threshold maior que 130
-    retas = utils.extraiRetas(imagem,400)
-    # cria imagem de retorno apartir do esqueleto e das retas
+    # o threshold parece mudar para cada imagem
+    retas = utils.extraiRetas(borda,100)
+    # cria imagem de retorno apartir das bordas e das retas
     for a in range(aux[0]-1):
         for b in range(aux[1]-1):
-            retorno[a][b] = imagem[a][b] and (not retas[a][b])
+            retorno[a][b] = borda[a][b] and (not retas[a][b])
     
-    return retorno, imagem, retas, imagem
+    return retorno, borda, retas, imagem
+
+def teste(imagem):
+    # laplace = filters.laplace(frangi)
+    gray = color.rgb2gray(imagem)
+    frangi = filters.frangi(gray)
+    lines = probabilistic_hough_line(frangi)
+    lines = []
+    return frangi, lines
