@@ -134,14 +134,14 @@ def teste(imagem):
     # selem = morphology.disk(5)
     # print(imagem)
     # median = filters.median(color.rgb2gray(imagem),selem=selem)
+    borda,_ = projeto_canny(color.rgb2gray(imagem))
+    lines = probabilistic_hough_line(borda,line_length=150, line_gap=150, threshold=100)
     imagem = exposure.equalize_adapthist(filters.gaussian(imagem))
     laplace = filters.laplace(imagem)
     gray = color.rgb2gray(laplace)
     frangi = filters.frangi(gray)
-    prewitt = filters.prewitt(frangi)
-
+    # prewitt = filters.prewitt(frangi)
     # prewitt = np.median(prewitt)/10 < prewitt
     # retas = utils.extraiRetas(prewitt,130)
     # lines = probabilistic_hough_line(prewitt,threshold=10,line_length=300,line_gap=1)
-    lines = []
-    return frangi, lines
+    return frangi, lines, borda
