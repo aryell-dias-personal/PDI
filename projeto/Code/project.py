@@ -2,8 +2,9 @@ import numpy as np
 import scipy
 import scipy.ndimage as scp
 import cv2
-from skimage import feature, filters, morphology
+from skimage import feature, filters, morphology, exposure, segmentation
 from skimage.transform import hough_line, hough_line_peaks, probabilistic_hough_line
+from sklearn import cluster
 import utils
 
 
@@ -52,7 +53,8 @@ def canny_por_canal(imagem):
     canny_b = scp.morphology.binary_closing(canny_b,structure=np.ones((3,3)))
     canny_b = scp.morphology.binary_opening(canny_b,structure=np.ones((3,3)))
 
-    result = np.zeros(np.shape(imagem))
+    result = np.zeros(np.shape(imagem[:,:,0]))
+    print(np.shape(result))
 
     for x in range(np.shape(imagem)[0]):
         for y in range(np.shape(imagem)[1]):
@@ -65,26 +67,7 @@ def canny_por_canal(imagem):
             else:
                 result[x][y] = 0
 
-    return result
-
-def projeto_rodrigo(imagem):
-    borda = feature.canny(imagem,sigma=1)
-
-    block_size = 45
-    img = filters.threshold_adaptive(imagem,block_size,offset=10)
-    img = 1 - img
-    img = morphology.skeletonize(img)
-
-    res = borda + img
-
-    for x in range(np.shape(res)[0]):
-        for y in range(np.shape(res)[1]):
-            if res[x][y] > 0:
-                res[x][y] = 1
-
-    res = scp.morphology.grey_closing(res,size=9)
-
-    return borda, img, res
+    return canny_r, canny_g, canny_b, result
 
 def detecta_rejunte(imagem):
     # gray = cv2.cvtColor
@@ -112,14 +95,45 @@ def projeto_aryell(imagem):
     return retorno 
 
 def projeto_aryell_2(imagem):
-    aux = np.shape(imagem[:][:][0])
+    aux = np.shape(imagem)
     retorno = np.zeros(aux)
-    borda = canny_por_canal(imagem)
-    rejunte = utils.extraiRetas(borda,130)
-    # esqueleto = morphology.skeletonize(imagem)
-    # rejunte = utils.extraiRetas(esqueleto,130)
-    print(rejunte)
+    imagem = projeto_canny(imagem)[0]
+    esqueleto = morphology.skeletonize(imagem)
+    rejunte = utils.extraiRetas(esqueleto,130)
+    # print(rejunte)
     for a in range(aux[0]-1):
         for b in range(aux[1]-1):
-            retorno[a][b] = borda[a][b] and (not rejunte[a][b])
-    return retorno, borda, rejunte, imagem
+            retorno[a][b] = esqueleto[a][b] and (not rejunte[a][b])
+    return retorno, esqueleto, rejunte, imagem
+
+def rodrigo(imagem):
+    # img = scp.morphology.grey_opening(imagem,size=17)
+    # close = scp.morphology.grey_closing(img,size=7)
+
+    # dila = scp.morphology.grey_dilation(img,size=7)
+
+    # retorno = abs(dila - imagem)
+
+    # retorno = projeto_canny(retorno)[0]
+
+    # fd,retorno = feature.hog(img, orientations=8, pixels_per_cell=(16, 16),cells_per_block=(1, 1), visualize=True, multichannel=True)
+
+    # retorno = exposure.rescale_intensity(retorno,in_range=(0,10))
+
+    img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
+
+    high_contr = exposure.equalize_adapthist(img)
+
+    # filtered_img = filters.median(high_contr,morphology.square(3))
+    filtered_img = scp.morphology.grey_opening(high_contr,size=17)
+    filtered_img = scp.morphology.grey_closing(filtered_img,size=7)
+
+    enhanced_img = abs(high_contr - filtered_img)
+
+    # edges = feature.canny(enhanced_img, sigma=1.5)
+    # edges = filters.sobel(enhanced_img)
+    edges = cluster.KMeans(n_clusters=2,random_state=0).fit(enhanced_img)
+    edges.labels_
+    edges = np.float(edges)
+
+    return edges

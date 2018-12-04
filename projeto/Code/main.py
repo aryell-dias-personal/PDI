@@ -3,15 +3,6 @@ import matplotlib.pyplot as plt
 import utils
 import project
 
-def rodrigo(imagem):
-    borda,imagem,aaaa = project.projeto_rodrigo(img)
-    fig, [[ax1, ax2],[ax3,ax4]] = plt.subplots(2,2,figsize=(20,10))
-    ax1.imshow(img, cmap='gray')
-    ax2.imshow(borda,cmap='gray')
-    ax3.imshow(imagem,cmap='gray')
-    ax4.imshow(aaaa,cmap='gray')
-    plt.show()
-
 def sobel(imagem):
     borda, imagem = project.projeto_sobel(img)
     fig, [ax1, ax2,ax3] = plt.subplots(1,3,figsize=(20,10))
@@ -44,27 +35,37 @@ def canny_banda(imagem):
     fig, [[ax1,ax2, ax3],[ax4,ax5,ax6]] = plt.subplots(2,3,figsize=(20,10))
 
     ax1.imshow(imagem)
-    ax2.imshow(res)
+    ax2.imshow(res,cmap='gray')
     ax4.imshow(R,cmap='gray')
     ax5.imshow(G,cmap='gray')
     ax6.imshow(B,cmap='gray')
     plt.show()    
 
+def r(imagem):
+    img = project.rodrigo(imagem)
+
+    fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10), sharex=True, sharey=True)
+
+    ax1.imshow(imagem, cmap='gray')
+    ax2.imshow(img, cmap='gray')
+    # ax3.imshow(a,cmap='gray')
+    plt.show()
+
 if __name__ == '__main__': 
     for i in range(1,68):
         img = utils.LerImage(str(i))
 
-        # img = utils.rgb2gray(img)
+        img = utils.rgb2gray(img)
+
+        r(img)
 
         # sobel(img)
 
         # canny_banda(img)
 
-        aryell(img)
+        # aryell(img)
 
         # canny(img)
-
-        # rodrigo(img)
 
     # img = utils.LerImage(str(i))
 
