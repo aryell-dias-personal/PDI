@@ -24,6 +24,18 @@ def aryell(imagem):
     # ax.imshow(esqueleto,cmap='gray')
     plt.show()
 
+def aryell2(imagem):
+    result, lines, borda = project.teste(img)
+    fig, [(ax1, ax2),(ax3, ax4)] = plt.subplots(2,2,figsize=(20,10))
+
+    ax1.imshow(utils.rgb2gray(img), cmap='gray')
+    ax2.imshow(result,cmap='gray')
+    ax3.imshow(np.zeros(np.shape(result)),cmap='gray')
+    for line in lines:
+        ax3.plot(*zip(*line), c='r')
+    ax4.imshow(borda, cmap='gray')
+    plt.show()
+
 def canny(imagem):
     borda, img = project.projeto_canny(imagem)
     fig, [ax1, ax2, ax3] = plt.subplots(1,3,figsize=(20,10))
@@ -66,18 +78,11 @@ if __name__ == '__main__':
         # canny_banda(img)
 
         # aryell(img)
+        aryell2(img)
 
-        result, lines = project.teste(img)
         # plt.imshow(result,cmap='gray')
         # histogram = {}
-        # for line in lines:
-        #     plt.plot(*zip(*line), c='r')
-        fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10))
 
-        ax1.imshow(utils.rgb2gray(img), cmap='gray')
-        ax2.imshow(result,cmap='gray')
-        plt.show()
-        
         # canny(img)
         
         # rodrigo(img)
