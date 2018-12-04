@@ -4,15 +4,6 @@ import utils
 from skimage import filters
 import project
 
-def rodrigo(imagem):
-    borda,imagem,aaaa = project.projeto_rodrigo(img)
-    fig, [[ax1, ax2],[ax3,ax4]] = plt.subplots(2,2,figsize=(20,10))
-    ax1.imshow(img, cmap='gray')
-    ax2.imshow(borda,cmap='gray')
-    ax3.imshow(imagem,cmap='gray')
-    ax4.imshow(aaaa,cmap='gray')
-    plt.show()
-
 def sobel(imagem):
     borda, imagem = project.projeto_sobel(img)
     fig, [ax1, ax2,ax3] = plt.subplots(1,3,figsize=(20,10))
@@ -33,6 +24,18 @@ def aryell(imagem):
     # ax.imshow(esqueleto,cmap='gray')
     plt.show()
 
+def aryell2(imagem):
+    result, lines, borda = project.teste(img)
+    fig, [(ax1, ax2),(ax3, ax4)] = plt.subplots(2,2,figsize=(20,10))
+
+    ax1.imshow(utils.rgb2gray(img), cmap='gray')
+    ax2.imshow(result,cmap='gray')
+    ax3.imshow(result,cmap='gray')
+    for line in lines:
+        ax3.plot(*zip(*line), c='r')
+    ax4.imshow(borda, cmap='gray')
+    plt.show()
+
 def canny(imagem):
     borda, img = project.projeto_canny(imagem)
     fig, [ax1, ax2, ax3] = plt.subplots(1,3,figsize=(20,10))
@@ -48,10 +51,21 @@ def canny_banda(imagem):
     fig, [[ax1,ax2],[ax3,ax4]] = plt.subplots(2,2,figsize=(20,10))
 
     ax1.imshow(imagem)
-    ax2.imshow(result,cmap='gray')
-    # ax3.imshow(G,cmap='gray')
-    # ax4.imshow(B,cmap='gray')
+    ax2.imshow(res,cmap='gray')
+    ax4.imshow(R,cmap='gray')
+    ax5.imshow(G,cmap='gray')
+    ax6.imshow(B,cmap='gray')
     plt.show()    
+
+def r(imagem):
+    img = project.rodrigo(imagem)
+
+    fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10), sharex=True, sharey=True)
+
+    ax1.imshow(imagem, cmap='gray')
+    ax2.imshow(img, cmap='gray')
+    # ax3.imshow(a,cmap='gray')
+    plt.show()
 
 if __name__ == '__main__': 
     for i in range(1,68):
@@ -64,7 +78,9 @@ if __name__ == '__main__':
         # canny_banda(img)
 
         # aryell(img)
+        aryell2(img)
 
+<<<<<<< HEAD
         result, lines, borda = project.teste(img)
         # plt.imshow(result,cmap='gray')
         # histogram = {}
@@ -79,6 +95,11 @@ if __name__ == '__main__':
         plt.show()
 
         
+=======
+        # plt.imshow(result,cmap='gray')
+        # histogram = {}
+
+>>>>>>> 6680b227f7e291a7a7c55cb3c9d1a3b1569e0a2b
         # canny(img)
         
         # rodrigo(img)
