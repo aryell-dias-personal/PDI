@@ -118,7 +118,7 @@ def teste(imagem):
     # median = filters.median(color.rgb2gray(imagem),selem=selem)
 
     borda,_ = projeto_canny(color.rgb2gray(imagem))
-    lines = probabilistic_hough_line(borda, threshold=100, line_length=150, line_gap=150)
+    lines = probabilistic_hough_line(borda, threshold=80, line_length=50, line_gap=40)
     imagem = exposure.equalize_adapthist(filters.gaussian(imagem))
     laplace = filters.laplace(imagem)
     gray = color.rgb2gray(laplace)

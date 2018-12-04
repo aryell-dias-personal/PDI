@@ -30,7 +30,7 @@ def aryell2(imagem):
 
     ax1.imshow(utils.rgb2gray(img), cmap='gray')
     ax2.imshow(result,cmap='gray')
-    ax3.imshow(np.zeros(np.shape(result)),cmap='gray')
+    ax3.imshow(result,cmap='gray')
     for line in lines:
         ax3.plot(*zip(*line), c='r')
     ax4.imshow(borda, cmap='gray')
