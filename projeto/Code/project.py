@@ -2,7 +2,9 @@ import numpy as np
 import scipy
 import scipy.ndimage as scp
 import cv2
-from skimage import feature, filters, morphology, exposure, segmentation
+
+from skimage import feature, filters, morphology, color, util, exposure, segmentation
+from skimage.measure import find_contours
 from skimage.transform import hough_line, hough_line_peaks, probabilistic_hough_line
 from sklearn import cluster
 import utils
@@ -32,7 +34,7 @@ def projeto_canny(imagem):
 
     img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
 
-    borda = feature.canny(img,sigma=1) 
+    borda = feature.canny(imagem,sigma=1) 
 
     return borda, imagem
 
@@ -53,8 +55,8 @@ def canny_por_canal(imagem):
     canny_b = scp.morphology.binary_closing(canny_b,structure=np.ones((3,3)))
     canny_b = scp.morphology.binary_opening(canny_b,structure=np.ones((3,3)))
 
-    result = np.zeros(np.shape(imagem[:,:,0]))
-    print(np.shape(result))
+    a,b,c = np.shape(imagem)
+    result = np.zeros((a,b))
 
     for x in range(np.shape(imagem)[0]):
         for y in range(np.shape(imagem)[1]):
@@ -93,18 +95,38 @@ def projeto_aryell(imagem):
             retorno[a][b] = bordaDilatada[a][b] and naoRejunte[a][b]
     retorno = scp.morphology.binary_erosion(retorno)
     return retorno 
-
+    
 def projeto_aryell_2(imagem):
     aux = np.shape(imagem)
     retorno = np.zeros(aux)
-    imagem = projeto_canny(imagem)[0]
-    esqueleto = morphology.skeletonize(imagem)
-    rejunte = utils.extraiRetas(esqueleto,130)
-    # print(rejunte)
+    
+    # extrai borda
+    borda,_ = projeto_canny(imagem)
+    # o threshold parece mudar para cada imagem
+    retas = utils.extraiRetas(borda,100)
+    # cria imagem de retorno apartir das bordas e das retas
     for a in range(aux[0]-1):
         for b in range(aux[1]-1):
-            retorno[a][b] = esqueleto[a][b] and (not rejunte[a][b])
-    return retorno, esqueleto, rejunte, imagem
+            retorno[a][b] = borda[a][b] and (not retas[a][b])
+    
+    return retorno, borda, retas, imagem 
+
+def teste(imagem):
+    # laplace = filters.laplace(frangi)
+    # selem = morphology.disk(5)
+    # print(imagem)
+    # median = filters.median(color.rgb2gray(imagem),selem=selem)
+    imagem = exposure.equalize_adapthist(filters.gaussian(imagem))
+    laplace = filters.laplace(imagem)
+    gray = color.rgb2gray(laplace)
+    frangi = filters.frangi(gray)
+    prewitt = filters.prewitt(frangi)
+
+    # prewitt = np.median(prewitt)/10 < prewitt
+    # retas = utils.extraiRetas(prewitt,130)
+    # lines = probabilistic_hough_line(prewitt,threshold=10,line_length=300,line_gap=1)
+    lines = []
+    return frangi, lines 
 
 def rodrigo(imagem):
     # img = scp.morphology.grey_opening(imagem,size=17)
