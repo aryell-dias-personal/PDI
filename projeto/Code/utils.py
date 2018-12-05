@@ -71,3 +71,18 @@ def Binarizar(imagem):
             else:
                 ImgBin[x][y] = 0
     return ImgBin
+
+def Histograma(imagem):
+    aux = np.shape(imagem)
+    count = []
+    mem = 0
+
+    for x in range(aux[0]):
+        for y in range(aux[1]):
+            if imagem[x][y] > 0:
+                try:
+                    count[imagem[x][y]] += 1
+                except:
+                    count.append(1)
+
+    return count

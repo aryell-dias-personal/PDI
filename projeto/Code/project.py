@@ -1,5 +1,6 @@
 import numpy as np
 import scipy
+import matplotlib.pyplot as plt 
 import scipy.ndimage as scp
 import cv2
 
@@ -156,10 +157,49 @@ def rodrigo(imagem):
 
     enhanced_img = abs(high_contr - filtered_img)
 
-    # edges = feature.canny(enhanced_img, sigma=1.5)
+    edges = feature.canny(enhanced_img, sigma=1.5)
     # edges = filters.sobel(enhanced_img)
-    edges = cluster.KMeans(n_clusters=2,random_state=0).fit(enhanced_img)
-    edges.labels_
-    edges = np.float(edges)
 
-    return edges
+    aaa = clean_up(edges)
+
+    return edges, aaa
+
+def clean_up(imagem):
+    s = np.ones([3,3])
+    labels = scipy.ndimage.label(imagem,s)
+
+    conta = utils.Histograma(labels[0])    
+
+    copia = np.copy(conta)
+
+    mem = np.zeros(np.shape(conta)[0])
+
+    for i in range(np.shape(conta)[0]):
+        for j in range(i,np.shape(conta)[0]):
+            if conta[i] < conta[j]:
+                aux = conta[j]
+                conta[j] = conta[i]
+                conta[i] = aux
+
+    for i in range(np.shape(conta)[0]):
+        for t in range(np.shape(conta)[0]):
+            if conta[i] == copia[t] and (t not in mem):
+                mem[i] = t
+
+    cortados = np.zeros(np.shape(conta)[0] - int(np.rint(0.3*np.shape(conta)[0])))
+
+    for h in range(int(np.rint(0.3*np.shape(conta)[0])),np.shape(conta)[0]):
+        cortados[h-int(np.rint(0.3*np.shape(conta)[0]))] = mem[h]
+
+    clean = np.zeros(np.shape(imagem))
+
+    for x in range(np.shape(imagem)[0]):
+        for y in range(np.shape(imagem)[1]):
+            if labels[0][x][y] not in cortados:
+                clean[x][y] = 1
+
+    # print(cortados)
+    # plt.plot(conta)
+    # plt.show()
+
+    return clean

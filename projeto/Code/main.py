@@ -58,27 +58,29 @@ def canny_banda(imagem):
     plt.show()    
 
 def r(imagem):
-    img = project.rodrigo(imagem)
+    img,a = project.rodrigo(imagem)
 
-    fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10), sharex=True, sharey=True)
+    fig, [ax1, ax2, ax3] = plt.subplots(1,3,figsize=(20,10), sharex=True, sharey=True)
 
     ax1.imshow(imagem, cmap='gray')
     ax2.imshow(img, cmap='gray')
-    # ax3.imshow(a,cmap='gray')
+    ax3.imshow(a,cmap='gray')
     plt.show()
 
 if __name__ == '__main__': 
     for i in range(1,68):
         img = utils.LerImage(str(i))
-        # img = utils.rgb2gray(img)
+        img = utils.rgb2gray(img)
 
         # print(img)
         # sobel(img)
 
         # canny_banda(img)
 
+        r(img)
+
         # aryell(img)
-        aryell2(img)
+        # aryell2(img)
 
         # plt.imshow(result,cmap='gray')
         # histogram = {}
