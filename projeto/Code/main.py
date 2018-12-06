@@ -69,22 +69,17 @@ def r(imagem):
 
 if __name__ == '__main__': 
     for i in range(1,68):
+        print(i)
         img = utils.LerImage(str(i))
-        img = utils.rgb2gray(img)
+        # img = utils.rgb2gray(img)
 
         # print(img)
         # sobel(img)
 
+        # canny(img)
         # canny_banda(img)
 
-        r(img)
+        # r(img)
 
         # aryell(img)
-        # aryell2(img)
-
-        # plt.imshow(result,cmap='gray')
-        # histogram = {}
-
-        # canny(img)
-        
-        # r(img)
+        aryell2(img)
