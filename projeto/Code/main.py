@@ -80,40 +80,9 @@ if __name__ == '__main__':
         # aryell(img)
         aryell2(img)
 
-<<<<<<< HEAD
-        result, lines, borda = project.teste(img)
-        # plt.imshow(result,cmap='gray')
-        # histogram = {}
-        fig, [(ax1, ax2), (ax3, ax4)] = plt.subplots(2,2,figsize=(20,10))
-
-        ax1.imshow(utils.rgb2gray(img), cmap='gray')
-        ax2.imshow(result,cmap='gray')
-        ax3.imshow(np.zeros(np.shape(result)),cmap='gray')
-        for line in lines:
-            ax2.plot(*zip(*line), c='r')
-        ax4.imshow(borda,cmap='gray')
-        plt.show()
-
-        
-=======
         # plt.imshow(result,cmap='gray')
         # histogram = {}
 
->>>>>>> 6680b227f7e291a7a7c55cb3c9d1a3b1569e0a2b
         # canny(img)
         
-        # rodrigo(img)
-
-    # img = utils.LerImage(str(i))
-
-    # img = utils.rgb2gray(img)
-
-    # imagem = project.projeto_aryell(img)
-
-    # fig, [ax1, ax2] = plt.subplots(1,2,figsize=(20,10))
-
-    # ax1.imshow(img, cmap='gray')
-    # # ax2.imshow(borda and labeled,cmap='gray')
-    # # ax2.imshow(labeled,cmap='gray')
-    # ax2.imshow(imagem,cmap='gray')
-    # plt.show()
+        # r(img)

@@ -116,28 +116,25 @@ def teste(imagem):
     # selem = morphology.disk(5)
     # print(imagem)
     # median = filters.median(color.rgb2gray(imagem),selem=selem)
-<<<<<<< HEAD
+    # high_contr = exposure.equalize_adapthist(imagem)
+    # filtered_img = scp.morphology.grey_opening(high_contr,size=17)
+    # filtered_img = scp.morphology.grey_closing(filtered_img,size=7)
+    # imagem = abs(high_contr - filtered_img)
     borda,_ = projeto_canny(color.rgb2gray(imagem))
-    lines = probabilistic_hough_line(borda,line_length=150, line_gap=150, threshold=100)
-=======
-
-    borda,_ = projeto_canny(color.rgb2gray(imagem))
-    lines = probabilistic_hough_line(borda, threshold=80, line_length=50, line_gap=40)
->>>>>>> 6680b227f7e291a7a7c55cb3c9d1a3b1569e0a2b
     imagem = exposure.equalize_adapthist(filters.gaussian(imagem))
     laplace = filters.laplace(imagem)
     gray = color.rgb2gray(laplace)
     frangi = filters.frangi(gray)
+    tresh = filters.threshold_local(frangi, 51,method='mean')
+    result = tresh < frangi
+    lines = probabilistic_hough_line(result, threshold=80, line_length=50, line_gap=40)
     # prewitt = filters.prewitt(frangi)
     # prewitt = np.median(prewitt)/10 < prewitt
     # retas = utils.extraiRetas(prewitt,130)
     # lines = probabilistic_hough_line(prewitt,threshold=10,line_length=300,line_gap=1)
-<<<<<<< HEAD
-    return frangi, lines, borda
-=======
     # lines = []
 
-    return frangi, lines, borda 
+    return result, lines, borda 
 
 def rodrigo(imagem):
     # img = scp.morphology.grey_opening(imagem,size=17)
@@ -154,20 +151,20 @@ def rodrigo(imagem):
     # retorno = exposure.rescale_intensity(retorno,in_range=(0,10))
 
     img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
+    # filtered_img = filters.median(high_contr,morphology.square(3))
+
+
 
     high_contr = exposure.equalize_adapthist(img)
-
-    # filtered_img = filters.median(high_contr,morphology.square(3))
     filtered_img = scp.morphology.grey_opening(high_contr,size=17)
     filtered_img = scp.morphology.grey_closing(filtered_img,size=7)
-
     enhanced_img = abs(high_contr - filtered_img)
 
     # edges = feature.canny(enhanced_img, sigma=1.5)
     # edges = filters.sobel(enhanced_img)
-    edges = cluster.KMeans(n_clusters=2,random_state=0).fit(enhanced_img)
-    edges.labels_
-    edges = np.float(edges)
+    print(enhanced_img)
+    # edges = cluster.KMeans(n_clusters=2,random_state=0).fit(enhanced_img)
+    # edges.labels_
+    # edges = np.float(edges)
 
-    return edges
->>>>>>> 6680b227f7e291a7a7c55cb3c9d1a3b1569e0a2b
+    return enhanced_img
