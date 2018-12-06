@@ -113,26 +113,22 @@ def projeto_aryell_2(imagem):
     return retorno, borda, retas, imagem 
 
 def teste(imagem):
-    # laplace = filters.laplace(frangi)
-    # selem = morphology.disk(5)
-    # print(imagem)
-    # median = filters.median(color.rgb2gray(imagem),selem=selem)
+    imagem = color.rgb2gray(imagem)
+    # limba e aumenta o contraste daimagem
+    imagem = filters.gaussian(exposure.adjust_gamma(imagem,3,3))
+    # destaca os detalhes
+    imagem = imagem + filters.laplace(imagem)
+    filtrada = filters.roberts(imagem)
+    # erodi e dilata
+    # erodida = morphology.erosion(filtrada)
+    # dilatada = morphology.dilation(erodida)
+    # segmenta
+    tresh = filters.threshold_otsu(filtrada)
+    result = filtrada > tresh
+    # extrai retas
+    lines = probabilistic_hough_line(result, threshold=80, line_length=50, line_gap=40)
 
-    borda,_ = projeto_canny(color.rgb2gray(imagem))
-    lines = probabilistic_hough_line(borda, threshold=80, line_length=50, line_gap=40)
-    imagem = exposure.equalize_adapthist(filters.gaussian(imagem))
-    laplace = filters.laplace(imagem)
-    gray = color.rgb2gray(laplace)
-    frangi = filters.frangi(gray)
-    # prewitt = filters.prewitt(frangi)
-    canny = filters.threshold_adaptive(frangi,35)
-
-    # prewitt = np.median(prewitt)/10 < prewitt
-    # retas = utils.extraiRetas(prewitt,130)
-    # lines = probabilistic_hough_line(prewitt,threshold=10,line_length=300,line_gap=1)
-    # lines = []
-
-    return canny, lines, borda 
+    return result, lines, filtrada
 
 def rodrigo(imagem):
     # img = scp.morphology.grey_opening(imagem,size=17)

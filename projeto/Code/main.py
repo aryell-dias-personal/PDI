@@ -88,9 +88,9 @@ if __name__ == '__main__':
         # r(img)
 
         # aryell(img)
-        # aryell2(img)
+        aryell2(img)
 
-        test(img)
+        # test(img)
 
         # plt.imshow(result,cmap='gray')
         # histogram = {}
