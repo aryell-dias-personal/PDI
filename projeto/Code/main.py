@@ -45,10 +45,9 @@ def canny(imagem):
     plt.show()
 
 def canny_banda(imagem):
-    # R,G,B = project.canny_por_canal(imagem)
-    result = project.canny_por_canal(imagem)
+    R,G,B,res = project.canny_por_canal(imagem)
 
-    fig, [[ax1,ax2],[ax3,ax4]] = plt.subplots(2,2,figsize=(20,10))
+    fig, [[ax1,ax2, ax3],[ax4,ax5,ax6]] = plt.subplots(2,2,figsize=(20,10))
 
     ax1.imshow(imagem)
     ax2.imshow(res,cmap='gray')
@@ -67,20 +66,31 @@ def r(imagem):
     ax3.imshow(a,cmap='gray')
     plt.show()
 
+def test(img):
+    teste = project.TCC(img)
+
+    fig, [ax1,ax2] = plt.subplots(1,2,figsize=(20,10))
+
+    ax1.imshow(img)
+    ax2.imshow(teste,cmap='gray')
+    plt.show()
+
 if __name__ == '__main__': 
     for i in range(1,68):
         img = utils.LerImage(str(i))
-        img = utils.rgb2gray(img)
+        # img = utils.rgb2gray(img)
 
         # print(img)
         # sobel(img)
 
         # canny_banda(img)
 
-        r(img)
+        # r(img)
 
         # aryell(img)
         # aryell2(img)
+
+        test(img)
 
         # plt.imshow(result,cmap='gray')
         # histogram = {}

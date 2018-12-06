@@ -124,14 +124,15 @@ def teste(imagem):
     laplace = filters.laplace(imagem)
     gray = color.rgb2gray(laplace)
     frangi = filters.frangi(gray)
-    prewitt = filters.prewitt(frangi)
+    # prewitt = filters.prewitt(frangi)
+    canny = filters.threshold_adaptive(frangi,35)
 
     # prewitt = np.median(prewitt)/10 < prewitt
     # retas = utils.extraiRetas(prewitt,130)
     # lines = probabilistic_hough_line(prewitt,threshold=10,line_length=300,line_gap=1)
     # lines = []
 
-    return frangi, lines, borda 
+    return canny, lines, borda 
 
 def rodrigo(imagem):
     # img = scp.morphology.grey_opening(imagem,size=17)
@@ -203,3 +204,16 @@ def clean_up(imagem):
     # plt.show()
 
     return clean
+
+def TCC(imagem):
+    img_filtrada = filters.rank.median(imagem, morphology.disk(2.25))
+
+    if np.mean(img_filtrada[:,:,0]) > np.mean(img_filtrada[:,:,1]):
+        if np.mean(img_filtrada[:,:,0]) > np.mean(img_filtrada[:,:,2]):
+            img_menor = (img_filtrada[:,:,1]+img_filtrada[:,:,2])/3
+        elif np.mean(img_filtrada[:,:,0]) < np.mean(img_filtrada[:,:,2]):
+            img_menor = (img_filtrada[:,:,1]+img_filtrada[:,:,0])/3
+        else:
+            img_menor = 2.5*(img_filtrada[:,:,1])/3
+
+    return img_menor
