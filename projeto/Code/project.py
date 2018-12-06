@@ -122,7 +122,7 @@ def projeto_aryell_2(imagem):
     # imagem = abs(high_contr - filtered_img)
     # borda,_ = projeto_canny(color.rgb2gray(imagem))
 
-def teste(imagem):
+def teste1(imagem):
     imagem = color.rgb2gray(imagem)
     # limba e aumenta o contraste daimagem
     imagem = filters.gaussian(exposure.adjust_gamma(imagem,3,3))
@@ -139,6 +139,29 @@ def teste(imagem):
     lines = probabilistic_hough_line(result, threshold=80, line_length=50, line_gap=40)
 
     return result, lines, filtrada 
+
+def teste(imagem):
+    imagem = color.rgb2gray(imagem)
+    # limpa e aumenta o contraste da imagem
+    
+    imagem = filters.gaussian(exposure.adjust_gamma(imagem,3,3))
+    # destaca os detalhes
+    lowpass = ndimage.gaussian_filter(imagem, 3)
+    gauss_highpass = imagem - lowpass
+    imagem = imagem + filters.laplace(imagem)
+    filtrada = filters.sobel(imagem)
+    # segmenta
+    tresh = filters.threshold_otsu(filtrada)
+    segmentada = filtrada > tresh
+
+    # close
+    closed = morphology.binary_dilation(segmentada)
+    # esqueleto
+    esqueleto = morphology.skeletonize(closed)
+    # extrai retas
+    lines = probabilistic_hough_line(esqueleto, threshold=80, line_length=50, line_gap=40)
+
+    return segmentada, lines, gauss_highpass 
 
 # prewitt = filters.prewitt(frangi)
     # prewitt = np.median(prewitt)/10 < prewitt
