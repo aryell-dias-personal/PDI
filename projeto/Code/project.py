@@ -112,6 +112,7 @@ def projeto_aryell_2(imagem):
     
     return retorno, borda, retas, imagem 
 
+<<<<<<< HEAD
 # laplace = filters.laplace(frangi)
     # selem = morphology.disk(5)
     # print(imagem)
@@ -123,6 +124,9 @@ def projeto_aryell_2(imagem):
     # borda,_ = projeto_canny(color.rgb2gray(imagem))
 
 def teste1(imagem):
+=======
+def teste(imagem):
+>>>>>>> bf878a229c97ff2d33b688b38b53760c094de18c
     imagem = color.rgb2gray(imagem)
     # limba e aumenta o contraste daimagem
     imagem = filters.gaussian(exposure.adjust_gamma(imagem,3,3))
@@ -138,6 +142,7 @@ def teste1(imagem):
     # extrai retas
     lines = probabilistic_hough_line(result, threshold=80, line_length=50, line_gap=40)
 
+<<<<<<< HEAD
     return result, lines, filtrada 
 
 def teste(imagem):
@@ -168,6 +173,9 @@ def teste(imagem):
     # retas = utils.extraiRetas(prewitt,130)
     # lines = probabilistic_hough_line(prewitt,threshold=10,line_length=300,line_gap=1)
     # lines = []
+=======
+    return result, lines, filtrada
+>>>>>>> bf878a229c97ff2d33b688b38b53760c094de18c
 
 def rodrigo(imagem):
     # img = scp.morphology.grey_opening(imagem,size=17)
@@ -184,17 +192,18 @@ def rodrigo(imagem):
     # retorno = exposure.rescale_intensity(retorno,in_range=(0,10))
 
     img = 1 - (np.max(imagem)-imagem)/(np.max(imagem)-np.min(imagem))
-    # filtered_img = filters.median(high_contr,morphology.square(3))
-
-
 
     high_contr = exposure.equalize_adapthist(img)
+
+    # filtered_img = filters.median(high_contr,morphology.square(3))
     filtered_img = scp.morphology.grey_opening(high_contr,size=17)
     filtered_img = scp.morphology.grey_closing(filtered_img,size=7)
+
     enhanced_img = abs(high_contr - filtered_img)
 
     edges = feature.canny(enhanced_img, sigma=1.5)
     # edges = filters.sobel(enhanced_img)
+
     aaa = clean_up(edges)
 
     return edges, aaa
@@ -238,3 +247,19 @@ def clean_up(imagem):
     # plt.show()
 
     return clean
+
+def TCC(imagem):
+    img_filtrada = filters.rank.median(imagem, morphology.disk(2.25))
+
+    if np.mean(img_filtrada[:,:,0]) > np.mean(img_filtrada[:,:,1]):
+        if np.mean(img_filtrada[:,:,0]) > np.mean(img_filtrada[:,:,2]):
+            img_menor = (img_filtrada[:,:,1]+img_filtrada[:,:,2])/3
+        elif np.mean(img_filtrada[:,:,0]) < np.mean(img_filtrada[:,:,2]):
+            img_menor = (img_filtrada[:,:,1]+img_filtrada[:,:,0])/3
+        else:
+            img_menor = 2.5*(img_filtrada[:,:,1])/3
+
+    return img_menor
+
+
+    # fuck
