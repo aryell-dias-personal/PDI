@@ -217,3 +217,6 @@ def TCC(imagem):
             img_menor = 2.5*(img_filtrada[:,:,1])/3
 
     return img_menor
+
+
+    # fuck
